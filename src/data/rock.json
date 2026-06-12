@@ -1,0 +1,452 @@
+[
+  {
+    "id": "rock-001",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Which band recorded the 1971 classic 'Stairway to Heaven'?",
+    "choices": ["Pink Floyd", "Deep Purple", "Led Zeppelin", "The Who"],
+    "correctIndex": 2,
+    "funFact": "Despite being one of the most-requested songs in radio history, 'Stairway to Heaven' was never released as a commercial single in the United States."
+  },
+  {
+    "id": "rock-002",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Who was the lead singer and guitarist of Nirvana?",
+    "choices": ["Kurt Cobain", "Eddie Vedder", "Chris Cornell", "Layne Staley"],
+    "correctIndex": 0,
+    "funFact": "Nirvana was inducted into the Rock and Roll Hall of Fame in 2014, in the band's very first year of eligibility."
+  },
+  {
+    "id": "rock-003",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Which band released the 1973 album 'The Dark Side of the Moon'?",
+    "choices": ["The Rolling Stones", "Led Zeppelin", "Genesis", "Pink Floyd"],
+    "correctIndex": 3,
+    "funFact": "'The Dark Side of the Moon' has spent more than 900 weeks on the Billboard 200 chart, far more than any other album in history."
+  },
+  {
+    "id": "rock-004",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Freddie Mercury was the frontman of which rock band?",
+    "choices": ["Kiss", "Queen", "Journey", "Aerosmith"],
+    "correctIndex": 1,
+    "funFact": "Freddie Mercury was born Farrokh Bulsara on the island of Zanzibar and spent much of his childhood in India before moving to England."
+  },
+  {
+    "id": "rock-005",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Which guitarist famously set his guitar on fire at the 1967 Monterey Pop Festival?",
+    "choices": ["Jimi Hendrix", "Eric Clapton", "Jimmy Page", "Jeff Beck"],
+    "correctIndex": 0,
+    "funFact": "Hendrix knelt over his burning Stratocaster and coaxed the flames with his fingers; the moment became one of the most iconic images in rock history."
+  },
+  {
+    "id": "rock-006",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "'Smells Like Teen Spirit' appears on which Nirvana album?",
+    "choices": ["Bleach", "In Utero", "Nevermind", "Incesticide"],
+    "correctIndex": 2,
+    "funFact": "The title came from graffiti Kathleen Hanna wrote on Kurt Cobain's wall; Cobain didn't realize Teen Spirit was a deodorant brand until after the song was released."
+  },
+  {
+    "id": "rock-007",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Mick Jagger and Keith Richards are founding members of which band?",
+    "choices": ["The Kinks", "The Rolling Stones", "The Beatles", "The Who"],
+    "correctIndex": 1,
+    "funFact": "Jagger and Richards were childhood acquaintances in Dartford who reconnected in 1961 on a train platform, bonding over the Chuck Berry records Jagger was carrying."
+  },
+  {
+    "id": "rock-008",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "In which city was AC/DC formed in 1973?",
+    "choices": ["Melbourne", "London", "Glasgow", "Sydney"],
+    "correctIndex": 3,
+    "funFact": "Brothers Malcolm and Angus Young got the band's name from the 'AC/DC' label on their sister's sewing machine."
+  },
+  {
+    "id": "rock-009",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Which Guns N' Roses guitarist is famous for his top hat and sunglasses?",
+    "choices": ["Slash", "Izzy Stradlin", "Duff McKagan", "Buckethead"],
+    "correctIndex": 0,
+    "funFact": "Slash's real name is Saul Hudson; he was born in London and got his nickname from a family friend because he was always rushing around."
+  },
+  {
+    "id": "rock-010",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "'Hotel California' is a signature song by which band?",
+    "choices": ["Fleetwood Mac", "America", "Eagles", "The Doobie Brothers"],
+    "correctIndex": 2,
+    "funFact": "The song won the Grammy for Record of the Year in 1978, and its dueling guitar solo by Don Felder and Joe Walsh is routinely ranked among the greatest ever recorded."
+  },
+  {
+    "id": "rock-011",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Which Seattle grunge band released the album 'Ten' in 1991?",
+    "choices": ["Soundgarden", "Alice in Chains", "Mudhoney", "Pearl Jam"],
+    "correctIndex": 3,
+    "funFact": "'Ten' sold slowly at first but eventually went 13 times platinum in the US, making it one of the best-selling rock albums of the 1990s."
+  },
+  {
+    "id": "rock-012",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Ozzy Osbourne first rose to fame as the lead singer of which band?",
+    "choices": ["Deep Purple", "Black Sabbath", "Judas Priest", "Iron Maiden"],
+    "correctIndex": 1,
+    "funFact": "Ozzy was fired from Black Sabbath in 1979 and replaced by Ronnie James Dio, only to launch a hugely successful solo career the following year."
+  },
+  {
+    "id": "rock-013",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Which punk band released 'Anarchy in the U.K.' in 1976?",
+    "choices": ["The Clash", "The Damned", "Sex Pistols", "Ramones"],
+    "correctIndex": 2,
+    "funFact": "EMI dropped the Sex Pistols just months after signing them, following the band's profanity-laced appearance on Bill Grundy's live TV show."
+  },
+  {
+    "id": "rock-014",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Which band recorded the 1969 album 'Abbey Road'?",
+    "choices": ["The Beatles", "The Kinks", "The Hollies", "The Zombies"],
+    "correctIndex": 0,
+    "funFact": "The famous zebra-crossing cover photo features neither the band's name nor the album title, a bold move the label initially resisted."
+  },
+  {
+    "id": "rock-015",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Which band recorded the hit 'Sweet Child o' Mine'?",
+    "choices": ["Mötley Crüe", "Guns N' Roses", "Poison", "Bon Jovi"],
+    "correctIndex": 1,
+    "funFact": "The song's famous opening riff started as a string-skipping warm-up exercise Slash was fooling around with; it became the band's only US number-one single."
+  },
+  {
+    "id": "rock-016",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Which band did Dave Grohl form in 1994 after the end of Nirvana?",
+    "choices": ["Audioslave", "Queens of the Stone Age", "Them Crooked Vultures", "Foo Fighters"],
+    "correctIndex": 3,
+    "funFact": "Grohl recorded the entire first Foo Fighters album essentially by himself, playing nearly every instrument and singing all the vocals."
+  },
+  {
+    "id": "rock-017",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "'Bohemian Rhapsody' appears on which Queen album?",
+    "choices": ["A Night at the Opera", "Sheer Heart Attack", "News of the World", "A Day at the Races"],
+    "correctIndex": 0,
+    "funFact": "'Bohemian Rhapsody' topped the UK chart for nine weeks in 1975-76, then returned to number one in 1991 after Freddie Mercury's death."
+  },
+  {
+    "id": "rock-018",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Who recorded the 1975 anthem 'Born to Run'?",
+    "choices": ["Bob Seger", "Tom Petty", "Bruce Springsteen", "John Mellencamp"],
+    "correctIndex": 2,
+    "funFact": "In October 1975, Springsteen appeared on the covers of both Time and Newsweek in the same week, an almost unheard-of feat for a rock musician."
+  },
+  {
+    "id": "rock-019",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "Which band is famous for the riff-driven classic 'Smoke on the Water'?",
+    "choices": ["Black Sabbath", "Uriah Heep", "Rainbow", "Deep Purple"],
+    "correctIndex": 3,
+    "funFact": "The lyrics describe a real event: the Montreux Casino in Switzerland burning down during a Frank Zappa concert in 1971 while Deep Purple were in town to record."
+  },
+  {
+    "id": "rock-020",
+    "league": "rock",
+    "difficulty": "easy",
+    "question": "The Ramones formed in which New York City borough?",
+    "choices": ["Brooklyn", "Queens", "The Bronx", "Manhattan"],
+    "correctIndex": 1,
+    "funFact": "None of the Ramones were actually related; they all adopted the surname 'Ramone' after Paul McCartney's old stage pseudonym, Paul Ramon."
+  },
+  {
+    "id": "rock-021",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "In which year did the original Woodstock festival take place?",
+    "choices": ["1967", "1969", "1970", "1971"],
+    "correctIndex": 1,
+    "funFact": "Woodstock wasn't actually held in Woodstock, New York; roughly 400,000 people gathered on Max Yasgur's dairy farm in Bethel, about 60 miles away."
+  },
+  {
+    "id": "rock-022",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Which drummer's death in 1980 led to the breakup of Led Zeppelin?",
+    "choices": ["Keith Moon", "Cozy Powell", "Ian Paice", "John Bonham"],
+    "correctIndex": 3,
+    "funFact": "Rather than replace Bonham, the surviving members announced in December 1980 that they 'could not continue as we were,' effectively ending the band."
+  },
+  {
+    "id": "rock-023",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "In which year was The Clash's landmark album 'London Calling' released in the UK?",
+    "choices": ["1979", "1977", "1980", "1982"],
+    "correctIndex": 0,
+    "funFact": "The cover photo of bassist Paul Simonon smashing his Fender Precision on stage was shot by Pennie Smith, who initially thought the image was too blurry to use."
+  },
+  {
+    "id": "rock-024",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Soundgarden's hit 'Black Hole Sun' appears on which album?",
+    "choices": ["Badmotorfinger", "Louder Than Love", "Superunknown", "Down on the Upside"],
+    "correctIndex": 2,
+    "funFact": "'Black Hole Sun' won the Grammy for Best Hard Rock Performance in 1995, and Chris Cornell said he wrote it in about 15 minutes."
+  },
+  {
+    "id": "rock-025",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Which band gave a famous unannounced rooftop concert in London in January 1969?",
+    "choices": ["The Rolling Stones", "The Who", "The Kinks", "The Beatles"],
+    "correctIndex": 3,
+    "funFact": "The 42-minute set atop the Apple Corps building on Savile Row was The Beatles' final public performance and was eventually shut down by the police."
+  },
+  {
+    "id": "rock-026",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Who replaced Bon Scott as AC/DC's lead singer in 1980?",
+    "choices": ["Brian Johnson", "Paul Rodgers", "David Coverdale", "Ronnie James Dio"],
+    "correctIndex": 0,
+    "funFact": "Recorded just months after Scott's death, 'Back in Black' became one of the best-selling albums of all time, with estimated worldwide sales around 50 million copies."
+  },
+  {
+    "id": "rock-027",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "In which year did Black Sabbath release the album 'Paranoid'?",
+    "choices": ["1968", "1970", "1971", "1973"],
+    "correctIndex": 1,
+    "funFact": "The title track was written in a hurry as album filler, and the record was nearly titled 'War Pigs' before the label got nervous about the name."
+  },
+  {
+    "id": "rock-028",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Which guitarist earned the nickname 'Slowhand'?",
+    "choices": ["Jeff Beck", "Mark Knopfler", "Eric Clapton", "George Harrison"],
+    "correctIndex": 2,
+    "funFact": "The nickname came from Yardbirds manager Giorgio Gomelsky: audiences would break into a slow handclap while Clapton replaced broken strings on stage."
+  },
+  {
+    "id": "rock-029",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Which member of Fleetwood Mac wrote 'Go Your Own Way'?",
+    "choices": ["Stevie Nicks", "Christine McVie", "Lindsey Buckingham", "Mick Fleetwood"],
+    "correctIndex": 2,
+    "funFact": "Buckingham wrote the song about his breakup with bandmate Stevie Nicks, who answered with her own perspective on the split in 'Dreams' on the same album."
+  },
+  {
+    "id": "rock-030",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Which rock guitarist played the famous solo on Michael Jackson's 'Beat It'?",
+    "choices": ["Eddie Van Halen", "Steve Lukather", "Slash", "Randy Rhoads"],
+    "correctIndex": 0,
+    "funFact": "Van Halen recorded the solo for free as a favor to producer Quincy Jones and didn't tell his bandmates, assuming no one would ever find out it was him."
+  },
+  {
+    "id": "rock-031",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Which 1969 rock opera by The Who tells the story of a 'deaf, dumb and blind' pinball player?",
+    "choices": ["Quadrophenia", "Tommy", "The Who Sell Out", "A Quick One"],
+    "correctIndex": 1,
+    "funFact": "'Tommy' was adapted into a star-studded 1975 film featuring Elton John, Tina Turner, and Jack Nicholson, with Roger Daltrey in the title role."
+  },
+  {
+    "id": "rock-032",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Chris Cornell and future Pearl Jam members formed which band as a tribute to the late Andrew Wood?",
+    "choices": ["Mad Season", "Green River", "Mother Love Bone", "Temple of the Dog"],
+    "correctIndex": 3,
+    "funFact": "The album's hit 'Hunger Strike' became a duet between Chris Cornell and a then-unknown Eddie Vedder, marking one of Vedder's first recorded vocal performances."
+  },
+  {
+    "id": "rock-033",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "In which year did the Ramones release their self-titled debut album?",
+    "choices": ["1974", "1976", "1977", "1979"],
+    "correctIndex": 1,
+    "funFact": "The debut was recorded in about a week for roughly $6,400, and its 14 songs blaze by in under 30 minutes total."
+  },
+  {
+    "id": "rock-034",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "At which 1969 concert did a fan die violently while the Rolling Stones played, with Hells Angels working as security?",
+    "choices": ["Altamont Speedway Free Festival", "Isle of Wight Festival", "Monterey Pop Festival", "Atlanta Pop Festival"],
+    "correctIndex": 0,
+    "funFact": "The killing of Meredith Hunter was captured on film and appears in the 1970 documentary 'Gimme Shelter'; Altamont is often called the symbolic end of the 1960s."
+  },
+  {
+    "id": "rock-035",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Who was the original lead singer of Van Halen?",
+    "choices": ["Sammy Hagar", "Gary Cherone", "David Lee Roth", "Michael Anthony"],
+    "correctIndex": 2,
+    "funFact": "After Roth left in 1985, Sammy Hagar fronted the band for over a decade in what fans dubbed the 'Van Hagar' era; Roth eventually rejoined for reunion tours starting in 2007."
+  },
+  {
+    "id": "rock-036",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Pink Floyd's 'Wish You Were Here' is largely a tribute to which former band member?",
+    "choices": ["Roger Waters", "Syd Barrett", "Richard Wright", "Bob Klose"],
+    "correctIndex": 1,
+    "funFact": "In an eerie coincidence, Barrett showed up unannounced at Abbey Road in 1975 while the band was recording 'Shine On You Crazy Diamond'; he had changed so much they barely recognized him."
+  },
+  {
+    "id": "rock-037",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Which band released the influential 1986 album 'Master of Puppets'?",
+    "choices": ["Megadeth", "Anthrax", "Slayer", "Metallica"],
+    "correctIndex": 3,
+    "funFact": "In 2016, 'Master of Puppets' became the first heavy metal recording selected for preservation in the US Library of Congress National Recording Registry."
+  },
+  {
+    "id": "rock-038",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Which 1994 album was Green Day's major-label breakthrough?",
+    "choices": ["Insomniac", "Kerplunk", "Dookie", "Nimrod"],
+    "correctIndex": 2,
+    "funFact": "'Dookie' won the Grammy for Best Alternative Music Performance and has been certified diamond in the US, with more than 10 million copies sold there."
+  },
+  {
+    "id": "rock-039",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Which founding guitarist of the Rolling Stones drowned in his swimming pool in July 1969?",
+    "choices": ["Brian Jones", "Mick Taylor", "Ronnie Wood", "Bill Wyman"],
+    "correctIndex": 0,
+    "funFact": "Jones founded the band and named it after a Muddy Waters song; he died less than a month after being dismissed from the group he had started."
+  },
+  {
+    "id": "rock-040",
+    "league": "rock",
+    "difficulty": "medium",
+    "question": "Aerosmith's original version of 'Walk This Way' appears on which 1975 album?",
+    "choices": ["Rocks", "Get Your Wings", "Draw the Line", "Toys in the Attic"],
+    "correctIndex": 3,
+    "funFact": "The title was inspired by a scene in Mel Brooks' 'Young Frankenstein,' and the 1986 remake with Run-D.M.C. became a pioneering rap-rock crossover that revived Aerosmith's career."
+  },
+  {
+    "id": "rock-041",
+    "league": "rock",
+    "difficulty": "hard",
+    "question": "Which band was Jimmy Page a member of immediately before forming Led Zeppelin?",
+    "choices": ["The Animals", "Them", "The Yardbirds", "The Kinks"],
+    "correctIndex": 2,
+    "funFact": "Page initially joined the Yardbirds on bass in 1966, and Led Zeppelin played their first shows billed as 'The New Yardbirds' to honor outstanding tour commitments."
+  },
+  {
+    "id": "rock-042",
+    "league": "rock",
+    "difficulty": "hard",
+    "question": "Who produced Nirvana's 1991 album 'Nevermind'?",
+    "choices": ["Butch Vig", "Steve Albini", "Rick Rubin", "Brendan O'Brien"],
+    "correctIndex": 0,
+    "funFact": "Vig went on to co-found the band Garbage, while Steve Albini, one of the wrong answers here, recorded Nirvana's follow-up 'In Utero.'"
+  },
+  {
+    "id": "rock-043",
+    "league": "rock",
+    "difficulty": "hard",
+    "question": "Under what name did Black Sabbath perform immediately before adopting the name Black Sabbath in 1969?",
+    "choices": ["Mythology", "Earth", "Rare Breed", "The Polka Tulk Blues Band"],
+    "correctIndex": 1,
+    "funFact": "The band ditched the name Earth after being confused with another group, taking their new name from a 1963 Boris Karloff horror film that inspired their song 'Black Sabbath.'"
+  },
+  {
+    "id": "rock-044",
+    "league": "rock",
+    "difficulty": "hard",
+    "question": "What is the birth name of punk pioneer Iggy Pop?",
+    "choices": ["James Osterberg", "Ron Asheton", "Dave Alexander", "James Williamson"],
+    "correctIndex": 0,
+    "funFact": "The 'Iggy' nickname stuck from his high school band The Iguanas, where he played drums before fronting The Stooges."
+  },
+  {
+    "id": "rock-045",
+    "league": "rock",
+    "difficulty": "hard",
+    "question": "Radiohead recorded much of 'OK Computer' in a historic English mansion owned by which actress?",
+    "choices": ["Helen Mirren", "Emma Thompson", "Judi Dench", "Jane Seymour"],
+    "correctIndex": 3,
+    "funFact": "The band worked at St Catherine's Court, Seymour's 16th-century manor near Bath, while she was away, using its grand rooms to capture the album's distinctive ambience."
+  },
+  {
+    "id": "rock-046",
+    "league": "rock",
+    "difficulty": "hard",
+    "question": "What was the name of the Boeing 720 jet Led Zeppelin leased for their 1973 and 1975 North American tours?",
+    "choices": ["Caesar's Chariot", "The Starship", "Big Bunny", "The Lisa Marie"],
+    "correctIndex": 1,
+    "funFact": "The Starship was previously owned by teen idol Bobby Sherman and featured an electric organ built into its bar; for the 1977 tour Zeppelin switched to a 707 called Caesar's Chariot."
+  },
+  {
+    "id": "rock-047",
+    "league": "rock",
+    "difficulty": "hard",
+    "question": "Which band released 'New Rose' in October 1976, widely considered the first British punk single?",
+    "choices": ["Buzzcocks", "The Clash", "The Damned", "Sex Pistols"],
+    "correctIndex": 2,
+    "funFact": "'New Rose' beat the Sex Pistols' 'Anarchy in the U.K.' to record shops by several weeks, and The Damned were also the first UK punk band to release an album and tour America."
+  },
+  {
+    "id": "rock-048",
+    "league": "rock",
+    "difficulty": "hard",
+    "question": "What was Pearl Jam's original band name before legal concerns forced a change?",
+    "choices": ["Mookie Blaylock", "Bad Radio", "Green River", "Mother Love Bone"],
+    "correctIndex": 0,
+    "funFact": "The band was named after the NBA point guard, and after renaming themselves Pearl Jam they titled their debut album 'Ten' in honor of Blaylock's jersey number."
+  },
+  {
+    "id": "rock-049",
+    "league": "rock",
+    "difficulty": "hard",
+    "question": "Approximately how long was Queen's celebrated set at Live Aid in 1985?",
+    "choices": ["12 minutes", "21 minutes", "35 minutes", "45 minutes"],
+    "correctIndex": 1,
+    "funFact": "Freddie Mercury's call-and-response 'Ay-Oh' with 72,000 people at Wembley became known as 'the note heard round the world,' and the set is frequently voted the greatest live performance in rock history."
+  },
+  {
+    "id": "rock-050",
+    "league": "rock",
+    "difficulty": "hard",
+    "question": "Rage Against the Machine guitarist Tom Morello graduated with honors from which university?",
+    "choices": ["Stanford", "Yale", "Princeton", "Harvard"],
+    "correctIndex": 3,
+    "funFact": "Morello earned a degree in Social Studies from Harvard in 1986 and worked as a scheduling secretary for US Senator Alan Cranston before committing to music full-time."
+  }
+]

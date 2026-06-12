@@ -1,0 +1,452 @@
+[
+  {
+    "id": "hiphop-001",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Which rapper released the album 'The Marshall Mathers LP' in 2000?",
+    "choices": ["Dr. Dre", "Eminem", "Jay-Z", "50 Cent"],
+    "correctIndex": 1,
+    "funFact": "The Marshall Mathers LP sold around 1.76 million copies in its first week, setting a record at the time for a solo artist."
+  },
+  {
+    "id": "hiphop-002",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Which group released the landmark 1988 album 'Straight Outta Compton'?",
+    "choices": ["Public Enemy", "Run-D.M.C.", "N.W.A", "Wu-Tang Clan"],
+    "correctIndex": 2,
+    "funFact": "The album's track 'F*** tha Police' prompted an FBI assistant director to send a warning letter to the group's record label in 1989."
+  },
+  {
+    "id": "hiphop-003",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Which rapper is known by the nickname 'Hov'?",
+    "choices": ["Jay-Z", "Nas", "The Notorious B.I.G.", "Kanye West"],
+    "correctIndex": 0,
+    "funFact": "In 2019, Forbes declared Jay-Z hip-hop's first billionaire, thanks to ventures like Roc Nation, Armand de Brignac champagne, and D'Ussé cognac."
+  },
+  {
+    "id": "hiphop-004",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "'California Love' featuring Dr. Dre was a massive 1995 hit for which rapper?",
+    "choices": ["Snoop Dogg", "Ice Cube", "2Pac", "The Game"],
+    "correctIndex": 2,
+    "funFact": "'California Love' was 2Pac's first single after his release from prison, recorded almost immediately after he signed with Death Row Records."
+  },
+  {
+    "id": "hiphop-005",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Method Man is a member of which hip-hop group?",
+    "choices": ["A Tribe Called Quest", "Wu-Tang Clan", "De La Soul", "Bone Thugs-N-Harmony"],
+    "correctIndex": 1,
+    "funFact": "Wu-Tang Clan hails from Staten Island, New York, which the group famously rebranded as 'Shaolin' in their kung fu-inspired mythology."
+  },
+  {
+    "id": "hiphop-006",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Which artist released the 2015 hit 'Hotline Bling'?",
+    "choices": ["Drake", "Future", "Travis Scott", "J. Cole"],
+    "correctIndex": 0,
+    "funFact": "'Hotline Bling' won Best Rap Song and Best Rap/Sung Performance at the 2017 Grammys, even though Drake himself pointed out it isn't really a rap song."
+  },
+  {
+    "id": "hiphop-007",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "What was The Notorious B.I.G.'s debut studio album?",
+    "choices": ["Life After Death", "Illmatic", "Reasonable Doubt", "Ready to Die"],
+    "correctIndex": 3,
+    "funFact": "'Ready to Die' (1994) was the only studio album Biggie released in his lifetime; 'Life After Death' came out just 16 days after his murder in 1997."
+  },
+  {
+    "id": "hiphop-008",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Which female rapper released the hit single 'Super Bass' in 2011?",
+    "choices": ["Cardi B", "Megan Thee Stallion", "Nicki Minaj", "Missy Elliott"],
+    "correctIndex": 2,
+    "funFact": "'Super Bass' has been certified Diamond by the RIAA, making it one of the best-selling singles ever by a female rapper."
+  },
+  {
+    "id": "hiphop-009",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "What was the title of Snoop Dogg's 1993 debut album, produced by Dr. Dre?",
+    "choices": ["The Chronic", "Doggystyle", "Tha Doggfather", "No Limit Top Dogg"],
+    "correctIndex": 1,
+    "funFact": "Doggystyle debuted at No. 1 on the Billboard 200 with over 800,000 copies sold in its first week, then the biggest debut ever for a new artist."
+  },
+  {
+    "id": "hiphop-010",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "In which city was hip-hop born?",
+    "choices": ["Los Angeles", "Chicago", "Atlanta", "New York"],
+    "correctIndex": 3,
+    "funFact": "Hip-hop's birth is commonly dated to August 11, 1973, when DJ Kool Herc spun records at his sister's back-to-school party at 1520 Sedgwick Avenue in the Bronx."
+  },
+  {
+    "id": "hiphop-011",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Which rapper released the chart-topping 2018 single 'Sicko Mode'?",
+    "choices": ["Travis Scott", "21 Savage", "Lil Uzi Vert", "Post Malone"],
+    "correctIndex": 0,
+    "funFact": "'Sicko Mode' features Drake and famously switches beats three times in a single track, yet still reached No. 1 on the Billboard Hot 100."
+  },
+  {
+    "id": "hiphop-012",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Eminem's song 'Lose Yourself' was written for which movie?",
+    "choices": ["Boyz n the Hood", "8 Mile", "Hustle & Flow", "Get Rich or Die Tryin'"],
+    "correctIndex": 1,
+    "funFact": "'Lose Yourself' was the first rap song ever to win the Academy Award for Best Original Song, but Eminem skipped the ceremony and was asleep at home when it won."
+  },
+  {
+    "id": "hiphop-013",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "What was Kanye West's debut studio album, released in 2004?",
+    "choices": ["Late Registration", "Graduation", "The College Dropout", "808s & Heartbreak"],
+    "correctIndex": 2,
+    "funFact": "Kanye recorded the album's single 'Through the Wire' while his jaw was still wired shut after a near-fatal 2002 car crash."
+  },
+  {
+    "id": "hiphop-014",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "The duo OutKast comes from which American city?",
+    "choices": ["Houston", "Memphis", "New Orleans", "Atlanta"],
+    "correctIndex": 3,
+    "funFact": "OutKast's 'Speakerboxxx/The Love Below' won the 2004 Grammy for Album of the Year, one of the very few hip-hop albums ever to take the top prize."
+  },
+  {
+    "id": "hiphop-015",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "What was Cardi B's breakout 2017 single that topped the Billboard Hot 100?",
+    "choices": ["WAP", "Bodak Yellow", "I Like It", "Money"],
+    "correctIndex": 1,
+    "funFact": "With 'Bodak Yellow,' Cardi B became the first solo female rapper to top the Hot 100 since Lauryn Hill's 'Doo Wop (That Thing)' in 1998."
+  },
+  {
+    "id": "hiphop-016",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Run-D.M.C.'s 1986 hit 'Walk This Way' was a collaboration with which rock band?",
+    "choices": ["Aerosmith", "AC/DC", "Led Zeppelin", "Van Halen"],
+    "correctIndex": 0,
+    "funFact": "The collaboration reached No. 4 on the Hot 100, broke rap onto MTV in a major way, and is widely credited with reviving Aerosmith's career."
+  },
+  {
+    "id": "hiphop-017",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Dr. Dre and Suge Knight co-founded which record label in 1991?",
+    "choices": ["Aftermath Entertainment", "Ruthless Records", "Interscope Records", "Death Row Records"],
+    "correctIndex": 3,
+    "funFact": "Three decades later, in 2022, Snoop Dogg acquired the Death Row Records brand, the label that launched his own career."
+  },
+  {
+    "id": "hiphop-018",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Which 2003 album was 50 Cent's major-label debut?",
+    "choices": ["Get Rich or Die Tryin'", "The Massacre", "Curtis", "Power of the Dollar"],
+    "correctIndex": 0,
+    "funFact": "Before the album's release, 50 Cent survived being shot nine times in 2000, an ordeal that became central to his larger-than-life image."
+  },
+  {
+    "id": "hiphop-019",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Which rapper released the 2017 hit single 'HUMBLE.'?",
+    "choices": ["J. Cole", "Big Sean", "Kendrick Lamar", "ScHoolboy Q"],
+    "correctIndex": 2,
+    "funFact": "'HUMBLE.' was Kendrick Lamar's first No. 1 on the Billboard Hot 100 as a lead artist, and its video won six MTV Video Music Awards."
+  },
+  {
+    "id": "hiphop-020",
+    "league": "hiphop",
+    "difficulty": "easy",
+    "question": "Which female rapper released the hit 'Work It' in 2002?",
+    "choices": ["Lil' Kim", "Eve", "Foxy Brown", "Missy Elliott"],
+    "correctIndex": 3,
+    "funFact": "In 2023, Missy Elliott became the first female rapper ever inducted into the Rock and Roll Hall of Fame."
+  },
+  {
+    "id": "hiphop-021",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "In what year was Nas's classic debut album 'Illmatic' released?",
+    "choices": ["1992", "1993", "1994", "1996"],
+    "correctIndex": 2,
+    "funFact": "Nas was only 20 years old when Illmatic earned a rare five-mic rating from The Source magazine."
+  },
+  {
+    "id": "hiphop-022",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Which producer crafted the gritty signature sound of Wu-Tang Clan's debut album?",
+    "choices": ["DJ Premier", "RZA", "Pete Rock", "Q-Tip"],
+    "correctIndex": 1,
+    "funFact": "RZA convinced the other eight members to follow his five-year plan, promising that if they gave him total creative control, Wu-Tang would take over the rap industry."
+  },
+  {
+    "id": "hiphop-023",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Which group recorded 'Rapper's Delight' in 1979, one of the first commercially successful rap records?",
+    "choices": ["The Sugarhill Gang", "Grandmaster Flash and the Furious Five", "Kurtis Blow", "Afrika Bambaataa and the Soulsonic Force"],
+    "correctIndex": 0,
+    "funFact": "'Rapper's Delight' was built on the groove of Chic's 'Good Times,' and Chic's Nile Rodgers threatened legal action until he and Bernard Edwards received songwriting credit."
+  },
+  {
+    "id": "hiphop-024",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Which group released the socially conscious 1982 classic 'The Message'?",
+    "choices": ["The Sugarhill Gang", "Run-D.M.C.", "Whodini", "Grandmaster Flash and the Furious Five"],
+    "correctIndex": 3,
+    "funFact": "'The Message' was selected for the Library of Congress's National Recording Registry in 2002, part of the registry's very first class of recordings."
+  },
+  {
+    "id": "hiphop-025",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Before her solo career, Lauryn Hill rose to fame as a member of which group?",
+    "choices": ["The Roots", "Fugees", "Digable Planets", "Arrested Development"],
+    "correctIndex": 1,
+    "funFact": "Her solo album 'The Miseducation of Lauryn Hill' became the first hip-hop album to win the Grammy for Album of the Year, in 1999."
+  },
+  {
+    "id": "hiphop-026",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Which Kendrick Lamar album won the 2018 Pulitzer Prize for Music?",
+    "choices": ["good kid, m.A.A.d city", "To Pimp a Butterfly", "DAMN.", "Mr. Morale & The Big Steppers"],
+    "correctIndex": 2,
+    "funFact": "DAMN. was the first work outside of classical and jazz ever to win the Pulitzer Prize for Music; the board praised its 'vernacular authenticity.'"
+  },
+  {
+    "id": "hiphop-027",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Which rapper wrote the lyrics to Dr. Dre's 1999 hit 'Still D.R.E.'?",
+    "choices": ["Snoop Dogg", "Eminem", "The D.O.C.", "Jay-Z"],
+    "correctIndex": 3,
+    "funFact": "Jay-Z ghostwrote the entire song, including both Dre's and Snoop Dogg's parts, a fact later confirmed by both Dre and Snoop."
+  },
+  {
+    "id": "hiphop-028",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Who founded Bad Boy Records in 1993?",
+    "choices": ["Sean 'Diddy' Combs", "Russell Simmons", "Jermaine Dupri", "Master P"],
+    "correctIndex": 0,
+    "funFact": "Combs launched Bad Boy shortly after being fired from Uptown Records, and within two years the label was a powerhouse behind The Notorious B.I.G."
+  },
+  {
+    "id": "hiphop-029",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Which 1991 A Tribe Called Quest album is celebrated for fusing jazz and hip-hop?",
+    "choices": ["Midnight Marauders", "The Low End Theory", "People's Instinctive Travels and the Paths of Rhythm", "Beats, Rhymes and Life"],
+    "correctIndex": 1,
+    "funFact": "Legendary jazz bassist Ron Carter, who recorded with Miles Davis, played upright bass on the album's track 'Verses from the Abstract.'"
+  },
+  {
+    "id": "hiphop-030",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "The legendary diss tracks 'Takeover' and 'Ether' were exchanged between which two rappers?",
+    "choices": ["2Pac and The Notorious B.I.G.", "50 Cent and Ja Rule", "Jay-Z and Nas", "Drake and Meek Mill"],
+    "correctIndex": 2,
+    "funFact": "The feud ended publicly in 2005 when Jay-Z brought Nas on stage at his 'I Declare War' concert, and Nas later signed with Def Jam while Jay-Z was its president."
+  },
+  {
+    "id": "hiphop-031",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "In what year did Tupac Shakur die after a drive-by shooting in Las Vegas?",
+    "choices": ["1995", "1996", "1997", "1998"],
+    "correctIndex": 1,
+    "funFact": "Earlier that same year, Tupac released 'All Eyez on Me,' one of the first double albums in hip-hop history."
+  },
+  {
+    "id": "hiphop-032",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "The influential duo UGK, made up of Bun B and Pimp C, came from which state?",
+    "choices": ["Georgia", "Tennessee", "Texas", "Louisiana"],
+    "correctIndex": 2,
+    "funFact": "The Port Arthur, Texas duo reached a massive new audience when Jay-Z featured them on his 2000 hit 'Big Pimpin'.'"
+  },
+  {
+    "id": "hiphop-033",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Which OutKast album contains both 'B.O.B.' and 'Ms. Jackson'?",
+    "choices": ["ATLiens", "Aquemini", "Speakerboxxx/The Love Below", "Stankonia"],
+    "correctIndex": 3,
+    "funFact": "'Ms. Jackson,' OutKast's first No. 1 hit, was inspired by André 3000's relationship with Erykah Badu and addressed to her mother."
+  },
+  {
+    "id": "hiphop-034",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Jay-Z's 1998 hit 'Hard Knock Life (Ghetto Anthem)' samples a song from which musical?",
+    "choices": ["Annie", "Oliver!", "The Wiz", "Grease"],
+    "correctIndex": 0,
+    "funFact": "The track was produced by Mark the 45 King, who later produced another era-defining sample-driven hit: Eminem's 'Stan.'"
+  },
+  {
+    "id": "hiphop-035",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "What was the title of Eric B. & Rakim's groundbreaking 1987 debut album?",
+    "choices": ["Follow the Leader", "Paid in Full", "Let the Rhythm Hit 'Em", "Don't Sweat the Technique"],
+    "correctIndex": 1,
+    "funFact": "Rakim's complex internal rhyme schemes on the album changed MCing forever, and he is still routinely cited by rappers as the greatest technician of all time."
+  },
+  {
+    "id": "hiphop-036",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Which rapper released the comeback anthem 'Mama Said Knock You Out' in 1990?",
+    "choices": ["Big Daddy Kane", "Ice-T", "Rakim", "LL Cool J"],
+    "correctIndex": 3,
+    "funFact": "The song was literally inspired by LL Cool J's grandmother, who told him to 'knock out' the critics calling him washed up; it won him a Grammy in 1992."
+  },
+  {
+    "id": "hiphop-037",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Which member of N.W.A left the group in 1989 over a royalty dispute?",
+    "choices": ["Eazy-E", "Dr. Dre", "Ice Cube", "MC Ren"],
+    "correctIndex": 2,
+    "funFact": "Ice Cube's 1991 response track 'No Vaseline,' aimed at his former group, is still regarded as one of the most devastating diss songs ever recorded."
+  },
+  {
+    "id": "hiphop-038",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "The Roots serve as the house band for which late-night television show?",
+    "choices": ["The Tonight Show Starring Jimmy Fallon", "Saturday Night Live", "The Daily Show", "Jimmy Kimmel Live!"],
+    "correctIndex": 0,
+    "funFact": "The Roots joined Jimmy Fallon's Late Night in 2009 and moved with him to The Tonight Show in 2014, while frontman Black Thought's 2017 ten-minute Funkmaster Flex freestyle went viral."
+  },
+  {
+    "id": "hiphop-039",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Which Lil Wayne album sold over one million copies in its first week in 2008?",
+    "choices": ["Tha Carter II", "Tha Carter III", "Tha Carter IV", "I Am Not a Human Being"],
+    "correctIndex": 1,
+    "funFact": "Powered by 'Lollipop' and 'A Milli,' Tha Carter III won the Grammy for Best Rap Album and capped Wayne's legendary mixtape run of the mid-2000s."
+  },
+  {
+    "id": "hiphop-040",
+    "league": "hiphop",
+    "difficulty": "medium",
+    "question": "Which group recorded 'Fight the Power' as the anthem for Spike Lee's film 'Do the Right Thing'?",
+    "choices": ["Public Enemy", "Boogie Down Productions", "EPMD", "X Clan"],
+    "correctIndex": 0,
+    "funFact": "Public Enemy frontman Chuck D famously described rap music as 'the Black CNN' for how it broadcast life in communities ignored by mainstream media."
+  },
+  {
+    "id": "hiphop-041",
+    "league": "hiphop",
+    "difficulty": "hard",
+    "question": "Who was the first hip-hop act inducted into the Rock and Roll Hall of Fame, in 2007?",
+    "choices": ["Run-D.M.C.", "Grandmaster Flash and the Furious Five", "Public Enemy", "Beastie Boys"],
+    "correctIndex": 1,
+    "funFact": "Run-D.M.C. became the second hip-hop act inducted, following two years later in 2009."
+  },
+  {
+    "id": "hiphop-042",
+    "league": "hiphop",
+    "difficulty": "hard",
+    "question": "What did DJ Kool Herc call his pioneering technique of extending a record's drum break using two copies of the same record?",
+    "choices": ["Scratching", "Beat juggling", "The Merry-Go-Round", "Transforming"],
+    "correctIndex": 2,
+    "funFact": "The dancers who saved their best moves for Herc's extended breaks became known as break-boys, or b-boys, giving breakdancing its name."
+  },
+  {
+    "id": "hiphop-043",
+    "league": "hiphop",
+    "difficulty": "hard",
+    "question": "Which member of Mobb Deep produced the iconic beat for 'Shook Ones, Pt. II'?",
+    "choices": ["Havoc", "Prodigy", "Large Professor", "The Alchemist"],
+    "correctIndex": 0,
+    "funFact": "The haunting piano loop's source remained a mystery for nearly two decades until fans identified it as a sped-up, pitch-shifted snippet of Herbie Hancock's 'Jessica.'"
+  },
+  {
+    "id": "hiphop-044",
+    "league": "hiphop",
+    "difficulty": "hard",
+    "question": "Which acclaimed instrumental album did producer J Dilla release just three days before his death in 2006?",
+    "choices": ["Welcome 2 Detroit", "The Shining", "Champion Sound", "Donuts"],
+    "correctIndex": 3,
+    "funFact": "Donuts came out on J Dilla's 32nd birthday, with much of it composed in the hospital as he battled complications from lupus and a rare blood disease."
+  },
+  {
+    "id": "hiphop-045",
+    "league": "hiphop",
+    "difficulty": "hard",
+    "question": "Which group released the laid-back 1993 classic '93 'til Infinity'?",
+    "choices": ["Souls of Mischief", "The Pharcyde", "Hieroglyphics", "Digable Planets"],
+    "correctIndex": 0,
+    "funFact": "Souls of Mischief are part of Oakland's Hieroglyphics collective, and the song's title simply referenced the year it dropped — yet it has stayed timeless ever since."
+  },
+  {
+    "id": "hiphop-046",
+    "league": "hiphop",
+    "difficulty": "hard",
+    "question": "In the 1980s 'Bridge Wars,' KRS-One's Boogie Down Productions feuded with which Queensbridge crew?",
+    "choices": ["The Cold Crush Brothers", "Native Tongues", "The Juice Crew", "The Flipmode Squad"],
+    "correctIndex": 2,
+    "funFact": "The feud erupted when BDP interpreted MC Shan's 'The Bridge' as claiming hip-hop began in Queensbridge, prompting the Bronx rebuttals 'South Bronx' and 'The Bridge Is Over.'"
+  },
+  {
+    "id": "hiphop-047",
+    "league": "hiphop",
+    "difficulty": "hard",
+    "question": "MF DOOM formed the duo Madvillain with which producer for the 2004 album 'Madvillainy'?",
+    "choices": ["J Dilla", "Madlib", "Danger Mouse", "The Alchemist"],
+    "correctIndex": 1,
+    "funFact": "An unfinished version of Madvillainy leaked online about a year before release, nearly derailing the project before the duo reworked it into a cult classic."
+  },
+  {
+    "id": "hiphop-048",
+    "league": "hiphop",
+    "difficulty": "hard",
+    "question": "Who won the first-ever Grammy Award for Best Rap Performance in 1989?",
+    "choices": ["Run-D.M.C.", "LL Cool J", "Salt-N-Pepa", "DJ Jazzy Jeff & The Fresh Prince"],
+    "correctIndex": 3,
+    "funFact": "The duo won for 'Parents Just Don't Understand' but boycotted the ceremony because the new rap category was not part of the televised broadcast."
+  },
+  {
+    "id": "hiphop-049",
+    "league": "hiphop",
+    "difficulty": "hard",
+    "question": "Geto Boys' 1991 classic 'Mind Playing Tricks on Me' is built on a sample from which soul artist?",
+    "choices": ["Curtis Mayfield", "Isaac Hayes", "Marvin Gaye", "Willie Hutch"],
+    "correctIndex": 1,
+    "funFact": "The song loops Isaac Hayes's 'Hung Up on My Baby' and became Houston rap's first major national hit, topping Billboard's Hot Rap Singles chart."
+  },
+  {
+    "id": "hiphop-050",
+    "league": "hiphop",
+    "difficulty": "hard",
+    "question": "Whose show-stealing verse on A Tribe Called Quest's posse cut 'Scenario' launched his career as a star?",
+    "choices": ["Q-Tip", "Phife Dawg", "Busta Rhymes", "Charlie Brown"],
+    "correctIndex": 2,
+    "funFact": "Busta Rhymes, then a member of Leaders of the New School, exploded with his 'rawr rawr like a dungeon dragon' verse, which is still ranked among the greatest guest verses ever."
+  }
+]

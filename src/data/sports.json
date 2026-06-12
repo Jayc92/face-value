@@ -1,0 +1,452 @@
+[
+  {
+    "id": "sports-001",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "Which NFL team overcame a 28-3 deficit to win Super Bowl LI in overtime?",
+    "choices": ["New England Patriots", "Atlanta Falcons", "Seattle Seahawks", "Green Bay Packers"],
+    "correctIndex": 0,
+    "funFact": "Super Bowl LI was the first Super Bowl ever to go to overtime, and Tom Brady earned a record fourth Super Bowl MVP award for the comeback."
+  },
+  {
+    "id": "sports-002",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "How many NBA championships did Michael Jordan win with the Chicago Bulls?",
+    "choices": ["4", "5", "6", "7"],
+    "correctIndex": 2,
+    "funFact": "Jordan was named Finals MVP in all six of his championship series, winning two separate three-peats divided by his brief retirement to play minor-league baseball."
+  },
+  {
+    "id": "sports-003",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "Which country has won the most FIFA World Cup titles?",
+    "choices": ["Germany", "Italy", "Argentina", "Brazil"],
+    "correctIndex": 3,
+    "funFact": "Brazil has won five World Cups and is the only nation to have appeared in every single World Cup tournament since the event began in 1930."
+  },
+  {
+    "id": "sports-004",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "Babe Ruth hit most of his 714 career home runs while playing for which team?",
+    "choices": ["Boston Red Sox", "Chicago Cubs", "Detroit Tigers", "New York Yankees"],
+    "correctIndex": 3,
+    "funFact": "Ruth actually began his career as a star pitcher with the Boston Red Sox, winning 89 games for them before the Yankees converted him into a full-time slugger."
+  },
+  {
+    "id": "sports-005",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "Which hockey legend is known as 'The Great One'?",
+    "choices": ["Mario Lemieux", "Wayne Gretzky", "Bobby Orr", "Gordie Howe"],
+    "correctIndex": 1,
+    "funFact": "Gretzky's 1,963 career assists are so far ahead of the field that he would still be the NHL's all-time points leader even if he had never scored a single goal."
+  },
+  {
+    "id": "sports-006",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "How many players does each soccer team have on the field at one time?",
+    "choices": ["9", "10", "11", "12"],
+    "correctIndex": 2,
+    "funFact": "Under the Laws of the Game, a team can continue playing with as few as seven players; if a side drops below seven, the match must be abandoned."
+  },
+  {
+    "id": "sports-007",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "What is Usain Bolt's world-record time in the 100-meter dash?",
+    "choices": ["9.49 seconds", "9.58 seconds", "9.69 seconds", "9.72 seconds"],
+    "correctIndex": 1,
+    "funFact": "Bolt set the record at the 2009 World Championships in Berlin, reaching a top speed of roughly 27.8 miles per hour mid-race."
+  },
+  {
+    "id": "sports-008",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "How many Grand Slam singles titles did Serena Williams win in her career?",
+    "choices": ["20", "22", "23", "25"],
+    "correctIndex": 2,
+    "funFact": "Serena won her 23rd Grand Slam title at the 2017 Australian Open while about eight weeks pregnant with her daughter."
+  },
+  {
+    "id": "sports-009",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "The Masters golf tournament is played every year at which course?",
+    "choices": ["Augusta National", "Pebble Beach", "St Andrews", "Pinehurst No. 2"],
+    "correctIndex": 0,
+    "funFact": "The Masters champion receives a green jacket and gets to choose the menu for the following year's Champions Dinner, a tradition started by Ben Hogan in 1952."
+  },
+  {
+    "id": "sports-010",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "Kobe Bryant played his entire 20-year NBA career with which team?",
+    "choices": ["Charlotte Hornets", "Philadelphia 76ers", "Los Angeles Clippers", "Los Angeles Lakers"],
+    "correctIndex": 3,
+    "funFact": "Kobe was actually drafted 13th overall by the Charlotte Hornets in 1996 and traded to the Lakers, who later retired both of his jersey numbers, 8 and 24."
+  },
+  {
+    "id": "sports-011",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "Which trophy is awarded to the NHL playoff champion?",
+    "choices": ["The Larry O'Brien Trophy", "The Stanley Cup", "The Vince Lombardi Trophy", "The Commissioner's Trophy"],
+    "correctIndex": 1,
+    "funFact": "Donated by Lord Stanley in 1892, the Stanley Cup is the oldest trophy in North American pro sports, and every player on the winning team gets a personal day with it."
+  },
+  {
+    "id": "sports-012",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "In baseball, how many strikes does it take to strike out a batter?",
+    "choices": ["2", "3", "4", "5"],
+    "correctIndex": 1,
+    "funFact": "Scorekeepers mark a strikeout with the letter 'K' because pioneering writer Henry Chadwick used the last letter of 'struck' when inventing his scoring system."
+  },
+  {
+    "id": "sports-013",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "How many Super Bowl titles did Tom Brady win in his career?",
+    "choices": ["4", "5", "6", "7"],
+    "correctIndex": 3,
+    "funFact": "Brady's seven Super Bowl wins are more than any single NFL franchise has earned — the Patriots and Steelers lead all teams with six apiece."
+  },
+  {
+    "id": "sports-014",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "How often are the Summer Olympic Games normally held?",
+    "choices": ["Every 2 years", "Every 3 years", "Every 4 years", "Every 5 years"],
+    "correctIndex": 2,
+    "funFact": "The Tokyo 2020 Games were the first Olympics ever postponed rather than canceled, moving to 2021 due to the COVID-19 pandemic."
+  },
+  {
+    "id": "sports-015",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "Which city hosted the 2016 Summer Olympics?",
+    "choices": ["Rio de Janeiro", "London", "Beijing", "Tokyo"],
+    "correctIndex": 0,
+    "funFact": "Rio 2016 marked the first time the Olympic Games were ever held in South America."
+  },
+  {
+    "id": "sports-016",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "Lionel Messi spent the first 17 seasons of his professional career with which club?",
+    "choices": ["Real Madrid", "FC Barcelona", "Manchester City", "Paris Saint-Germain"],
+    "correctIndex": 1,
+    "funFact": "Barcelona's first commitment to sign 13-year-old Messi was famously sketched out on a paper napkin during a meeting with his representatives in 2000."
+  },
+  {
+    "id": "sports-017",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "How many points is a touchdown worth in the NFL, before any extra-point attempt?",
+    "choices": ["3", "6", "7", "9"],
+    "correctIndex": 1,
+    "funFact": "The term 'touchdown' is a holdover from rugby, where the ball had to be physically touched to the ground — in modern football, no touching down is required at all."
+  },
+  {
+    "id": "sports-018",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "In tennis, what does the scoring term 'love' mean?",
+    "choices": ["Zero points", "A tied score", "Match point", "An ace"],
+    "correctIndex": 0,
+    "funFact": "One popular theory traces 'love' to the French word 'l'oeuf' — the egg — because the numeral zero resembles an egg."
+  },
+  {
+    "id": "sports-019",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "Muhammad Ali won an Olympic gold medal at the 1960 Rome Games in which sport?",
+    "choices": ["Wrestling", "Judo", "Weightlifting", "Boxing"],
+    "correctIndex": 3,
+    "funFact": "Ali, then 18-year-old Cassius Clay, won light heavyweight gold; according to legend he later threw the medal into the Ohio River and received a replacement at the 1996 Atlanta Games."
+  },
+  {
+    "id": "sports-020",
+    "league": "sports",
+    "difficulty": "easy",
+    "question": "Which golfer won the 1997 Masters by a record 12 strokes at age 21?",
+    "choices": ["Tiger Woods", "Phil Mickelson", "Ernie Els", "David Duval"],
+    "correctIndex": 0,
+    "funFact": "It was Woods' first major championship, and he became the youngest Masters winner in history, a record that still stands."
+  },
+  {
+    "id": "sports-021",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Who holds the MLB record for most career home runs?",
+    "choices": ["Barry Bonds", "Hank Aaron", "Babe Ruth", "Albert Pujols"],
+    "correctIndex": 0,
+    "funFact": "Bonds also holds the single-season record with 73 homers in 2001, and pitchers feared him so much that he drew 120 intentional walks in 2004 alone."
+  },
+  {
+    "id": "sports-022",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Which NFL team completed the league's only perfect season, capped by a Super Bowl win, in 1972?",
+    "choices": ["Pittsburgh Steelers", "Miami Dolphins", "Dallas Cowboys", "Oakland Raiders"],
+    "correctIndex": 1,
+    "funFact": "The 17-0 Dolphins remain the only undefeated, untied Super Bowl champions, and surviving team members reportedly toast each season when the last unbeaten team finally loses."
+  },
+  {
+    "id": "sports-023",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "In what year did Wilt Chamberlain score 100 points in a single NBA game?",
+    "choices": ["1958", "1960", "1962", "1966"],
+    "correctIndex": 2,
+    "funFact": "The game was played in Hershey, Pennsylvania, and was never televised — only photos and a radio recording of the fourth quarter survive."
+  },
+  {
+    "id": "sports-024",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Which country won the first FIFA World Cup in 1930?",
+    "choices": ["Brazil", "Argentina", "Italy", "Uruguay"],
+    "correctIndex": 3,
+    "funFact": "Uruguay hosted the tournament and beat Argentina 4-2 in the final, adding to the Olympic football gold medals it had already won in 1924 and 1928."
+  },
+  {
+    "id": "sports-025",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "How many career assists did Wayne Gretzky record, an NHL record?",
+    "choices": ["1,963", "1,249", "1,571", "2,857"],
+    "correctIndex": 0,
+    "funFact": "Gretzky's assist total alone is higher than any other player's combined goals and assists — his 2,857 total points remain hockey's most untouchable record."
+  },
+  {
+    "id": "sports-026",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "How many Wimbledon singles titles did Roger Federer win?",
+    "choices": ["6", "7", "8", "9"],
+    "correctIndex": 2,
+    "funFact": "Federer's eight Wimbledon titles are the most by any man, and he won five of them consecutively from 2003 to 2007."
+  },
+  {
+    "id": "sports-027",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Which team ended an 86-year championship drought by winning the 2004 World Series?",
+    "choices": ["Boston Red Sox", "Chicago Cubs", "Chicago White Sox", "Cleveland Indians"],
+    "correctIndex": 0,
+    "funFact": "On the way to breaking the 'Curse of the Bambino,' the Red Sox became the first MLB team ever to win a playoff series after trailing three games to none, stunning the Yankees in the ALCS."
+  },
+  {
+    "id": "sports-028",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Who became the NBA's first unanimous MVP in 2016?",
+    "choices": ["LeBron James", "Stephen Curry", "Kevin Durant", "James Harden"],
+    "correctIndex": 1,
+    "funFact": "That season Curry made an astonishing 402 three-pointers, shattering his own record, while his Warriors set the NBA's best-ever regular-season mark at 73-9."
+  },
+  {
+    "id": "sports-029",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "In the 1980 'Miracle on Ice,' the underdog U.S. hockey team upset which country?",
+    "choices": ["Soviet Union", "Czechoslovakia", "Sweden", "Finland"],
+    "correctIndex": 0,
+    "funFact": "The famous upset was not actually the gold-medal game — the Americans still had to beat Finland two days later to clinch gold."
+  },
+  {
+    "id": "sports-030",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Which nation won the 2018 FIFA World Cup in Russia?",
+    "choices": ["Croatia", "Germany", "Brazil", "France"],
+    "correctIndex": 3,
+    "funFact": "In the final, 19-year-old Kylian Mbappe became the first teenager to score in a World Cup final since Pele did it in 1958."
+  },
+  {
+    "id": "sports-031",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Jesse Owens won four gold medals at which Olympic Games?",
+    "choices": ["1932 Los Angeles", "1936 Berlin", "1948 London", "1928 Amsterdam"],
+    "correctIndex": 1,
+    "funFact": "A year before Berlin, Owens set three world records and tied a fourth in the span of about 45 minutes at a 1935 Big Ten meet — often called the greatest 45 minutes in sports."
+  },
+  {
+    "id": "sports-032",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Which golfer holds the record for most major championship wins with 18?",
+    "choices": ["Tiger Woods", "Arnold Palmer", "Ben Hogan", "Jack Nicklaus"],
+    "correctIndex": 3,
+    "funFact": "Beyond his 18 wins, Nicklaus also finished runner-up in 19 majors, and he claimed his final Masters title in 1986 at age 46."
+  },
+  {
+    "id": "sports-033",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Who threw the pass to Dwight Clark for 'The Catch' in the January 1982 NFC Championship Game?",
+    "choices": ["Steve Young", "Joe Montana", "Dan Fouts", "Ken Anderson"],
+    "correctIndex": 1,
+    "funFact": "Montana's last-minute touchdown pass beat the Cowboys 28-27 and sent the 49ers to their first Super Bowl, launching a dynasty that won four titles in the 1980s."
+  },
+  {
+    "id": "sports-034",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Which tennis player completed the 'Golden Slam' — all four majors plus Olympic gold — in 1988?",
+    "choices": ["Martina Navratilova", "Chris Evert", "Monica Seles", "Steffi Graf"],
+    "correctIndex": 3,
+    "funFact": "Graf remains the only singles player in history, man or woman, to win all four Grand Slam titles and Olympic gold in the same calendar year."
+  },
+  {
+    "id": "sports-035",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "How many consecutive games did Joe DiMaggio hit safely in during his record 1941 streak?",
+    "choices": ["44", "50", "56", "61"],
+    "correctIndex": 2,
+    "funFact": "The night after the streak ended, DiMaggio started a new one that lasted 16 more games — meaning he hit safely in 72 of 73 straight games."
+  },
+  {
+    "id": "sports-036",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Kobe Bryant scored 81 points in a 2006 game against which team?",
+    "choices": ["Dallas Mavericks", "New York Knicks", "Phoenix Suns", "Toronto Raptors"],
+    "correctIndex": 3,
+    "funFact": "Kobe's 81 is the second-highest single-game total in NBA history, and he scored 55 of those points in the second half to erase a 14-point Lakers deficit."
+  },
+  {
+    "id": "sports-037",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Which country became the first African nation to host the FIFA World Cup in 2010?",
+    "choices": ["Morocco", "Egypt", "South Africa", "Nigeria"],
+    "correctIndex": 2,
+    "funFact": "Champion Spain lost its opening match to Switzerland, becoming the first team ever to lose its opener and still win the World Cup."
+  },
+  {
+    "id": "sports-038",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "How many Olympic gold medals did Michael Phelps win, the all-time record?",
+    "choices": ["18", "20", "23", "28"],
+    "correctIndex": 2,
+    "funFact": "Phelps won 28 medals overall, including eight golds at Beijing 2008 alone, breaking Mark Spitz's single-Games record of seven."
+  },
+  {
+    "id": "sports-039",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Which franchise has won the most Stanley Cups in NHL history?",
+    "choices": ["Toronto Maple Leafs", "Montreal Canadiens", "Detroit Red Wings", "Boston Bruins"],
+    "correctIndex": 1,
+    "funFact": "The Canadiens have hoisted the Cup 24 times, but their most recent win in 1993 also stands as the last championship by any Canadian-based team through 2024."
+  },
+  {
+    "id": "sports-040",
+    "league": "sports",
+    "difficulty": "medium",
+    "question": "Which quarterback set the single-season NFL record with 55 touchdown passes in 2013?",
+    "choices": ["Tom Brady", "Drew Brees", "Aaron Rodgers", "Peyton Manning"],
+    "correctIndex": 3,
+    "funFact": "Manning also set the single-season passing-yards record with 5,477 that year and collected his record fifth NFL MVP award."
+  },
+  {
+    "id": "sports-041",
+    "league": "sports",
+    "difficulty": "hard",
+    "question": "Who threw the only perfect game in World Series history?",
+    "choices": ["Sandy Koufax", "Don Larsen", "Bob Gibson", "Whitey Ford"],
+    "correctIndex": 1,
+    "funFact": "Larsen's 1956 Game 5 gem for the Yankees came just days after he was knocked out in the second inning of Game 2 against the same Dodgers lineup."
+  },
+  {
+    "id": "sports-042",
+    "league": "sports",
+    "difficulty": "hard",
+    "question": "In which season did the NBA first adopt the three-point line?",
+    "choices": ["1967-68", "1972-73", "1979-80", "1984-85"],
+    "correctIndex": 2,
+    "funFact": "The NBA borrowed the line from the rival ABA, and in that first season teams attempted fewer than three three-pointers per game — a number that topped 30 by the 2020s."
+  },
+  {
+    "id": "sports-043",
+    "league": "sports",
+    "difficulty": "hard",
+    "question": "Which gymnast holds the record for most Olympic medals by a female athlete, with 18?",
+    "choices": ["Nadia Comaneci", "Simone Biles", "Larisa Latynina", "Vera Caslavska"],
+    "correctIndex": 2,
+    "funFact": "The Soviet star's 18 medals stood as the all-time record for any athlete, male or female, for 48 years until Michael Phelps surpassed it in 2012."
+  },
+  {
+    "id": "sports-044",
+    "league": "sports",
+    "difficulty": "hard",
+    "question": "Who is the youngest golfer to complete the career Grand Slam of all four major championships?",
+    "choices": ["Jack Nicklaus", "Gary Player", "Rory McIlroy", "Tiger Woods"],
+    "correctIndex": 3,
+    "funFact": "Woods completed the set at age 24 at the 2000 Open Championship, then won the next three majors to hold all four trophies at once — the famous 'Tiger Slam.'"
+  },
+  {
+    "id": "sports-045",
+    "league": "sports",
+    "difficulty": "hard",
+    "question": "Who won the longest match in tennis history, an 11-hour, 5-minute marathon at Wimbledon in 2010?",
+    "choices": ["John Isner", "Nicolas Mahut", "Kevin Anderson", "Ivo Karlovic"],
+    "correctIndex": 0,
+    "funFact": "Isner finally beat Mahut 70-68 in a fifth set spread across three days — the electronic scoreboard malfunctioned and froze when the set reached 47-47."
+  },
+  {
+    "id": "sports-046",
+    "league": "sports",
+    "difficulty": "hard",
+    "question": "Which goaltender holds the NHL record for most career regular-season wins?",
+    "choices": ["Patrick Roy", "Martin Brodeur", "Marc-Andre Fleury", "Roberto Luongo"],
+    "correctIndex": 1,
+    "funFact": "Beyond his 691 wins, Brodeur is the only goalie in NHL history credited with three career goals, including one in the playoffs."
+  },
+  {
+    "id": "sports-047",
+    "league": "sports",
+    "difficulty": "hard",
+    "question": "Who won Olympic gold in the decathlon at both the 1948 and 1952 Games?",
+    "choices": ["Rafer Johnson", "Bruce Jenner", "Bob Mathias", "Daley Thompson"],
+    "correctIndex": 2,
+    "funFact": "Mathias won his first decathlon gold in London at just 17, making him the youngest male Olympic champion in track and field history."
+  },
+  {
+    "id": "sports-048",
+    "league": "sports",
+    "difficulty": "hard",
+    "question": "Who set the MLB single-season hits record with 262 in 2004?",
+    "choices": ["Pete Rose", "Derek Jeter", "Ichiro Suzuki", "Tony Gwynn"],
+    "correctIndex": 2,
+    "funFact": "Ichiro broke George Sisler's 84-year-old record of 257 hits and went on to post ten consecutive 200-hit seasons, another MLB record."
+  },
+  {
+    "id": "sports-049",
+    "league": "sports",
+    "difficulty": "hard",
+    "question": "Which player holds the record for most goals scored across FIFA World Cup tournaments?",
+    "choices": ["Ronaldo (Brazil)", "Pele", "Gerd Muller", "Miroslav Klose"],
+    "correctIndex": 3,
+    "funFact": "Klose's record-breaking 16th goal came in Germany's stunning 7-1 semifinal rout of Brazil in 2014 — passing Brazilian legend Ronaldo on Brazil's home soil."
+  },
+  {
+    "id": "sports-050",
+    "league": "sports",
+    "difficulty": "hard",
+    "question": "Which quarterback famously 'guaranteed' victory before Super Bowl III and then delivered the upset?",
+    "choices": ["Joe Namath", "Johnny Unitas", "Bart Starr", "Len Dawson"],
+    "correctIndex": 0,
+    "funFact": "Namath's 18-point underdog Jets beat the Colts 16-7, and he was named Super Bowl MVP despite not throwing a single touchdown pass in the game."
+  }
+]

@@ -1,0 +1,452 @@
+[
+  {
+    "id": "country-001",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Which country legend was known as 'The Man in Black'?",
+    "choices": ["Willie Nelson", "Johnny Cash", "Waylon Jennings", "Merle Haggard"],
+    "correctIndex": 1,
+    "funFact": "Johnny Cash explained his signature look in the 1971 song 'Man in Black,' saying he wore black on behalf of the poor, the imprisoned, and the downtrodden."
+  },
+  {
+    "id": "country-002",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Which Dolly Parton song later became a massive pop hit for Whitney Houston?",
+    "choices": ["Jolene", "9 to 5", "I Will Always Love You", "Coat of Many Colors"],
+    "correctIndex": 2,
+    "funFact": "Elvis Presley wanted to record 'I Will Always Love You,' but Dolly Parton refused when Colonel Tom Parker demanded half the publishing rights — a decision that later earned her millions."
+  },
+  {
+    "id": "country-003",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Which artist launched her career with the 2006 debut single 'Tim McGraw'?",
+    "choices": ["Carrie Underwood", "Miranda Lambert", "Kacey Musgraves", "Taylor Swift"],
+    "correctIndex": 3,
+    "funFact": "At age 14, Taylor Swift became the youngest songwriter ever signed by the Sony/ATV publishing house, two years before her debut single was released."
+  },
+  {
+    "id": "country-004",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "'Friends in Low Places' is a signature song of which country superstar?",
+    "choices": ["Garth Brooks", "Alan Jackson", "George Strait", "Toby Keith"],
+    "correctIndex": 0,
+    "funFact": "According to the RIAA, Garth Brooks is the best-selling solo albums artist in United States history, ahead of even Elvis Presley."
+  },
+  {
+    "id": "country-005",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "The Grand Ole Opry is located in which city?",
+    "choices": ["Memphis", "Austin", "Nashville", "Branson"],
+    "correctIndex": 2,
+    "funFact": "The Opry began in 1925 as the WSM Barn Dance radio show, making it the longest-running radio broadcast in American history."
+  },
+  {
+    "id": "country-006",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Carrie Underwood rose to fame in 2005 after winning which television competition?",
+    "choices": ["The Voice", "Nashville Star", "America's Got Talent", "American Idol"],
+    "correctIndex": 3,
+    "funFact": "After her audition, Simon Cowell predicted Underwood would not only win American Idol but outsell every previous winner — and she did."
+  },
+  {
+    "id": "country-007",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Which country legend wrote and recorded 'On the Road Again'?",
+    "choices": ["Kris Kristofferson", "Merle Haggard", "Willie Nelson", "Waylon Jennings"],
+    "correctIndex": 2,
+    "funFact": "Willie Nelson scribbled 'On the Road Again' mid-flight on an airplane sick bag when asked to write a theme for the 1980 film Honeysuckle Rose."
+  },
+  {
+    "id": "country-008",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Who recorded the 1968 country anthem 'Stand By Your Man'?",
+    "choices": ["Tammy Wynette", "Loretta Lynn", "Patsy Cline", "Dolly Parton"],
+    "correctIndex": 0,
+    "funFact": "Tammy Wynette and producer Billy Sherrill wrote 'Stand By Your Man' in roughly 15 minutes at the end of a recording session."
+  },
+  {
+    "id": "country-009",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Which country star is affectionately nicknamed 'King George'?",
+    "choices": ["George Jones", "George Strait", "Conway Twitty", "Randy Travis"],
+    "correctIndex": 1,
+    "funFact": "George Strait has racked up 60 number-one singles across all charts, more than any other artist in any genre of music."
+  },
+  {
+    "id": "country-010",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Who had the timeless 1961 hit 'Crazy'?",
+    "choices": ["Patsy Cline", "Loretta Lynn", "Brenda Lee", "Kitty Wells"],
+    "correctIndex": 0,
+    "funFact": "Patsy Cline recorded her final 'Crazy' vocal in a single take just weeks after a near-fatal car crash, having initially struggled to hit the notes because of broken ribs."
+  },
+  {
+    "id": "country-011",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Which group recorded the 2009 crossover smash 'Need You Now'?",
+    "choices": ["Little Big Town", "Rascal Flatts", "The Band Perry", "Lady A"],
+    "correctIndex": 3,
+    "funFact": "'Need You Now' won four Grammy Awards in 2011, including both Record of the Year and Song of the Year, beating out pop heavyweights."
+  },
+  {
+    "id": "country-012",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Which Canadian-born star released 'Man! I Feel Like a Woman!'?",
+    "choices": ["Faith Hill", "Shania Twain", "Terri Clark", "Anne Murray"],
+    "correctIndex": 1,
+    "funFact": "Shania Twain's 1997 album Come On Over is the best-selling country album of all time and the best-selling studio album ever by a solo female artist."
+  },
+  {
+    "id": "country-013",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Which country singer served as a coach on The Voice for its first 23 seasons?",
+    "choices": ["Luke Bryan", "Keith Urban", "Blake Shelton", "Brad Paisley"],
+    "correctIndex": 2,
+    "funFact": "Blake Shelton won The Voice a record nine times as a coach — and met his wife, Gwen Stefani, when she joined the show as a fellow coach."
+  },
+  {
+    "id": "country-014",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Who had the 1992 line-dance phenomenon 'Achy Breaky Heart'?",
+    "choices": ["Billy Ray Cyrus", "Alan Jackson", "Travis Tritt", "Joe Diffie"],
+    "correctIndex": 0,
+    "funFact": "Twenty-seven years after 'Achy Breaky Heart,' Billy Ray Cyrus returned to the top of the charts on Lil Nas X's record-breaking 'Old Town Road' remix."
+  },
+  {
+    "id": "country-015",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Who sang the 1978 storytelling classic 'The Gambler'?",
+    "choices": ["Glen Campbell", "Kenny Rogers", "Don Williams", "Charley Pride"],
+    "correctIndex": 1,
+    "funFact": "'The Gambler' was written by Don Schlitz and recorded by several artists first, but Kenny Rogers' version won a Grammy and spawned a series of TV movies starring Rogers himself."
+  },
+  {
+    "id": "country-016",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Whose version of 'Wagon Wheel' hit number one on the country charts in 2013?",
+    "choices": ["Dierks Bentley", "Eric Church", "Darius Rucker", "Chris Young"],
+    "correctIndex": 2,
+    "funFact": "'Wagon Wheel' began as an unfinished Bob Dylan sketch from 1973; Ketch Secor of Old Crow Medicine Show wrote verses around Dylan's chorus decades later."
+  },
+  {
+    "id": "country-017",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Which instrument does the devil play in Charlie Daniels' 'The Devil Went Down to Georgia'?",
+    "choices": ["Banjo", "Fiddle", "Steel guitar", "Mandolin"],
+    "correctIndex": 1,
+    "funFact": "The song won the Charlie Daniels Band a Grammy in 1979, and the devil's frantic fiddle solo was built by layering multiple overdubbed fiddle tracks."
+  },
+  {
+    "id": "country-018",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Tim McGraw is married to which fellow country star?",
+    "choices": ["Faith Hill", "Martina McBride", "Sara Evans", "LeAnn Rimes"],
+    "correctIndex": 0,
+    "funFact": "Married in 1996, McGraw and Hill launched the Soul2Soul II Tour in 2006, which became one of the highest-grossing tours in country music history."
+  },
+  {
+    "id": "country-019",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Who recorded the beloved 1971 anthem 'Take Me Home, Country Roads'?",
+    "choices": ["Glen Campbell", "Kris Kristofferson", "Gordon Lightfoot", "John Denver"],
+    "correctIndex": 3,
+    "funFact": "Co-written with Bill Danoff and Taffy Nivert, the song was officially adopted as a state song of West Virginia in 2014."
+  },
+  {
+    "id": "country-020",
+    "league": "country",
+    "difficulty": "easy",
+    "question": "Which artist had the 2017 hit 'Body Like a Back Road'?",
+    "choices": ["Sam Hunt", "Thomas Rhett", "Kane Brown", "Luke Combs"],
+    "correctIndex": 0,
+    "funFact": "'Body Like a Back Road' spent a then-record 34 weeks at number one on Billboard's Hot Country Songs chart. Sam Hunt played college football as a quarterback before turning to music."
+  },
+  {
+    "id": "country-021",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Which then-struggling songwriter wrote Patsy Cline's hit 'Crazy'?",
+    "choices": ["Roger Miller", "Hank Cochran", "Harlan Howard", "Willie Nelson"],
+    "correctIndex": 3,
+    "funFact": "In the same prolific stretch, Willie Nelson also wrote 'Hello Walls' for Faron Young and 'Funny How Time Slips Away' — all before anyone knew him as a singer."
+  },
+  {
+    "id": "country-022",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Hank Williams died on New Year's Day of which year?",
+    "choices": ["1949", "1951", "1953", "1955"],
+    "correctIndex": 2,
+    "funFact": "Williams was only 29 when he died in the back seat of his Cadillac en route to a show in Canton, Ohio — and his single 'I'll Never Get Out of This World Alive' was on the charts at the time."
+  },
+  {
+    "id": "country-023",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Which artist had a controversial 1969 hit with 'Okie From Muskogee'?",
+    "choices": ["Buck Owens", "Merle Haggard", "George Jones", "Charley Pride"],
+    "correctIndex": 1,
+    "funFact": "Merle Haggard was actually an inmate at San Quentin when Johnny Cash performed there on New Year's Day 1959 — an experience Haggard credited with inspiring his music career."
+  },
+  {
+    "id": "country-024",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "The twangy, Telecaster-driven 'Bakersfield Sound' of the 1960s came out of which U.S. state?",
+    "choices": ["Texas", "Oklahoma", "California", "Tennessee"],
+    "correctIndex": 2,
+    "funFact": "Pioneered by Buck Owens and Merle Haggard, the Bakersfield Sound arose as a raw honky-tonk alternative to the string-laden polish of the 'Nashville Sound.'"
+  },
+  {
+    "id": "country-025",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Which singer wrote and recorded the autobiographical hit 'Coal Miner's Daughter'?",
+    "choices": ["Loretta Lynn", "Tammy Wynette", "Dolly Parton", "Jeannie C. Riley"],
+    "correctIndex": 0,
+    "funFact": "The 1980 film adaptation of Coal Miner's Daughter earned Sissy Spacek the Academy Award for Best Actress for her portrayal of Loretta Lynn — Spacek did all her own singing."
+  },
+  {
+    "id": "country-026",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "In 1999, Garth Brooks released a pop-rock album under which fictional alter ego?",
+    "choices": ["Cole Steele", "Chris Gaines", "Johnny Ryder", "Jesse King"],
+    "correctIndex": 1,
+    "funFact": "The Chris Gaines project was meant as a 'pre-soundtrack' for a movie called The Lamb that was never made, yet it gave Brooks his only Billboard Hot 100 top-five hit, 'Lost in You.'"
+  },
+  {
+    "id": "country-027",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Who won the very first CMA Entertainer of the Year award in 1967?",
+    "choices": ["Roy Acuff", "Buck Owens", "Johnny Cash", "Eddy Arnold"],
+    "correctIndex": 3,
+    "funFact": "Eddy Arnold, known as 'the Tennessee Plowboy,' sold more than 85 million records and helped pioneer the smooth, crossover-friendly Nashville Sound."
+  },
+  {
+    "id": "country-028",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Which group recorded the darkly comic 2000 revenge hit 'Goodbye Earl'?",
+    "choices": ["The Chicks (Dixie Chicks)", "SHeDAISY", "Pistol Annies", "Little Big Town"],
+    "correctIndex": 0,
+    "funFact": "'Goodbye Earl' was written by Dennis Linde, the same songwriter behind Elvis Presley's 1972 hit 'Burning Love.'"
+  },
+  {
+    "id": "country-029",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Alan Jackson's 2003 chart-topper 'It's Five O'Clock Somewhere' was a duet with which singer?",
+    "choices": ["Kenny Chesney", "Kid Rock", "Zac Brown", "Jimmy Buffett"],
+    "correctIndex": 3,
+    "funFact": "The breezy duet spent eight weeks at number one on the country chart and won the CMA Vocal Event of the Year award in 2003."
+  },
+  {
+    "id": "country-030",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Which country artist's album Golden Hour won the Grammy for Album of the Year in 2019?",
+    "choices": ["Maren Morris", "Kacey Musgraves", "Ashley McBryde", "Margo Price"],
+    "correctIndex": 1,
+    "funFact": "Before her Grammy sweep, Kacey Musgraves got her television start on the singing competition Nashville Star in 2007, where she finished seventh."
+  },
+  {
+    "id": "country-031",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "'He Stopped Loving Her Today,' often called the greatest country song ever recorded, was a 1980 hit for whom?",
+    "choices": ["Conway Twitty", "Vern Gosdin", "George Jones", "Gene Watson"],
+    "correctIndex": 2,
+    "funFact": "George Jones bet producer Billy Sherrill that 'nobody'll buy that morbid son of a gun' — instead it revived his career and became his signature song."
+  },
+  {
+    "id": "country-032",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "What 1976 compilation featuring Waylon Jennings and Willie Nelson became the first country album certified platinum?",
+    "choices": ["Wanted! The Outlaws", "Red Headed Stranger", "Honky Tonk Heroes", "The Ramblin' Man"],
+    "correctIndex": 0,
+    "funFact": "The album also featured Jessi Colter, Waylon Jennings' wife, and Tompall Glaser, cementing the 'outlaw country' movement as a commercial force."
+  },
+  {
+    "id": "country-033",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Dolly Parton's theme park Dollywood is located in which Tennessee town?",
+    "choices": ["Pigeon Forge", "Gatlinburg", "Sevierville", "Chattanooga"],
+    "correctIndex": 0,
+    "funFact": "Dolly grew up nearby in Sevier County and opened Dollywood in 1986; it is now Tennessee's most-visited ticketed attraction."
+  },
+  {
+    "id": "country-034",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Which duo had the 1992 honky-tonk dance hit 'Boot Scootin' Boogie'?",
+    "choices": ["The Bellamy Brothers", "Montgomery Gentry", "Brooks & Dunn", "Big & Rich"],
+    "correctIndex": 2,
+    "funFact": "Brooks & Dunn won the CMA Vocal Duo of the Year award 14 times, more than any other duo in the history of the awards."
+  },
+  {
+    "id": "country-035",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Chris Stapleton's breakout 2015 CMA Awards performance of 'Tennessee Whiskey' paired him with which pop star?",
+    "choices": ["Bruno Mars", "Justin Timberlake", "Ed Sheeran", "John Mayer"],
+    "correctIndex": 1,
+    "funFact": "'Tennessee Whiskey' was originally recorded by David Allan Coe in 1981 and made famous by George Jones in 1983 before Stapleton's soulful reinvention."
+  },
+  {
+    "id": "country-036",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Reba McEntire grew up on a cattle ranch in which state?",
+    "choices": ["Texas", "Tennessee", "Arkansas", "Oklahoma"],
+    "correctIndex": 3,
+    "funFact": "Reba was discovered after singing the national anthem at the 1974 National Finals Rodeo in Oklahoma City; her father and grandfather were both champion steer ropers."
+  },
+  {
+    "id": "country-037",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "In Marty Robbins' 1959 gunfighter ballad 'El Paso,' what is the name of the Mexican maiden the cowboy loves?",
+    "choices": ["Feleena", "Rosita", "Maria", "Carmelita"],
+    "correctIndex": 0,
+    "funFact": "Robbins kept returning to the story for decades, writing the sequel 'Feleena (From El Paso)' in 1966 and the Grammy-nominated 'El Paso City' in 1976."
+  },
+  {
+    "id": "country-038",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Which singer, the youngest sister of Loretta Lynn, had the 1977 hit 'Don't It Make My Brown Eyes Blue'?",
+    "choices": ["Barbara Mandrell", "Tanya Tucker", "Crystal Gayle", "Janie Fricke"],
+    "correctIndex": 2,
+    "funFact": "Crystal Gayle, famous for her floor-length hair, won the 1978 Grammy for Best Female Country Vocal Performance for the song, which crossed over to the pop top five."
+  },
+  {
+    "id": "country-039",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Keith Urban was born in which country?",
+    "choices": ["Australia", "United States", "Canada", "New Zealand"],
+    "correctIndex": 3,
+    "funFact": "Though born in Whangarei, New Zealand, Urban was raised in Queensland, Australia, and moved to Nashville in the early 1990s years before his American breakthrough."
+  },
+  {
+    "id": "country-040",
+    "league": "country",
+    "difficulty": "medium",
+    "question": "Johnny Cash's 'Ring of Fire' was co-written by Merle Kilgore and which member of the Carter Family?",
+    "choices": ["Anita Carter", "June Carter", "Helen Carter", "Maybelle Carter"],
+    "correctIndex": 1,
+    "funFact": "June's sister Anita Carter actually recorded the song first in 1962; Johnny Cash then cut his version with mariachi-style horns he claimed came to him in a dream."
+  },
+  {
+    "id": "country-041",
+    "league": "country",
+    "difficulty": "hard",
+    "question": "Which radio announcer, known as 'The Solemn Old Judge,' coined the name 'Grand Ole Opry' on the air in 1927?",
+    "choices": ["Harry Stone", "George D. Hay", "Edwin Craig", "Roy Acuff"],
+    "correctIndex": 1,
+    "funFact": "Hay improvised the name right after NBC's grand opera program, quipping that for the next hour listeners would hear the 'Grand Ole Opry' instead."
+  },
+  {
+    "id": "country-042",
+    "league": "country",
+    "difficulty": "hard",
+    "question": "Whose 1924 recording of 'Wreck of the Old 97' backed with 'The Prisoner's Song' is considered country music's first million-seller?",
+    "choices": ["Fiddlin' John Carson", "Uncle Dave Macon", "Vernon Dalhart", "Jimmie Rodgers"],
+    "correctIndex": 2,
+    "funFact": "Vernon Dalhart was a Texas-born light-opera tenor who recorded under more than 100 different pseudonyms during his prolific career."
+  },
+  {
+    "id": "country-043",
+    "league": "country",
+    "difficulty": "hard",
+    "question": "Which producer oversaw the famous 1927 Bristol Sessions, often called the 'Big Bang of country music'?",
+    "choices": ["Ralph Peer", "Sam Phillips", "Art Satherley", "Owen Bradley"],
+    "correctIndex": 0,
+    "funFact": "Within days of each other at the Bristol Sessions, Ralph Peer discovered and recorded both Jimmie Rodgers and the Carter Family, launching two foundational country careers."
+  },
+  {
+    "id": "country-044",
+    "league": "country",
+    "difficulty": "hard",
+    "question": "Who was the first solo female artist inducted into the Country Music Hall of Fame, in 1973?",
+    "choices": ["Kitty Wells", "Minnie Pearl", "Loretta Lynn", "Patsy Cline"],
+    "correctIndex": 3,
+    "funFact": "Cline's induction came a decade after the 1963 plane crash near Camden, Tennessee, that killed her along with fellow stars Cowboy Copas and Hawkshaw Hawkins."
+  },
+  {
+    "id": "country-045",
+    "league": "country",
+    "difficulty": "hard",
+    "question": "The 2000 lament 'Murder on Music Row,' decrying pop influence on country music, was a duet between Alan Jackson and whom?",
+    "choices": ["Vince Gill", "George Strait", "Randy Travis", "Clint Black"],
+    "correctIndex": 1,
+    "funFact": "Despite never being released as an official single, the song charted from radio airplay alone and won the CMA Vocal Event of the Year award in 2000."
+  },
+  {
+    "id": "country-046",
+    "league": "country",
+    "difficulty": "hard",
+    "question": "Which Nashville Sound architect built the famous Quonset Hut studio, widely regarded as Music Row's first major recording studio?",
+    "choices": ["Chet Atkins", "Billy Sherrill", "Owen Bradley", "Fred Foster"],
+    "correctIndex": 2,
+    "funFact": "Owen Bradley, who built the studio with his guitarist brother Harold in the mid-1950s, went on to produce defining records for Patsy Cline, Loretta Lynn, and Brenda Lee."
+  },
+  {
+    "id": "country-047",
+    "league": "country",
+    "difficulty": "hard",
+    "question": "Who was the Grand Ole Opry's first African American star, famed for the harmonica showpiece 'Pan American Blues'?",
+    "choices": ["DeFord Bailey", "Charley Pride", "Stoney Edwards", "O.B. McClinton"],
+    "correctIndex": 0,
+    "funFact": "It was DeFord Bailey's performance of 'Pan American Blues' that immediately preceded George D. Hay's on-air coining of the name 'Grand Ole Opry' in 1927; Bailey was inducted into the Country Music Hall of Fame in 2005."
+  },
+  {
+    "id": "country-048",
+    "league": "country",
+    "difficulty": "hard",
+    "question": "How old was Tanya Tucker when her hit 'Delta Dawn' reached the country top ten in 1972?",
+    "choices": ["11", "13", "15", "17"],
+    "correctIndex": 1,
+    "funFact": "Helen Reddy's pop version of 'Delta Dawn' hit number one a year later, but the teenage Tucker recorded it first, launching one of country's longest careers."
+  },
+  {
+    "id": "country-049",
+    "league": "country",
+    "difficulty": "hard",
+    "question": "Willie Nelson's 1975 concept album Red Headed Stranger produced which song, his first number-one hit as a singer?",
+    "choices": ["Whiskey River", "Always on My Mind", "Mammas Don't Let Your Babies Grow Up to Be Cowboys", "Blue Eyes Crying in the Rain"],
+    "correctIndex": 3,
+    "funFact": "'Blue Eyes Crying in the Rain' was written by Fred Rose back in 1945 and recorded by Roy Acuff decades before Nelson's stripped-down version won him his first Grammy."
+  },
+  {
+    "id": "country-050",
+    "league": "country",
+    "difficulty": "hard",
+    "question": "Which Rhodes Scholar turned songwriter wrote 'Sunday Mornin' Comin' Down,' 'Me and Bobby McGee,' and 'Help Me Make It Through the Night'?",
+    "choices": ["Kris Kristofferson", "Mickey Newbury", "Tom T. Hall", "Billy Joe Shaver"],
+    "correctIndex": 0,
+    "funFact": "While working as a National Guard helicopter pilot, Kristofferson famously landed a helicopter on Johnny Cash's lawn to get his song demos heard."
+  }
+]

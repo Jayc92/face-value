@@ -1,0 +1,452 @@
+[
+  {
+    "id": "pop-001",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Which artist is known as the \"King of Pop\"?",
+    "choices": ["Prince", "Elvis Presley", "Justin Timberlake", "Michael Jackson"],
+    "correctIndex": 3,
+    "funFact": "Michael Jackson's 1982 album \"Thriller\" remains the best-selling album of all time, with estimated worldwide sales of around 70 million copies."
+  },
+  {
+    "id": "pop-002",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Which artist released the 2014 album \"1989\", named after her birth year?",
+    "choices": ["Katy Perry", "Ariana Grande", "Taylor Swift", "Lorde"],
+    "correctIndex": 2,
+    "funFact": "\"1989\" won Album of the Year at the 2016 Grammys, making Taylor Swift the first woman ever to win that award twice as a lead artist."
+  },
+  {
+    "id": "pop-003",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Who scored a massive 1984 hit with \"Like a Virgin\"?",
+    "choices": ["Madonna", "Cyndi Lauper", "Whitney Houston", "Janet Jackson"],
+    "correctIndex": 0,
+    "funFact": "Madonna famously performed \"Like a Virgin\" in a wedding dress at the very first MTV Video Music Awards in 1984, rolling around the stage in one of pop's most iconic TV moments."
+  },
+  {
+    "id": "pop-004",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Which Beyonce hit features the famous line \"to the left, to the left\"?",
+    "choices": ["Single Ladies (Put a Ring on It)", "Irreplaceable", "Halo", "Naughty Girl"],
+    "correctIndex": 1,
+    "funFact": "\"Irreplaceable\" was co-written by Ne-Yo and spent 10 consecutive weeks at number one on the Billboard Hot 100 in 2006-2007."
+  },
+  {
+    "id": "pop-005",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Justin Timberlake rose to fame as a member of which boy band?",
+    "choices": ["Backstreet Boys", "98 Degrees", "New Kids on the Block", "NSYNC"],
+    "correctIndex": 3,
+    "funFact": "NSYNC's album \"No Strings Attached\" sold 2.42 million copies in its first week in 2000, a record that stood for 15 years until Adele's \"25\"."
+  },
+  {
+    "id": "pop-006",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Who released the 2008 hit single \"Poker Face\"?",
+    "choices": ["Lady Gaga", "Kesha", "Rihanna", "Katy Perry"],
+    "correctIndex": 0,
+    "funFact": "Lady Gaga's stage name was inspired by the Queen song \"Radio Ga Ga\", one of her favorite tracks growing up."
+  },
+  {
+    "id": "pop-007",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Which artist's devoted fanbase is known as the \"Beyhive\"?",
+    "choices": ["Rihanna", "Nicki Minaj", "Beyonce", "Adele"],
+    "correctIndex": 2,
+    "funFact": "Beyonce holds the record for the most Grammy Awards won by any artist in history, and in 2025 she finally claimed her first Album of the Year win with \"Cowboy Carter\"."
+  },
+  {
+    "id": "pop-008",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Who released the 2017 smash hit \"Shape of You\"?",
+    "choices": ["Shawn Mendes", "Ed Sheeran", "Sam Smith", "Charlie Puth"],
+    "correctIndex": 1,
+    "funFact": "Ed Sheeran has said he originally started writing \"Shape of You\" with Rihanna in mind, and it became the first song ever to reach 3 billion streams on Spotify."
+  },
+  {
+    "id": "pop-009",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Whitney Houston's version of \"I Will Always Love You\" appeared on the soundtrack of which film?",
+    "choices": ["Sister Act", "Waiting to Exhale", "The Preacher's Wife", "The Bodyguard"],
+    "correctIndex": 3,
+    "funFact": "\"The Bodyguard\" soundtrack is the best-selling soundtrack album of all time, with more than 45 million copies sold worldwide."
+  },
+  {
+    "id": "pop-010",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "What was Britney Spears' debut single, released in 1998?",
+    "choices": ["Oops!... I Did It Again", "Toxic", "...Baby One More Time", "Lucky"],
+    "correctIndex": 2,
+    "funFact": "\"...Baby One More Time\" was written by Swedish hitmaker Max Martin and was reportedly offered to TLC first, who turned it down."
+  },
+  {
+    "id": "pop-011",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Which British singer released the hit \"Rolling in the Deep\"?",
+    "choices": ["Adele", "Duffy", "Amy Winehouse", "Leona Lewis"],
+    "correctIndex": 0,
+    "funFact": "Adele's album \"21\" was the best-selling album in the world in both 2011 and 2012, a back-to-back feat no other album of the era matched."
+  },
+  {
+    "id": "pop-012",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Mark Ronson's 2014 mega-hit \"Uptown Funk\" features which singer on lead vocals?",
+    "choices": ["Pharrell Williams", "Bruno Mars", "Justin Timberlake", "Usher"],
+    "correctIndex": 1,
+    "funFact": "\"Uptown Funk\" spent 14 weeks at number one on the Billboard Hot 100, one of the longest runs at the top in chart history."
+  },
+  {
+    "id": "pop-013",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "What is the name of Taylor Swift's record-breaking 2023-2024 concert tour?",
+    "choices": ["Reputation Stadium Tour", "1989 World Tour", "Fearless Tour", "The Eras Tour"],
+    "correctIndex": 3,
+    "funFact": "The Eras Tour became the first concert tour in history to gross over $1 billion, ultimately earning more than $2 billion in ticket sales."
+  },
+  {
+    "id": "pop-014",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Who sang the 1983 anthem \"Girls Just Want to Have Fun\"?",
+    "choices": ["Madonna", "Cyndi Lauper", "Belinda Carlisle", "Pat Benatar"],
+    "correctIndex": 1,
+    "funFact": "The song was originally written and recorded in 1979 by Robert Hazard from a male perspective; Cyndi Lauper rewrote it into a feminist anthem."
+  },
+  {
+    "id": "pop-015",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Which artist released the 2019 hit \"Bad Guy\"?",
+    "choices": ["Olivia Rodrigo", "Halsey", "Billie Eilish", "Dua Lipa"],
+    "correctIndex": 2,
+    "funFact": "When \"Bad Guy\" hit number one, Billie Eilish became the first artist born in the 2000s to top the Billboard Hot 100, dethroning \"Old Town Road\" after its record 19-week run."
+  },
+  {
+    "id": "pop-016",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "What was Olivia Rodrigo's record-breaking debut single in January 2021?",
+    "choices": ["drivers license", "good 4 u", "deja vu", "vampire"],
+    "correctIndex": 0,
+    "funFact": "\"drivers license\" broke Spotify's record for the most single-day streams for a non-holiday song and spent eight weeks at number one on the Hot 100."
+  },
+  {
+    "id": "pop-017",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Which group released the 1996 debut single \"Wannabe\"?",
+    "choices": ["TLC", "Destiny's Child", "All Saints", "Spice Girls"],
+    "correctIndex": 3,
+    "funFact": "\"Wannabe\" hit number one in 37 countries, and the Spice Girls' debut album \"Spice\" became the best-selling album ever by a girl group."
+  },
+  {
+    "id": "pop-018",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "The 1985 charity single \"We Are the World\" was co-written by Lionel Richie and which other superstar?",
+    "choices": ["Stevie Wonder", "Prince", "Michael Jackson", "Quincy Jones"],
+    "correctIndex": 2,
+    "funFact": "Producer Quincy Jones taped a sign reading \"Check your ego at the door\" at the studio entrance before the all-star recording session."
+  },
+  {
+    "id": "pop-019",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "Which artist released both \"Firework\" and \"Roar\"?",
+    "choices": ["Katy Perry", "Kesha", "Pink", "Miley Cyrus"],
+    "correctIndex": 0,
+    "funFact": "Katy Perry's album \"Teenage Dream\" produced five number-one Hot 100 singles, tying Michael Jackson's \"Bad\" and making her the only woman to achieve the feat from one album."
+  },
+  {
+    "id": "pop-020",
+    "league": "pop",
+    "difficulty": "easy",
+    "question": "The 2017 remix of \"Despacito\" by Luis Fonsi and Daddy Yankee featured which pop star?",
+    "choices": ["Shawn Mendes", "Nick Jonas", "Charlie Puth", "Justin Bieber"],
+    "correctIndex": 3,
+    "funFact": "The \"Despacito\" remix spent 16 weeks at number one on the Hot 100, tying the all-time record held at that point by \"One Sweet Day\"."
+  },
+  {
+    "id": "pop-021",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Which Michael Jackson album was the first in history to produce five number-one singles on the Billboard Hot 100?",
+    "choices": ["Thriller", "Bad", "Dangerous", "Off the Wall"],
+    "correctIndex": 1,
+    "funFact": "The five consecutive chart-toppers from \"Bad\" were \"I Just Can't Stop Loving You\", \"Bad\", \"The Way You Make Me Feel\", \"Man in the Mirror\", and \"Dirty Diana\"."
+  },
+  {
+    "id": "pop-022",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Who was the first artist to have their first five singles all reach number one on the Billboard Hot 100?",
+    "choices": ["Whitney Houston", "Madonna", "Mariah Carey", "Janet Jackson"],
+    "correctIndex": 2,
+    "funFact": "Mariah Carey now holds 19 Hot 100 number ones, the most of any solo artist in chart history, trailing only The Beatles overall."
+  },
+  {
+    "id": "pop-023",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Whitney Houston holds the record for the most consecutive number-one singles on the Hot 100. How many did she score in a row?",
+    "choices": ["Five", "Six", "Seven", "Eight"],
+    "correctIndex": 2,
+    "funFact": "Her streak of seven straight chart-toppers ran from \"Saving All My Love for You\" in 1985 through \"Where Do Broken Hearts Go\" in 1988, a record that still stands."
+  },
+  {
+    "id": "pop-024",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "\"When Doves Cry\" was the lead single from which 1984 Prince album?",
+    "choices": ["1999", "Purple Rain", "Sign o' the Times", "Parade"],
+    "correctIndex": 1,
+    "funFact": "\"When Doves Cry\" famously has no bass line; Prince deleted the bass track at the last minute and played every instrument on the record himself."
+  },
+  {
+    "id": "pop-025",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Which Madonna single spent the most weeks (seven) at number one on the Billboard Hot 100?",
+    "choices": ["Like a Virgin", "Vogue", "Music", "Take a Bow"],
+    "correctIndex": 3,
+    "funFact": "\"Take a Bow\" was co-written and produced with Babyface, and its seven-week reign in 1995 outlasted any of Madonna's flashier 80s hits."
+  },
+  {
+    "id": "pop-026",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "In which year did Adele's album \"21\" win the Grammy for Album of the Year?",
+    "choices": ["2011", "2012", "2013", "2014"],
+    "correctIndex": 1,
+    "funFact": "At that 2012 ceremony Adele won all six categories she was nominated in, tying the record for the most Grammys won by a female artist in a single night."
+  },
+  {
+    "id": "pop-027",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Which George Michael solo album won the Grammy for Album of the Year in 1989?",
+    "choices": ["Faith", "Listen Without Prejudice Vol. 1", "Older", "Patience"],
+    "correctIndex": 0,
+    "funFact": "\"Faith\" generated four US number-one singles: \"Faith\", \"Father Figure\", \"One More Try\", and \"Monkey\"."
+  },
+  {
+    "id": "pop-028",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Before Adele's \"25\" in 2015, which album held the record for the biggest first-week US sales by a female artist?",
+    "choices": ["Taylor Swift - 1989", "Lady Gaga - Born This Way", "Beyonce - Dangerously in Love", "Britney Spears - Oops!... I Did It Again"],
+    "correctIndex": 3,
+    "funFact": "\"Oops!... I Did It Again\" sold 1.319 million copies in its first week in 2000, a record for a female artist that stood for 15 years until \"25\" sold 3.38 million."
+  },
+  {
+    "id": "pop-029",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Along with Beyonce and Kelly Rowland, who completed the final lineup of Destiny's Child?",
+    "choices": ["Michelle Williams", "LaTavia Roberson", "LeToya Luckett", "Farrah Franklin"],
+    "correctIndex": 0,
+    "funFact": "The trio reunited for a surprise performance during Beyonce's Super Bowl XLVII halftime show in 2013, performing \"Bootylicious\" and \"Single Ladies\"."
+  },
+  {
+    "id": "pop-030",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Which artist opened the 2017 Super Bowl halftime show by performing from the roof of the stadium?",
+    "choices": ["Katy Perry", "Beyonce", "Bruno Mars", "Lady Gaga"],
+    "correctIndex": 3,
+    "funFact": "Lady Gaga began the show singing \"God Bless America\" and \"This Land Is Your Land\" from the roof of Houston's NRG Stadium before diving down to the stage."
+  },
+  {
+    "id": "pop-031",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Which song set the all-time record by spending 90 weeks on the Billboard Hot 100?",
+    "choices": ["Blinding Lights", "Shape of You", "Rolling in the Deep", "Uptown Funk"],
+    "correctIndex": 0,
+    "funFact": "The Weeknd's \"Blinding Lights\" was the first song ever to spend a full year in the Hot 100's top ten, and in 2021 Billboard named it the greatest Hot 100 song of all time."
+  },
+  {
+    "id": "pop-032",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Which Dua Lipa album features the hits \"Don't Start Now\" and \"Levitating\"?",
+    "choices": ["Dua Lipa", "Club Future Nostalgia", "Future Nostalgia", "Radical Optimism"],
+    "correctIndex": 2,
+    "funFact": "\"Levitating\" was Billboard's number-one year-end song of 2021 despite never reaching number one on the weekly Hot 100 chart, peaking at number two."
+  },
+  {
+    "id": "pop-033",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Which K-pop group became the first Korean act to top the Billboard Hot 100 with \"Dynamite\" in 2020?",
+    "choices": ["EXO", "BTS", "BLACKPINK", "Stray Kids"],
+    "correctIndex": 1,
+    "funFact": "\"Dynamite\" was BTS's first song recorded entirely in English, and it debuted at number one on the Hot 100."
+  },
+  {
+    "id": "pop-034",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "At which 1983 televised event did Michael Jackson debut the moonwalk?",
+    "choices": ["The 1984 Grammy Awards", "Super Bowl XXVII", "The Motown 25 TV special", "The 1984 American Music Awards"],
+    "correctIndex": 2,
+    "funFact": "Jackson debuted the moonwalk during \"Billie Jean\" on \"Motown 25: Yesterday, Today, Forever\", a special watched by an estimated 47 million viewers."
+  },
+  {
+    "id": "pop-035",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Which rapper is featured on Rihanna's 2007 hit \"Umbrella\"?",
+    "choices": ["Jay-Z", "Kanye West", "T.I.", "Ludacris"],
+    "correctIndex": 0,
+    "funFact": "\"Umbrella\" was written by The-Dream and Tricky Stewart and was first offered to Britney Spears, whose label passed on it before Rihanna recorded it."
+  },
+  {
+    "id": "pop-036",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Which 1998 Cher single famously popularized the use of Auto-Tune as a vocal effect?",
+    "choices": ["Strong Enough", "If I Could Turn Back Time", "Walking in Memphis", "Believe"],
+    "correctIndex": 3,
+    "funFact": "When \"Believe\" hit number one in the US, Cher became the oldest female artist to top the Hot 100 at age 52, and the robotic vocal trick was dubbed the \"Cher effect\"."
+  },
+  {
+    "id": "pop-037",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "The band a-ha, famous for the 1985 hit \"Take On Me\", comes from which country?",
+    "choices": ["Sweden", "Denmark", "Norway", "Finland"],
+    "correctIndex": 2,
+    "funFact": "The song's iconic pencil-sketch music video used a rotoscoping technique that required animating roughly 3,000 frames over 16 weeks."
+  },
+  {
+    "id": "pop-038",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Who was the lead singer of Eurythmics on the 1983 hit \"Sweet Dreams (Are Made of This)\"?",
+    "choices": ["Annie Lennox", "Alison Moyet", "Chrissie Hynde", "Siouxsie Sioux"],
+    "correctIndex": 0,
+    "funFact": "Annie Lennox later won an Academy Award in 2004 for co-writing \"Into the West\" from \"The Lord of the Rings: The Return of the King\"."
+  },
+  {
+    "id": "pop-039",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "In 2019, which artist became the first act since The Beatles in 1964 to hold the top three spots on the Hot 100 simultaneously?",
+    "choices": ["Drake", "Ariana Grande", "Post Malone", "Billie Eilish"],
+    "correctIndex": 1,
+    "funFact": "Ariana Grande achieved the feat with \"7 Rings\", \"Break Up with Your Girlfriend, I'm Bored\", and \"Thank U, Next\" all from the same album."
+  },
+  {
+    "id": "pop-040",
+    "league": "pop",
+    "difficulty": "medium",
+    "question": "Which 1987 Rick Astley hit later became the centerpiece of the internet prank known as \"Rickrolling\"?",
+    "choices": ["Together Forever", "Whenever You Need Somebody", "She Wants to Dance with Me", "Never Gonna Give You Up"],
+    "correctIndex": 3,
+    "funFact": "\"Never Gonna Give You Up\" topped the charts in 25 countries in the 80s, then got a second life online; its video surpassed one billion YouTube views in 2021."
+  },
+  {
+    "id": "pop-041",
+    "league": "pop",
+    "difficulty": "hard",
+    "question": "Which song was Billboard's number-one single on the year-end Hot 100 chart for 1984?",
+    "choices": ["Footloose - Kenny Loggins", "When Doves Cry - Prince", "Like a Virgin - Madonna", "Jump - Van Halen"],
+    "correctIndex": 1,
+    "funFact": "1984 was a massive year for Prince: the \"Purple Rain\" film also won him an Academy Award for Best Original Song Score."
+  },
+  {
+    "id": "pop-042",
+    "league": "pop",
+    "difficulty": "hard",
+    "question": "How many weeks did Mariah Carey and Boyz II Men's \"One Sweet Day\" spend at number one on the Hot 100?",
+    "choices": ["12 weeks", "14 weeks", "16 weeks", "18 weeks"],
+    "correctIndex": 2,
+    "funFact": "Its 16-week record stood for over two decades until Lil Nas X's \"Old Town Road\" logged 19 weeks at number one in 2019."
+  },
+  {
+    "id": "pop-043",
+    "league": "pop",
+    "difficulty": "hard",
+    "question": "What was the first music video ever played on MTV when the channel launched on August 1, 1981?",
+    "choices": ["The Buggles - Video Killed the Radio Star", "Michael Jackson - Billie Jean", "Duran Duran - Hungry Like the Wolf", "Blondie - Rapture"],
+    "correctIndex": 0,
+    "funFact": "MTV launched with the words \"Ladies and gentlemen, rock and roll\", and the second video ever aired was Pat Benatar's \"You Better Run\"."
+  },
+  {
+    "id": "pop-044",
+    "league": "pop",
+    "difficulty": "hard",
+    "question": "Which Swedish producer co-wrote \"...Baby One More Time\", \"I Want It That Way\", and \"Since U Been Gone\"?",
+    "choices": ["Dr. Luke", "Max Martin", "Timbaland", "RedOne"],
+    "correctIndex": 1,
+    "funFact": "Max Martin has written or co-written more than 25 Billboard Hot 100 number ones, more than any songwriter in history except Paul McCartney and John Lennon."
+  },
+  {
+    "id": "pop-045",
+    "league": "pop",
+    "difficulty": "hard",
+    "question": "Dolly Parton originally wrote \"I Will Always Love You\" as a farewell to whom?",
+    "choices": ["Her husband Carl Dean", "Elvis Presley", "Her mentor and duet partner Porter Wagoner", "Her father"],
+    "correctIndex": 2,
+    "funFact": "Elvis Presley wanted to record the song, but Colonel Tom Parker demanded half the publishing rights, so Parton refused — a decision that earned her millions when Whitney Houston's version became a blockbuster."
+  },
+  {
+    "id": "pop-046",
+    "league": "pop",
+    "difficulty": "hard",
+    "question": "Which album is the only one in history to produce Billboard Hot 100 number-one singles in three different calendar years?",
+    "choices": ["Michael Jackson - Thriller", "George Michael - Faith", "Def Leppard - Hysteria", "Janet Jackson - Rhythm Nation 1814"],
+    "correctIndex": 3,
+    "funFact": "\"Rhythm Nation 1814\" topped the chart in 1989, 1990, and 1991, and it was also the first album ever to send seven singles into the Hot 100's top five."
+  },
+  {
+    "id": "pop-047",
+    "league": "pop",
+    "difficulty": "hard",
+    "question": "Which Swedish duo scored four US number-one hits between 1989 and 1991, including \"It Must Have Been Love\"?",
+    "choices": ["ABBA", "Ace of Base", "Robyn", "Roxette"],
+    "correctIndex": 3,
+    "funFact": "\"It Must Have Been Love\" became a worldwide smash thanks to the film \"Pretty Woman\", but Roxette had originally released it in 1987 as a Christmas single."
+  },
+  {
+    "id": "pop-048",
+    "league": "pop",
+    "difficulty": "hard",
+    "question": "Which company canceled its sponsorship deal with Madonna in 1989 amid controversy over the \"Like a Prayer\" music video?",
+    "choices": ["Pepsi", "Coca-Cola", "Nike", "Calvin Klein"],
+    "correctIndex": 0,
+    "funFact": "Madonna kept her reported $5 million fee even after Pepsi pulled the commercial, and the video went on to win the Viewer's Choice award at the 1989 MTV VMAs."
+  },
+  {
+    "id": "pop-049",
+    "league": "pop",
+    "difficulty": "hard",
+    "question": "When \"Royals\" hit number one in 2013, Lorde became the youngest solo artist to top the Hot 100 since which 1987 chart-topper?",
+    "choices": ["Debbie Gibson", "Tiffany", "Martika", "Belinda Carlisle"],
+    "correctIndex": 1,
+    "funFact": "Lorde was inspired to write \"Royals\" after seeing a National Geographic photo of Kansas City Royals baseball star George Brett signing autographs."
+  },
+  {
+    "id": "pop-050",
+    "league": "pop",
+    "difficulty": "hard",
+    "question": "What was the name of the animated cat that danced with Paula Abdul in the \"Opposites Attract\" music video?",
+    "choices": ["DJ Catnip", "Felix", "Top Cat", "MC Skat Kat"],
+    "correctIndex": 3,
+    "funFact": "The video, which won the 1991 Grammy for Best Short Form Music Video, was an homage to Gene Kelly's famous dance with Jerry the mouse in \"Anchors Aweigh\"."
+  }
+]
