@@ -78,3 +78,59 @@ export async function saveCompletedLiveEventIds(ids: string[]): Promise<void> {
     throw new StorageError('Failed to save completed Live Events to device storage', error);
   }
 }
+
+/** Dev-only: removes the Ticket Vault key entirely. */
+export async function clearTickets(): Promise<void> {
+  try {
+    await AsyncStorage.removeItem(TICKETS_KEY);
+  } catch (error) {
+    throw new StorageError('Failed to clear the Ticket Vault', error);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// First-run onboarding flag
+// ---------------------------------------------------------------------------
+
+const ONBOARDING_KEY = 'facevalue/onboarding/v1';
+
+/**
+ * Whether the player has finished (or skipped) the first-run briefing.
+ * Missing or corrupt data reads as `false` so a broken flag simply shows
+ * the briefing again rather than crashing.
+ */
+export async function loadOnboardingComplete(): Promise<boolean> {
+  let raw: string | null = null;
+  try {
+    raw = await AsyncStorage.getItem(ONBOARDING_KEY);
+  } catch (error) {
+    // A read failure shouldn't block the app; treat as "not onboarded".
+    console.error('Failed to read onboarding flag; showing briefing', error);
+    return false;
+  }
+  if (raw === null) {
+    return false;
+  }
+  try {
+    return JSON.parse(raw) === true;
+  } catch (error) {
+    console.error('Onboarding flag was corrupt; showing briefing', error);
+    return false;
+  }
+}
+
+export async function saveOnboardingComplete(complete: boolean): Promise<void> {
+  try {
+    await AsyncStorage.setItem(ONBOARDING_KEY, JSON.stringify(complete));
+  } catch (error) {
+    throw new StorageError('Failed to save onboarding flag', error);
+  }
+}
+
+export async function clearOnboarding(): Promise<void> {
+  try {
+    await AsyncStorage.removeItem(ONBOARDING_KEY);
+  } catch (error) {
+    throw new StorageError('Failed to clear onboarding flag', error);
+  }
+}

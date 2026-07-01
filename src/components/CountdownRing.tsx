@@ -1,44 +1,50 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
+  cancelAnimation,
   Easing,
   useAnimatedProps,
+  useAnimatedStyle,
   useSharedValue,
+  withRepeat,
+  withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import Svg, { Circle } from 'react-native-svg';
-import { colors } from '../utils/theme';
+import Svg, { Circle, Line } from 'react-native-svg';
+import { getPreferences } from '../utils/preferences';
+import { palette } from '../utils/theme';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 interface CountdownRingProps {
-  /** Total seconds for the question. */
   totalSeconds: number;
-  /** Seconds left right now (drives the number in the middle). */
   secondsRemaining: number;
-  /** Bump this to restart the ring animation (e.g. the question index). */
+  /** Bump to restart the animation when a new question loads. */
   resetKey: number;
-  /** Freeze the ring (after an answer is locked in). */
   paused: boolean;
   size?: number;
 }
 
 /**
- * Circular countdown that sweeps from full to empty over the question
- * timer, shifting pink -> yellow -> red as time runs out.
+ * Circular countdown with tick marks every second on the dial. Color
+ * shifts pink (calm) → yellow (warning) → red (critical) and the
+ * ring pulses subtly under 5s without bouncing or distracting.
  */
 export function CountdownRing({
   totalSeconds,
   secondsRemaining,
   resetKey,
   paused,
-  size = 84,
+  size = 112,
 }: CountdownRingProps): React.JSX.Element {
-  const strokeWidth = 7;
-  const radius: number = (size - strokeWidth) / 2;
+  const strokeWidth = 6;
+  const radius: number = (size - strokeWidth - 8) / 2;
   const circumference: number = 2 * Math.PI * radius;
+  const cx: number = size / 2;
+  const cy: number = size / 2;
 
   const progress = useSharedValue(1);
+  const pulse = useSharedValue(0);
 
   useEffect(() => {
     progress.value = 1;
@@ -46,41 +52,84 @@ export function CountdownRing({
       duration: totalSeconds * 1000,
       easing: Easing.linear,
     });
-    // Restart only when a new question arrives.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetKey, totalSeconds]);
 
   useEffect(() => {
     if (paused) {
-      // Freeze in place by re-assigning the current value (cancels the timing).
-      progress.value = progress.value;
+      cancelAnimation(progress);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paused]);
+  }, [paused, progress]);
+
+  // The decorative "critical" pulse is suppressed under reduced motion;
+  // the color shift to red still communicates urgency without movement.
+  const critical: boolean =
+    secondsRemaining <= 5 && !paused && !getPreferences().reduceMotion;
+  useEffect(() => {
+    if (critical) {
+      pulse.value = withRepeat(
+        withSequence(withTiming(1, { duration: 380 }), withTiming(0, { duration: 380 })),
+        -1,
+        false,
+      );
+    } else {
+      cancelAnimation(pulse);
+      pulse.value = withTiming(0, { duration: 200 });
+    }
+  }, [critical, pulse]);
 
   const animatedProps = useAnimatedProps(() => ({
     strokeDashoffset: circumference * (1 - progress.value),
   }));
 
-  const urgency: 'calm' | 'warning' | 'critical' =
-    secondsRemaining <= 5 ? 'critical' : secondsRemaining <= 9 ? 'warning' : 'calm';
+  const pulseStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: 1 + pulse.value * 0.04 }],
+    opacity: 0.92 + pulse.value * 0.08,
+  }));
+
   const ringColor: string =
-    urgency === 'critical' ? colors.danger : urgency === 'warning' ? colors.yellow : colors.pink;
+    secondsRemaining <= 5
+      ? palette.danger
+      : secondsRemaining <= 9
+        ? palette.yellow
+        : palette.pink;
+
+  // Tick marks every second
+  const ticks: number[] = Array.from({ length: totalSeconds }, (_, index) => index);
 
   return (
-    <View style={[styles.container, { width: size, height: size }]}>
+    <Animated.View style={[styles.container, { width: size, height: size }, pulseStyle]}>
       <Svg width={size} height={size}>
+        {/* Tick marks */}
+        {ticks.map((index) => {
+          const angle: number = (index / totalSeconds) * 2 * Math.PI - Math.PI / 2;
+          const outerR: number = radius + 4;
+          const innerR: number = radius + (index % 5 === 0 ? -1 : 1);
+          return (
+            <Line
+              key={index}
+              x1={cx + Math.cos(angle) * innerR}
+              y1={cy + Math.sin(angle) * innerR}
+              x2={cx + Math.cos(angle) * outerR}
+              y2={cy + Math.sin(angle) * outerR}
+              stroke={palette.hairlineStrong}
+              strokeWidth={index % 5 === 0 ? 1.5 : 0.75}
+            />
+          );
+        })}
+        {/* Track */}
         <Circle
-          cx={size / 2}
-          cy={size / 2}
+          cx={cx}
+          cy={cy}
           r={radius}
-          stroke={colors.surfaceLight}
+          stroke={palette.panelRaised}
           strokeWidth={strokeWidth}
           fill="none"
         />
+        {/* Progress */}
         <AnimatedCircle
-          cx={size / 2}
-          cy={size / 2}
+          cx={cx}
+          cy={cy}
           r={radius}
           stroke={ringColor}
           strokeWidth={strokeWidth}
@@ -88,13 +137,26 @@ export function CountdownRing({
           strokeLinecap="round"
           strokeDasharray={`${circumference} ${circumference}`}
           animatedProps={animatedProps}
-          transform={`rotate(-90 ${size / 2} ${size / 2})`}
+          transform={`rotate(-90 ${cx} ${cy})`}
         />
       </Svg>
-      <View style={styles.label}>
-        <Text style={[styles.seconds, { color: ringColor }]}>{secondsRemaining}</Text>
+      <View
+        style={styles.center}
+        accessibilityRole="timer"
+        accessibilityLabel={`${secondsRemaining} seconds remaining`}
+      >
+        <Text style={styles.label} accessibilityElementsHidden importantForAccessibility="no">
+          SECONDS
+        </Text>
+        <Text
+          style={[styles.seconds, { color: ringColor }]}
+          accessibilityElementsHidden
+          importantForAccessibility="no"
+        >
+          {secondsRemaining}
+        </Text>
       </View>
-    </View>
+    </Animated.View>
   );
 }
 
@@ -103,17 +165,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  label: {
+  center: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  seconds: {
-    fontSize: 26,
+  label: {
+    color: palette.textLow,
+    fontSize: 9,
     fontWeight: '900',
+    letterSpacing: 2,
+    marginBottom: 2,
+  },
+  seconds: {
+    fontSize: 36,
+    fontWeight: '900',
+    fontVariant: ['tabular-nums'],
+    letterSpacing: -1,
   },
 });

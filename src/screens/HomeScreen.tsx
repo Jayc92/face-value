@@ -1,55 +1,124 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { GlowButton } from '../components/GlowButton';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { CountdownHeader } from '../components/CountdownHeader';
+import { HowToPlay } from '../components/HowToPlay';
+import { LeagueBadge } from '../components/LeagueBadge';
+import { LeagueCard } from '../components/LeagueCard';
+import { Panel } from '../components/Panel';
+import { PrimaryButton } from '../components/PrimaryButton';
+import { ScreenShell } from '../components/ScreenShell';
+import { SectionHeader } from '../components/SectionHeader';
+import { VenueBackdrop } from '../components/VenueBackdrop';
+import { Wordmark } from '../components/Wordmark';
 import {
   dailyLiveEventForDate,
-  LEAGUE_EMOJIS,
   LEAGUE_LABELS,
   LEAGUES,
   recentLiveEvents,
 } from '../game/events';
 import { useGame } from '../game/GameContext';
+import { deriveChaseGoals } from '../game/goals';
 import { ScreenProps } from '../game/navigation';
-import { DailyLiveEvent, League } from '../game/types';
-import { colors, radii, spacing, typography } from '../utils/theme';
+import { toLocalDateString } from '../game/streaks';
+import { ChaseGoal, DailyLiveEvent, League, TierLevel } from '../game/types';
+import { perfectResultsRouteParams } from '../utils/devFixtures';
+import { LEAGUE_VISUALS } from '../utils/leagueVisuals';
+import {
+  loadOnboardingComplete,
+  saveOnboardingComplete,
+} from '../utils/storage';
+import { palette, radii, shadows, spacing } from '../utils/theme';
 
-function formatCountdown(milliseconds: number): string {
-  const totalSeconds: number = Math.max(0, Math.floor(milliseconds / 1000));
-  const hours: number = Math.floor(totalSeconds / 3600);
-  const minutes: number = Math.floor((totalSeconds % 3600) / 60);
-  const seconds: number = totalSeconds % 60;
-  const pad = (value: number): string => String(value).padStart(2, '0');
-  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-}
+const PLAYABLE_TIERS: TierLevel[] = [1, 2];
+
+/**
+ * Dev fixtures like the "dev · 10/10" chip are gated by BOTH __DEV__ and
+ * an explicit env flag. Expo Go demos run in dev mode too, so we don't
+ * want the chip to appear during external testing — set
+ * EXPO_PUBLIC_ENABLE_DEV_FIXTURES=true in your local env only.
+ */
+const ENABLE_DEV_FIXTURES: boolean =
+  __DEV__ && process.env.EXPO_PUBLIC_ENABLE_DEV_FIXTURES === 'true';
 
 export function HomeScreen({ navigation }: ScreenProps<'Home'>): React.JSX.Element {
-  const { fanScore, tickets, completedLiveEventIds } = useGame();
+  const { fanScore, tickets, completedLiveEventIds, collectionCompletion, playerProfile, isHydrating } =
+    useGame();
   const [nowMs, setNowMs] = useState<number>(() => Date.now());
   const [showReplays, setShowReplays] = useState<boolean>(false);
 
-  // Tick once a second to drive the live countdown.
+  // Onboarding: null = unknown (still loading the flag). Once resolved we
+  // either show the briefing (first run) or don't. Replays open it manually.
+  const [onboardingComplete, setOnboardingComplete] = useState<boolean | null>(null);
+  const [howToPlayVisible, setHowToPlayVisible] = useState<boolean>(false);
+
   useEffect(() => {
     const interval = setInterval(() => setNowMs(Date.now()), 1000);
     return () => clearInterval(interval);
   }, []);
 
+  // Load the onboarding flag once the app has hydrated its storage.
+  useEffect(() => {
+    if (isHydrating) {
+      return;
+    }
+    let cancelled = false;
+    loadOnboardingComplete().then((complete) => {
+      if (cancelled) {
+        return;
+      }
+      setOnboardingComplete(complete);
+      if (!complete) {
+        setHowToPlayVisible(true);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [isHydrating]);
+
+  const finishOnboarding = (): void => {
+    setHowToPlayVisible(false);
+    if (!onboardingComplete) {
+      setOnboardingComplete(true);
+      saveOnboardingComplete(true).catch((error) =>
+        console.error('Failed to persist onboarding flag', error),
+      );
+    }
+  };
+
   const liveEvent: DailyLiveEvent = useMemo(() => dailyLiveEventForDate(new Date(nowMs)), [
-    // Re-derive only when the date flips, not every second.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     new Date(nowMs).toDateString(),
   ]);
 
   const liveEventCompleted: boolean = completedLiveEventIds.includes(liveEvent.id);
-  const msUntilWindowCloses: number = liveEvent.windowEndMs - nowMs;
+  const liveAccent = LEAGUE_VISUALS[liveEvent.league];
 
   const replayEvents: DailyLiveEvent[] = useMemo(
     () =>
       recentLiveEvents(new Date(nowMs), 5).filter(
         (event) => !completedLiveEventIds.includes(event.id),
       ),
-    // Recompute when the date flips or completions change.
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [new Date(nowMs).toDateString(), completedLiveEventIds],
+  );
+
+  const ticketsInLeague = (league: League): number =>
+    tickets.filter((ticket) => ticket.league === league).length;
+
+  const today: string = useMemo(() => toLocalDateString(nowMs), [nowMs]);
+  const streakClaimedToday: boolean = playerProfile.lastDailyPlayDate === today;
+
+  const chaseGoals: ChaseGoal[] = useMemo(
+    () =>
+      deriveChaseGoals({
+        profile: playerProfile,
+        today,
+        todaysLiveEventLeague: liveEvent.league,
+        todaysLiveEventCompleted: liveEventCompleted,
+        playableTiers: PLAYABLE_TIERS,
+      }),
+    [playerProfile, today, liveEvent.league, liveEventCompleted],
   );
 
   const startLiveEvent = (event: DailyLiveEvent, bonusActive: boolean): void => {
@@ -62,261 +131,575 @@ export function HomeScreen({ navigation }: ScreenProps<'Home'>): React.JSX.Eleme
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.header}>
-          <Text style={styles.logoTop}>FACE</Text>
-          <Text style={styles.logoBottom}>VALUE</Text>
-          <Text style={styles.tagline}>Win trivia. Outbid the crowd. Claim the front row.</Text>
-        </View>
+    <ScreenShell scroll>
+      <HowToPlay
+        visible={howToPlayVisible}
+        onClose={finishOnboarding}
+        finishLabel={onboardingComplete ? 'Got it' : 'Enter'}
+      />
 
-        <View style={styles.statsRow}>
-          <View style={styles.statCard}>
-            <Text style={styles.statValue}>{fanScore}</Text>
-            <Text style={styles.statLabel}>FAN SCORE</Text>
+      {/* Atmospheric backdrop fills the top of the page, well behind content. */}
+      <VenueBackdrop height={420} />
+
+      {/* Status header: wordmark left, integrated Fan Score + Vault right.
+          Replaces the "two dashboard cards" pattern from the first pass. */}
+      <View style={styles.headerBlock}>
+        <View style={styles.headerTop}>
+          <Wordmark size="sm" />
+          <View style={styles.headerRightGroup}>
+            {ENABLE_DEV_FIXTURES ? (
+              <Pressable
+                onPress={() => navigation.navigate('Results', perfectResultsRouteParams())}
+                style={styles.devChip}
+                accessibilityLabel="Dev: simulate perfect round"
+              >
+                <Text style={styles.devChipText}>dev · 10/10</Text>
+              </Pressable>
+            ) : null}
+            <Pressable
+              onPress={() => navigation.navigate('TicketVault')}
+              style={styles.vaultChip}
+              accessibilityLabel="Open Ticket Vault"
+            >
+              <View style={styles.vaultDot} />
+              <Text style={styles.vaultChipText}>Vault</Text>
+              <Text style={styles.vaultChipCount}>{tickets.length}</Text>
+            </Pressable>
           </View>
-          <Pressable style={styles.statCard} onPress={() => navigation.navigate('TicketVault')}>
-            <Text style={styles.statValue}>🎟️ {tickets.length}</Text>
-            <Text style={styles.statLabel}>TICKET VAULT</Text>
-          </Pressable>
         </View>
 
-        <View style={styles.liveBanner}>
+        <View style={styles.statusLine}>
+          <View style={styles.statusItem}>
+            <Text style={styles.statusItemLabel}>Fan</Text>
+            <Text style={styles.statusItemValue}>{fanScore}</Text>
+          </View>
+          <View style={styles.statusDivider} />
+          <View style={styles.statusItem}>
+            <Text style={styles.statusItemLabel}>Streak</Text>
+            <Text
+              style={[
+                styles.statusItemValue,
+                playerProfile.currentDailyStreak > 0 && { color: palette.yellow },
+              ]}
+            >
+              {playerProfile.currentDailyStreak}
+              {playerProfile.currentDailyStreak > 0 ? (
+                <Text style={styles.statusItemUnit}>d</Text>
+              ) : null}
+            </Text>
+          </View>
+          <View style={styles.statusDivider} />
+          <View style={styles.statusItem}>
+            <Text style={styles.statusItemLabel}>Rank</Text>
+            <Text style={styles.statusItemValue}>{playerProfile.operatorRank}</Text>
+          </View>
+        </View>
+
+        <Text style={styles.statusSecondary}>
+          {getTierLabel(fanScore)} stage
+          {getNextTierGap(fanScore) > 0 ? `  ·  +${getNextTierGap(fanScore)} tickets to next tier` : '  ·  Top tier reached'}
+          {playerProfile.longestDailyStreak > 0
+            ? `  ·  Longest streak ${playerProfile.longestDailyStreak}d`
+            : ''}
+        </Text>
+      </View>
+
+      {/* Live Event Hero */}
+      <Panel
+        variant="raised"
+        borderColor={liveEventCompleted ? palette.success : liveAccent.accent}
+        borderWidth={1.5}
+        style={[styles.liveCard, !liveEventCompleted && shadows.glowPink]}
+      >
+        <View style={styles.liveTopRow}>
           <View style={styles.liveBadgeRow}>
-            <View style={styles.liveDot} />
-            <Text style={styles.liveBadgeText}>TODAY&apos;S LIVE EVENT</Text>
+            <View style={[styles.livePulse, { backgroundColor: palette.danger }]} />
+            <Text style={styles.liveBadgeText}>LIVE TONIGHT</Text>
           </View>
-          <Text style={styles.liveName}>
-            {LEAGUE_EMOJIS[liveEvent.league]} {liveEvent.name}
-          </Text>
-          <Text style={styles.liveLeague}>{LEAGUE_LABELS[liveEvent.league]} League · 2x credits</Text>
-          {liveEventCompleted ? (
-            <Text style={styles.liveDone}>✅ Completed — come back tomorrow!</Text>
-          ) : (
-            <>
-              <Text style={styles.liveCountdown}>
-                Window closes in {formatCountdown(msUntilWindowCloses)}
-              </Text>
-              <GlowButton
-                label="PLAY LIVE — 2x CREDITS"
-                onPress={() => startLiveEvent(liveEvent, true)}
-              />
-            </>
-          )}
+          <View style={styles.liveBonus}>
+            <Text style={styles.liveBonusText}>2× CREDITS</Text>
+          </View>
         </View>
 
-        <Pressable style={styles.replayToggle} onPress={() => setShowReplays((value) => !value)}>
+        <View style={styles.liveBodyRow}>
+          <LeagueBadge league={liveEvent.league} size={56} />
+          <View style={styles.liveTextBlock}>
+            <Text style={styles.liveEventName} numberOfLines={2}>
+              {liveEvent.name}
+            </Text>
+            <Text style={styles.liveLeagueLabel}>
+              {LEAGUE_LABELS[liveEvent.league]} League · One night only
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.liveFooter}>
+          {liveEventCompleted ? (
+            <View style={styles.liveDone}>
+              <Text style={styles.liveDoneText}>
+                {streakClaimedToday
+                  ? `DAILY STREAK CLAIMED  ·  ${playerProfile.currentDailyStreak} DAY${playerProfile.currentDailyStreak === 1 ? '' : 'S'}`
+                  : 'SET COMPLETE · COME BACK TOMORROW'}
+              </Text>
+            </View>
+          ) : (
+            <CountdownHeader endsAtMs={liveEvent.windowEndMs} />
+          )}
+          {!liveEventCompleted ? (
+            <PrimaryButton
+              label="Enter live event"
+              trailing="→"
+              kicker={`${LEAGUE_LABELS[liveEvent.league].toUpperCase()}  ·  2× MULTIPLIER`}
+              onPress={() => startLiveEvent(liveEvent, true)}
+            />
+          ) : null}
+        </View>
+      </Panel>
+
+      {/* Chase goals — local-only, deterministic replay hooks */}
+      {chaseGoals.length > 0 ? (
+        <View style={styles.chaseBlock}>
+          <Text style={styles.chaseKicker}>Tonight's targets</Text>
+          <View style={styles.chaseList}>
+            {chaseGoals.map((goal) => {
+              const accent: string = goal.league
+                ? LEAGUE_VISUALS[goal.league].accent
+                : palette.pink;
+              return (
+                <Pressable
+                  key={goal.id}
+                  style={styles.chaseRow}
+                  onPress={() => {
+                    if (goal.cta === 'vault') {
+                      navigation.navigate('TicketVault');
+                    } else if (goal.cta === 'live' && !liveEventCompleted) {
+                      startLiveEvent(liveEvent, true);
+                    } else if (goal.league) {
+                      navigation.navigate('LeagueSelect', { forcedLeague: goal.league });
+                    } else {
+                      navigation.navigate('LeagueSelect', {});
+                    }
+                  }}
+                >
+                  <View style={[styles.chaseStripe, { backgroundColor: accent }]} />
+                  <View style={styles.chaseText}>
+                    <Text style={styles.chaseHeadline} numberOfLines={1}>
+                      {goal.headline}
+                    </Text>
+                    <Text style={styles.chaseDetail} numberOfLines={1}>
+                      {goal.detail}
+                    </Text>
+                  </View>
+                  <Text style={styles.chaseChevron}>›</Text>
+                </Pressable>
+              );
+            })}
+          </View>
+        </View>
+      ) : null}
+
+      {/* Replays */}
+      {replayEvents.length > 0 ? (
+        <Pressable
+          style={styles.replayToggle}
+          onPress={() => setShowReplays((value) => !value)}
+        >
           <Text style={styles.replayToggleText}>
-            {showReplays ? '▾' : '▸'} Replays ({replayEvents.length} missed events)
+            {showReplays ? '▾' : '▸'}  Replays  ·  {replayEvents.length} missed
           </Text>
+          <Text style={styles.replayToggleHint}>Standard rewards</Text>
         </Pressable>
-        {showReplays &&
-          replayEvents.map((event) => (
+      ) : null}
+      {showReplays
+        ? replayEvents.map((event) => (
             <Pressable
               key={event.id}
               style={styles.replayCard}
               onPress={() => startLiveEvent(event, false)}
             >
-              <Text style={styles.replayName}>
-                {LEAGUE_EMOJIS[event.league]} {event.name}
-              </Text>
-              <Text style={styles.replayMeta}>
-                {LEAGUE_LABELS[event.league]} · standard rewards
-              </Text>
+              <LeagueBadge league={event.league} size={32} outline />
+              <View style={styles.replayTextBlock}>
+                <Text style={styles.replayName} numberOfLines={1}>
+                  {event.name}
+                </Text>
+                <Text style={styles.replayMeta}>
+                  {LEAGUE_LABELS[event.league]} · standard rewards
+                </Text>
+              </View>
+              <Text style={styles.replayChevron}>›</Text>
             </Pressable>
-          ))}
+          ))
+        : null}
 
-        <Text style={styles.sectionTitle}>PICK YOUR LEAGUE</Text>
-        <View style={styles.leagueGrid}>
-          {LEAGUES.map((league: League) => (
-            <Pressable
-              key={league}
-              style={styles.leagueCard}
-              onPress={() => navigation.navigate('LeagueSelect', { forcedLeague: league })}
-            >
-              <Text style={styles.leagueEmoji}>{LEAGUE_EMOJIS[league]}</Text>
-              <Text style={styles.leagueName}>{LEAGUE_LABELS[league]}</Text>
-            </Pressable>
-          ))}
-        </View>
+      {/* Leagues — first card gets a "FEATURED" treatment, others compact */}
+      <SectionHeader
+        kicker="TONIGHT'S CIRCUIT"
+        title="Pick your league"
+        action={{ label: 'See all', onPress: () => navigation.navigate('LeagueSelect', {}) }}
+        style={{ marginTop: spacing.xl }}
+      />
+      <View style={styles.leagueColumn}>
+        {LEAGUES.map((league: League, index: number) => (
+          <LeagueCard
+            key={league}
+            league={league}
+            ticketsWon={ticketsInLeague(league)}
+            completionPct={collectionCompletion[league]}
+            compact={index !== 0}
+            onPress={() => navigation.navigate('LeagueSelect', { forcedLeague: league })}
+          />
+        ))}
+      </View>
 
-        <GlowButton
-          label="BROWSE ALL LEAGUES"
-          variant="secondary"
-          onPress={() => navigation.navigate('LeagueSelect', {})}
-          style={styles.browseButton}
-        />
-      </ScrollView>
-    </SafeAreaView>
+      {/* Footer: replayable briefing + settings */}
+      <View style={styles.footerRow}>
+        <Pressable
+          hitSlop={8}
+          onPress={() => setHowToPlayVisible(true)}
+          accessibilityRole="button"
+          accessibilityLabel="How to play"
+          style={styles.footerLink}
+        >
+          <Text style={styles.footerLinkText}>How to play</Text>
+        </Pressable>
+        <View style={styles.footerDivider} />
+        <Pressable
+          hitSlop={8}
+          onPress={() => navigation.navigate('Settings')}
+          accessibilityRole="button"
+          accessibilityLabel="Open settings"
+          style={styles.footerLink}
+        >
+          <Text style={styles.footerLinkText}>Settings</Text>
+        </Pressable>
+      </View>
+    </ScreenShell>
   );
 }
 
+function getTierLabel(fanScore: number): string {
+  if (fanScore >= 15) {
+    return 'Festival';
+  }
+  if (fanScore >= 8) {
+    return 'Arena';
+  }
+  if (fanScore >= 3) {
+    return 'Regional';
+  }
+  return 'Local';
+}
+
+function getNextTierGap(fanScore: number): number {
+  if (fanScore < 3) {
+    return 3 - fanScore;
+  }
+  if (fanScore < 8) {
+    return 8 - fanScore;
+  }
+  if (fanScore < 15) {
+    return 15 - fanScore;
+  }
+  return 0;
+}
+
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  scrollContent: {
-    padding: spacing.md,
-    paddingBottom: spacing.xl,
-  },
-  header: {
-    alignItems: 'center',
-    marginTop: spacing.md,
+  headerBlock: {
     marginBottom: spacing.lg,
+    gap: spacing.md,
   },
-  logoTop: {
-    ...typography.display,
-    color: colors.white,
-    lineHeight: 42,
-  },
-  logoBottom: {
-    ...typography.display,
-    color: colors.pink,
-    lineHeight: 42,
-    textShadowColor: colors.pink,
-    textShadowRadius: 18,
-    textShadowOffset: { width: 0, height: 0 },
-  },
-  tagline: {
-    color: colors.textDim,
-    fontSize: 13,
-    fontWeight: '600',
-    marginTop: spacing.sm,
-    textAlign: 'center',
-  },
-  statsRow: {
+  headerTop: {
     flexDirection: 'row',
-    gap: spacing.sm,
-    marginBottom: spacing.md,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  statCard: {
-    flex: 1,
-    backgroundColor: colors.surface,
+  headerRightGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  devChip: {
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 5,
+    borderRadius: radii.pill,
+    borderWidth: 1,
+    borderColor: palette.hairline,
+    backgroundColor: palette.panelGlass,
+  },
+  devChipText: {
+    color: palette.textLow,
+    fontSize: 9,
+    fontWeight: '800',
+    letterSpacing: 0.3,
+  },
+  vaultChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    backgroundColor: palette.panelGlass,
+    borderRadius: radii.pill,
+    borderWidth: 1,
+    borderColor: palette.hairlineStrong,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 6,
+  },
+  vaultDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: palette.yellow,
+  },
+  vaultChipText: {
+    color: palette.textMed,
+    fontSize: 12,
+    fontWeight: '800',
+    letterSpacing: 0.3,
+  },
+  vaultChipCount: {
+    color: palette.textHi,
+    fontSize: 13,
+    fontWeight: '900',
+    fontVariant: ['tabular-nums'],
+  },
+  statusLine: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: palette.panelGlass,
     borderRadius: radii.md,
     borderWidth: 1,
-    borderColor: colors.surfaceLight,
-    paddingVertical: spacing.md,
-    alignItems: 'center',
+    borderColor: palette.hairline,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
   },
-  statValue: {
-    color: colors.yellow,
+  statusItem: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    gap: 6,
+  },
+  statusItemLabel: {
+    color: palette.textLow,
+    fontSize: 10,
+    fontWeight: '800',
+    letterSpacing: 0.8,
+  },
+  statusItemValue: {
+    color: palette.textHi,
+    fontSize: 14,
+    fontWeight: '900',
+    fontVariant: ['tabular-nums'],
+    letterSpacing: 0.2,
+  },
+  statusItemUnit: {
+    color: palette.textLow,
+    fontSize: 11,
+    fontWeight: '800',
+  },
+  statusSecondary: {
+    color: palette.textLow,
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 0.2,
+    marginTop: 6,
+    paddingHorizontal: spacing.md,
+  },
+  statusDivider: {
+    width: 1,
+    height: 16,
+    backgroundColor: palette.hairline,
+    marginHorizontal: spacing.sm,
+  },
+  chaseBlock: {
+    marginTop: spacing.md,
+    gap: spacing.sm,
+  },
+  chaseKicker: {
+    color: palette.pink,
+    fontSize: 11,
+    fontWeight: '800',
+    letterSpacing: 1.6,
+  },
+  chaseList: {
+    gap: spacing.xs,
+  },
+  chaseRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+    backgroundColor: palette.panelGlass,
+    borderRadius: radii.md,
+    borderWidth: 1,
+    borderColor: palette.hairline,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm + 2,
+  },
+  chaseStripe: {
+    width: 3,
+    height: 26,
+    borderRadius: 2,
+  },
+  chaseText: {
+    flex: 1,
+    gap: 2,
+  },
+  chaseHeadline: {
+    color: palette.textHi,
+    fontSize: 13,
+    fontWeight: '800',
+    letterSpacing: 0.1,
+  },
+  chaseDetail: {
+    color: palette.textLow,
+    fontSize: 11,
+    fontWeight: '600',
+  },
+  chaseChevron: {
+    color: palette.textLow,
     fontSize: 22,
     fontWeight: '900',
   },
-  statLabel: {
-    color: colors.textDim,
-    fontSize: 11,
-    fontWeight: '700',
-    letterSpacing: 1,
-    marginTop: 2,
+  liveCard: {
+    padding: spacing.lg,
+    gap: spacing.md,
   },
-  liveBanner: {
-    backgroundColor: colors.surface,
-    borderRadius: radii.lg,
-    borderWidth: 1.5,
-    borderColor: colors.pink,
-    padding: spacing.md,
-    marginBottom: spacing.md,
-    gap: spacing.sm,
+  liveTopRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   liveBadgeRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
   },
-  liveDot: {
+  livePulse: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: colors.danger,
   },
   liveBadgeText: {
-    color: colors.danger,
-    fontSize: 11,
+    color: palette.danger,
+    fontSize: 10,
     fontWeight: '900',
-    letterSpacing: 1.5,
+    letterSpacing: 1.8,
   },
-  liveName: {
-    color: colors.white,
-    ...typography.title,
+  liveBonus: {
+    backgroundColor: palette.yellow,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 3,
+    borderRadius: radii.sm,
   },
-  liveLeague: {
-    color: colors.textDim,
-    fontSize: 13,
-    fontWeight: '600',
+  liveBonusText: {
+    color: palette.ink900,
+    fontSize: 10,
+    fontWeight: '900',
+    letterSpacing: 1.4,
   },
-  liveCountdown: {
-    color: colors.yellow,
-    fontSize: 15,
-    fontWeight: '800',
-    fontVariant: ['tabular-nums'],
+  liveBodyRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
   },
-  liveDone: {
-    color: colors.success,
-    fontSize: 14,
+  liveTextBlock: {
+    flex: 1,
+    gap: 4,
+  },
+  liveEventName: {
+    color: palette.textHi,
+    fontSize: 22,
+    fontWeight: '900',
+    letterSpacing: 0,
+    lineHeight: 26,
+  },
+  liveLeagueLabel: {
+    color: palette.textMed,
+    fontSize: 12,
     fontWeight: '700',
   },
-  replayToggle: {
+  liveFooter: {
+    gap: spacing.md,
+  },
+  liveDone: {
     paddingVertical: spacing.sm,
+    borderTopWidth: 1,
+    borderTopColor: palette.hairline,
+  },
+  liveDoneText: {
+    color: palette.success,
+    fontSize: 12,
+    fontWeight: '900',
+    letterSpacing: 1.2,
+  },
+  replayToggle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: spacing.md,
+    marginTop: spacing.xs,
   },
   replayToggleText: {
-    color: colors.textDim,
-    fontSize: 13,
+    color: palette.textMed,
+    fontSize: 12,
+    fontWeight: '800',
+  },
+  replayToggleHint: {
+    color: palette.textLow,
+    fontSize: 11,
     fontWeight: '700',
   },
   replayCard: {
-    backgroundColor: colors.surface,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+    backgroundColor: palette.panel,
     borderRadius: radii.md,
     padding: spacing.md,
     marginBottom: spacing.sm,
     borderWidth: 1,
-    borderColor: colors.surfaceLight,
+    borderColor: palette.hairline,
+  },
+  replayTextBlock: {
+    flex: 1,
+    gap: 2,
   },
   replayName: {
-    color: colors.white,
+    color: palette.textHi,
     fontSize: 14,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   replayMeta: {
-    color: colors.textDim,
-    fontSize: 12,
-    marginTop: 2,
+    color: palette.textLow,
+    fontSize: 11,
+    fontWeight: '700',
   },
-  sectionTitle: {
-    color: colors.white,
-    fontSize: 15,
+  replayChevron: {
+    color: palette.textLow,
+    fontSize: 22,
     fontWeight: '900',
-    letterSpacing: 1.5,
-    marginTop: spacing.md,
-    marginBottom: spacing.sm,
   },
-  leagueGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+  leagueColumn: {
     gap: spacing.sm,
   },
-  leagueCard: {
-    width: '31%',
-    aspectRatio: 1,
-    backgroundColor: colors.surface,
-    borderRadius: radii.md,
-    borderWidth: 1,
-    borderColor: colors.surfaceLight,
+  footerRow: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    flexGrow: 1,
+    marginTop: spacing.xl,
+    gap: spacing.md,
   },
-  leagueEmoji: {
-    fontSize: 34,
+  footerLink: {
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.sm,
   },
-  leagueName: {
-    color: colors.white,
+  footerLinkText: {
+    color: palette.textLow,
     fontSize: 13,
     fontWeight: '800',
-    marginTop: spacing.xs,
+    letterSpacing: 0.3,
   },
-  browseButton: {
-    marginTop: spacing.lg,
+  footerDivider: {
+    width: 1,
+    height: 14,
+    backgroundColor: palette.hairline,
   },
 });

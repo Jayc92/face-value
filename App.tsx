@@ -2,6 +2,7 @@ import React from 'react';
 import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
+import { ErrorBoundary } from './src/components/ErrorBoundary';
 import { GameProvider } from './src/game/GameContext';
 import { RootStackParamList } from './src/game/navigation';
 import { colors } from './src/utils/theme';
@@ -11,6 +12,7 @@ import { TriviaGauntletScreen } from './src/screens/TriviaGauntletScreen';
 import { BiddingFloorScreen } from './src/screens/BiddingFloorScreen';
 import { ResultsScreen } from './src/screens/ResultsScreen';
 import { TicketVaultScreen } from './src/screens/TicketVaultScreen';
+import { SettingsScreen } from './src/screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -27,9 +29,10 @@ const navigationTheme = {
 
 export default function App(): React.JSX.Element {
   return (
-    <GameProvider>
-      <NavigationContainer theme={navigationTheme}>
-        <StatusBar style="light" />
+    <ErrorBoundary>
+      <GameProvider>
+        <NavigationContainer theme={navigationTheme}>
+          <StatusBar style="light" />
         <Stack.Navigator
           initialRouteName="Home"
           screenOptions={{
@@ -55,8 +58,10 @@ export default function App(): React.JSX.Element {
             options={{ gestureEnabled: false }}
           />
           <Stack.Screen name="TicketVault" component={TicketVaultScreen} />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
         </Stack.Navigator>
-      </NavigationContainer>
-    </GameProvider>
+        </NavigationContainer>
+      </GameProvider>
+    </ErrorBoundary>
   );
 }

@@ -33,6 +33,8 @@ export type RootStackParamList = {
     liveBonusActive: boolean;
   };
   Results: {
+    /** Stable id for this round; makes profile/vault/streak writes idempotent. */
+    roundId: string;
     league: League;
     tierLevel: TierLevel;
     event: GameEvent;
@@ -42,6 +44,7 @@ export type RootStackParamList = {
     liveEventId?: string;
   };
   TicketVault: undefined;
+  Settings: undefined;
 };
 
 export type ScreenProps<T extends keyof RootStackParamList> = NativeStackScreenProps<

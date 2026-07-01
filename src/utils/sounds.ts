@@ -1,4 +1,5 @@
 import { AudioPlayer, createAudioPlayer } from 'expo-audio';
+import { getPreferences } from './preferences';
 
 /**
  * Tiny synthesized sound effects, embedded as base64 WAV data URIs so the
@@ -97,6 +98,11 @@ const playerCache = new Map<SoundName, AudioPlayer>();
  * logged and swallowed so audio problems can never interrupt a round.
  */
 export function playSound(name: SoundName): void {
+  // Respect the player's sound toggle. Read is synchronous from the
+  // in-memory preference mirror, so this never blocks a round.
+  if (!getPreferences().soundEnabled) {
+    return;
+  }
   try {
     let player: AudioPlayer | undefined = playerCache.get(name);
     if (!player) {

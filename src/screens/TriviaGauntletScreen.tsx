@@ -1,16 +1,27 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
+import { AnswerChoice } from '../components/AnswerChoice';
 import { CountdownRing } from '../components/CountdownRing';
-import { GlowButton } from '../components/GlowButton';
+import { LeagueBadge } from '../components/LeagueBadge';
+import { Panel } from '../components/Panel';
+import { PrimaryButton } from '../components/PrimaryButton';
+import { ScreenShell } from '../components/ScreenShell';
 import { StreakBadge } from '../components/StreakBadge';
 import { LEAGUE_LABELS } from '../game/events';
 import { ScreenProps } from '../game/navigation';
 import { drawGauntletQuestions } from '../game/questionBank';
 import { creditsForAnswer, QUESTION_TIME_SECONDS, QUESTIONS_PER_ROUND } from '../game/scoring';
 import { AnsweredQuestion, TriviaQuestion } from '../game/types';
+import { LEAGUE_VISUALS } from '../utils/leagueVisuals';
 import { playSound } from '../utils/sounds';
-import { colors, radii, spacing, typography } from '../utils/theme';
+import { palette, radii, spacing } from '../utils/theme';
 
 type Phase = 'answering' | 'revealed';
 
@@ -19,8 +30,8 @@ export function TriviaGauntletScreen({
   route,
 }: ScreenProps<'TriviaGauntlet'>): React.JSX.Element {
   const { league, tierLevel, liveEventId, liveEventName, liveBonusActive } = route.params;
+  const leagueVisual = LEAGUE_VISUALS[league];
 
-  // Draw the round once; re-renders must not reshuffle.
   const questions = useMemo<TriviaQuestion[]>(
     () => drawGauntletQuestions(league, tierLevel),
     [league, tierLevel],
@@ -38,8 +49,11 @@ export function TriviaGauntletScreen({
   const phaseRef = useRef<Phase>('answering');
   phaseRef.current = phase;
 
-  // Per-question countdown. Ticks the clock, plays the urgency tick under
-  // 6s, and locks in a timeout (null answer) at zero.
+  const creditBump = useSharedValue(0);
+  const creditScale = useAnimatedStyle(() => ({
+    transform: [{ scale: 1 + creditBump.value * 0.18 }],
+  }));
+
   useEffect(() => {
     if (phase !== 'answering') {
       return;
@@ -52,7 +66,6 @@ export function TriviaGauntletScreen({
         }
         if (next <= 0) {
           clearInterval(interval);
-          // Defer so the state updater stays pure.
           setTimeout(() => {
             if (phaseRef.current === 'answering') {
               lockInAnswer(null, 0);
@@ -82,6 +95,12 @@ export function TriviaGauntletScreen({
     setChosenIndex(choice);
     setStreak(nextStreak);
     setTotalCredits((previous) => previous + creditsEarned);
+    if (creditsEarned > 0) {
+      creditBump.value = withSequence(
+        withSpring(1, { damping: 7, stiffness: 240 }),
+        withTiming(0, { duration: 220 }),
+      );
+    }
     setAnswered((previous) => [
       ...previous,
       {
@@ -116,166 +135,369 @@ export function TriviaGauntletScreen({
   };
 
   const lastAnswer: AnsweredQuestion | undefined = answered[answered.length - 1];
+  const isLastQuestion: boolean = questionIndex + 1 >= questions.length;
+
+  const stateForChoice = (index: number): React.ComponentProps<typeof AnswerChoice>['state'] => {
+    if (phase !== 'revealed') {
+      return 'answering';
+    }
+    if (index === currentQuestion.correctIndex) {
+      return 'revealedCorrect';
+    }
+    if (index === chosenIndex) {
+      return 'revealedWrong';
+    }
+    return 'revealedNeutral';
+  };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <ScreenShell scroll>
+      {/* Top bar: progress segments + credits */}
       <View style={styles.topBar}>
-        <Text style={styles.progress}>
-          Q{questionIndex + 1}/{QUESTIONS_PER_ROUND} · {LEAGUE_LABELS[league]}
-        </Text>
-        <StreakBadge streak={streak} />
-        <Text style={styles.credits}>⚡ {totalCredits.toLocaleString()}</Text>
+        <View style={styles.leagueChip}>
+          <LeagueBadge league={league} size={20} outline />
+          <Text style={styles.leagueChipText}>{LEAGUE_LABELS[league]}</Text>
+        </View>
+
+        <Pressable
+          hitSlop={8}
+          onPress={() => navigation.popToTop()}
+          style={styles.exitButton}
+          accessibilityLabel="Exit gauntlet"
+        >
+          <Text style={styles.exitText}>Exit</Text>
+        </Pressable>
       </View>
 
-      {liveBonusActive && (
-        <Text style={styles.liveBonus}>🔴 LIVE — all credits doubled</Text>
-      )}
+      <View style={styles.progressRow}>
+        {Array.from({ length: QUESTIONS_PER_ROUND }).map((_, index) => {
+          const state =
+            index < questionIndex
+              ? answered[index]?.wasCorrect
+                ? 'correct'
+                : 'wrong'
+              : index === questionIndex
+                ? 'current'
+                : 'pending';
+          const bg: string =
+            state === 'correct'
+              ? palette.success
+              : state === 'wrong'
+                ? palette.danger
+                : state === 'current'
+                  ? palette.pink
+                  : palette.panelRaised;
+          return <View key={index} style={[styles.progressSeg, { backgroundColor: bg }]} />;
+        })}
+      </View>
 
+      <View style={styles.metaRow}>
+        <Text style={styles.metaCount}>
+          Question {questionIndex + 1}<Text style={styles.metaCountDim}> / {QUESTIONS_PER_ROUND}</Text>
+        </Text>
+        <Animated.View style={creditScale}>
+          <View style={styles.creditPill}>
+            <Text style={styles.creditPillBolt}>⚡</Text>
+            <Text style={styles.creditPillValue}>{totalCredits.toLocaleString()}</Text>
+          </View>
+        </Animated.View>
+      </View>
+
+      {liveBonusActive ? (
+        <View style={styles.liveBonusStrip}>
+          <View style={styles.liveBonusDot} />
+          <Text style={styles.liveBonusText}>LIVE EVENT · ALL CREDITS ×2</Text>
+        </View>
+      ) : null}
+
+      {/* Countdown ring + streak */}
       <View style={styles.ringRow}>
         <CountdownRing
           totalSeconds={QUESTION_TIME_SECONDS}
           secondsRemaining={secondsRemaining}
           resetKey={questionIndex}
           paused={phase === 'revealed'}
+          size={132}
         />
+        <View style={styles.streakColumn}>
+          <Text style={styles.difficultyKicker}>
+            {currentQuestion.difficulty.toUpperCase()}
+          </Text>
+          <View style={[styles.difficultyChip, { borderColor: leagueVisual.accent }]}>
+            <Text style={[styles.difficultyChipText, { color: leagueVisual.accent }]}>
+              {currentQuestion.difficulty === 'hard'
+                ? '★★★'
+                : currentQuestion.difficulty === 'medium'
+                  ? '★★'
+                  : '★'}
+            </Text>
+          </View>
+          <View style={{ marginTop: spacing.sm }}>
+            <StreakBadge streak={streak} />
+          </View>
+        </View>
       </View>
 
       <Text style={styles.question}>{currentQuestion.question}</Text>
 
       <View style={styles.choices}>
-        {currentQuestion.choices.map((choice: string, index: number) => {
-          const isCorrectChoice: boolean = index === currentQuestion.correctIndex;
-          const isChosen: boolean = index === chosenIndex;
-          const revealed: boolean = phase === 'revealed';
-          return (
-            <Pressable
-              key={index}
-              disabled={revealed}
-              onPress={() => lockInAnswer(index, secondsRemaining)}
-              style={[
-                styles.choiceCard,
-                revealed && isCorrectChoice && styles.choiceCorrect,
-                revealed && isChosen && !isCorrectChoice && styles.choiceWrong,
-              ]}
-            >
-              <Text style={styles.choiceLetter}>{String.fromCharCode(65 + index)}</Text>
-              <Text style={styles.choiceText}>{choice}</Text>
-            </Pressable>
-          );
-        })}
+        {currentQuestion.choices.map((choice: string, index: number) => (
+          <AnswerChoice
+            key={`${questionIndex}-${index}`}
+            letter={String.fromCharCode(65 + index)}
+            text={choice}
+            state={stateForChoice(index)}
+            disabled={phase === 'revealed'}
+            index={index}
+            onPress={() => lockInAnswer(index, secondsRemaining)}
+          />
+        ))}
       </View>
 
-      {phase === 'revealed' && lastAnswer && (
-        <View style={styles.revealPanel}>
-          <Text style={styles.revealHeadline}>
-            {lastAnswer.wasCorrect
-              ? `✅ +${lastAnswer.creditsEarned.toLocaleString()} credits${
-                  lastAnswer.multiplierApplied > 1 ? ` (x${lastAnswer.multiplierApplied} hype)` : ''
-                }`
+      {phase === 'revealed' && lastAnswer ? (
+        <Panel
+          variant="raised"
+          borderColor={
+            lastAnswer.wasCorrect
+              ? palette.success
               : lastAnswer.chosenIndex === null
-                ? '⏰ Time! No credits.'
-                : '❌ Wrong — streak broken.'}
-          </Text>
-          <Text style={styles.funFact}>💡 {currentQuestion.funFact}</Text>
-          <GlowButton
-            label={questionIndex + 1 >= questions.length ? 'TO THE BIDDING FLOOR →' : 'NEXT QUESTION'}
+                ? palette.warning
+                : palette.danger
+          }
+          borderWidth={1.5}
+          style={styles.revealPanel}
+        >
+          <View style={styles.revealHeader}>
+            <Text
+              style={[
+                styles.revealKicker,
+                {
+                  color: lastAnswer.wasCorrect
+                    ? palette.success
+                    : lastAnswer.chosenIndex === null
+                      ? palette.warning
+                      : palette.danger,
+                },
+              ]}
+            >
+              {lastAnswer.wasCorrect
+                ? 'CORRECT'
+                : lastAnswer.chosenIndex === null
+                  ? 'TIME UP'
+                  : 'INCORRECT'}
+            </Text>
+            {lastAnswer.wasCorrect ? (
+              <Text style={styles.revealCredits}>
+                +{lastAnswer.creditsEarned.toLocaleString()}
+                {lastAnswer.multiplierApplied > 1 ? (
+                  <Text style={styles.revealMultiplier}> ·  ×{lastAnswer.multiplierApplied}</Text>
+                ) : null}
+              </Text>
+            ) : null}
+          </View>
+
+          <View style={styles.factDivider} />
+
+          <View>
+            <Text style={styles.factKicker}>DID YOU KNOW</Text>
+            <Text style={styles.factText}>{currentQuestion.funFact}</Text>
+          </View>
+
+          <PrimaryButton
+            label={isLastQuestion ? 'TO THE BIDDING FLOOR' : 'NEXT QUESTION'}
+            trailing="→"
             onPress={advance}
           />
-        </View>
-      )}
-    </SafeAreaView>
+        </Panel>
+      ) : null}
+    </ScreenShell>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.background,
-    padding: spacing.md,
-  },
   topBar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: spacing.sm,
   },
-  progress: {
-    color: colors.textDim,
-    fontSize: 13,
-    fontWeight: '800',
+  leagueChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 4,
+    backgroundColor: palette.panel,
+    borderRadius: radii.pill,
+    borderWidth: 1,
+    borderColor: palette.hairline,
   },
-  credits: {
-    color: colors.yellow,
-    fontSize: 15,
-    fontWeight: '900',
-  },
-  liveBonus: {
-    color: colors.danger,
+  leagueChipText: {
+    color: palette.textMed,
     fontSize: 12,
     fontWeight: '800',
-    textAlign: 'center',
-    marginTop: spacing.xs,
+    letterSpacing: 0.2,
+  },
+  exitButton: {
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 4,
+  },
+  exitText: {
+    color: palette.textLow,
+    fontSize: 12,
+    fontWeight: '800',
+    letterSpacing: 0.2,
+  },
+  progressRow: {
+    flexDirection: 'row',
+    gap: 4,
+    marginBottom: spacing.md,
+  },
+  progressSeg: {
+    flex: 1,
+    height: 4,
+    borderRadius: 2,
+  },
+  metaRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  metaCount: {
+    color: palette.textHi,
+    fontSize: 13,
+    fontWeight: '800',
+    letterSpacing: 0.2,
+  },
+  metaCountDim: {
+    color: palette.textLow,
+  },
+  creditPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: palette.panel,
+    borderRadius: radii.pill,
+    borderWidth: 1,
+    borderColor: palette.hairline,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 4,
+  },
+  creditPillBolt: {
+    color: palette.yellow,
+    fontSize: 14,
+    fontWeight: '900',
+  },
+  creditPillValue: {
+    color: palette.yellow,
+    fontSize: 14,
+    fontWeight: '900',
+    fontVariant: ['tabular-nums'],
+  },
+  liveBonusStrip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    marginTop: spacing.sm,
+    paddingVertical: 4,
+  },
+  liveBonusDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: palette.danger,
+  },
+  liveBonusText: {
+    color: palette.danger,
+    fontSize: 10,
+    fontWeight: '900',
+    letterSpacing: 1.6,
   },
   ringRow: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: spacing.sm,
+    justifyContent: 'space-between',
+    gap: spacing.lg,
+    marginTop: spacing.md,
+    marginBottom: spacing.md,
+  },
+  streakColumn: {
+    alignItems: 'flex-start',
+    gap: 4,
+    flex: 1,
+  },
+  difficultyKicker: {
+    color: palette.textLow,
+    fontSize: 10,
+    fontWeight: '900',
+    letterSpacing: 1.6,
+  },
+  difficultyChip: {
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 4,
+    borderRadius: radii.sm,
+    borderWidth: 1,
+    alignSelf: 'flex-start',
+  },
+  difficultyChipText: {
+    fontSize: 13,
+    fontWeight: '900',
+    letterSpacing: 2,
   },
   question: {
-    ...typography.title,
-    color: colors.white,
-    textAlign: 'center',
-    marginBottom: spacing.md,
+    color: palette.textHi,
+    fontSize: 22,
+    fontWeight: '900',
+    letterSpacing: 0.2,
+    lineHeight: 28,
+    marginBottom: spacing.lg,
     minHeight: 64,
   },
   choices: {
     gap: spacing.sm,
-  },
-  choiceCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.surface,
-    borderRadius: radii.md,
-    borderWidth: 1.5,
-    borderColor: colors.surfaceLight,
-    padding: spacing.md,
-    gap: spacing.md,
-  },
-  choiceCorrect: {
-    borderColor: colors.success,
-    backgroundColor: '#10331F',
-  },
-  choiceWrong: {
-    borderColor: colors.danger,
-    backgroundColor: '#3A1118',
-  },
-  choiceLetter: {
-    color: colors.pink,
-    fontSize: 16,
-    fontWeight: '900',
-    width: 22,
-  },
-  choiceText: {
-    color: colors.white,
-    fontSize: 15,
-    fontWeight: '600',
-    flexShrink: 1,
+    marginBottom: spacing.md,
   },
   revealPanel: {
-    marginTop: 'auto',
-    backgroundColor: colors.surface,
-    borderRadius: radii.lg,
-    borderWidth: 1,
-    borderColor: colors.surfaceLight,
-    padding: spacing.md,
-    gap: spacing.sm,
+    padding: spacing.lg,
+    gap: spacing.md,
   },
-  revealHeadline: {
-    color: colors.white,
-    fontSize: 16,
-    fontWeight: '800',
+  revealHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  funFact: {
-    color: colors.textDim,
+  revealKicker: {
+    fontSize: 13,
+    fontWeight: '900',
+    letterSpacing: 1.6,
+  },
+  revealCredits: {
+    color: palette.yellow,
+    fontSize: 22,
+    fontWeight: '900',
+    fontVariant: ['tabular-nums'],
+  },
+  revealMultiplier: {
+    color: palette.pink,
+    fontSize: 14,
+    fontWeight: '900',
+  },
+  factDivider: {
+    height: 1,
+    backgroundColor: palette.hairline,
+  },
+  factKicker: {
+    color: palette.pink,
+    fontSize: 10,
+    fontWeight: '900',
+    letterSpacing: 1.6,
+    marginBottom: 4,
+  },
+  factText: {
+    color: palette.textMed,
     fontSize: 13,
     lineHeight: 19,
+    fontWeight: '500',
   },
 });

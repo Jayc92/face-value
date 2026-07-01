@@ -6,6 +6,22 @@ import { TierConfig, TierLevel } from './types';
  *
  * fanScoreRequired is measured in total tickets won across all leagues.
  */
+/**
+ * Tier balance.
+ *
+ * seatReserves are the *minimum* winning bid per tier — a Front Row bid
+ * below the reserve loses the seat. The reserves are sized to be roughly
+ * what a 7-correct, no-streak, easy-mix round earns at that tier, so a
+ * weak round can't accidentally squeak into the front. The values below
+ * are tuned against:
+ *   - 2/10 correct, no streak, Tier 1: ~120-180 credits
+ *   - 5/10 correct, light streak, Tier 1: ~350-500 credits
+ *   - 8/10 correct, multiple streaks, Tier 1: ~700-900 credits
+ *   - 10/10 with full streak, Tier 1: ~1400+ credits
+ *
+ * AI pools are sized so a weak round meets aggressive AI, while a strong
+ * round still has to fight for Front Row.
+ */
 export const TIER_CONFIGS: Record<TierLevel, TierConfig> = {
   1: {
     level: 1,
@@ -14,8 +30,9 @@ export const TIER_CONFIGS: Record<TierLevel, TierConfig> = {
     aiBidderCount: 2,
     difficultyMix: { easy: 7, medium: 3, hard: 0 },
     fanScoreRequired: 0,
-    aiBaseCreditPool: 600,
-    aiAggressionRange: [0.25, 0.55],
+    aiBaseCreditPool: 520,
+    aiAggressionRange: [0.4, 0.65],
+    seatReserves: { front: 260, mid: 100, upper: 30 },
     comingSoon: false,
   },
   2: {
@@ -25,8 +42,9 @@ export const TIER_CONFIGS: Record<TierLevel, TierConfig> = {
     aiBidderCount: 3,
     difficultyMix: { easy: 3, medium: 5, hard: 2 },
     fanScoreRequired: 3,
-    aiBaseCreditPool: 1000,
-    aiAggressionRange: [0.45, 0.75],
+    aiBaseCreditPool: 1100,
+    aiAggressionRange: [0.5, 0.75],
+    seatReserves: { front: 550, mid: 220, upper: 70 },
     comingSoon: false,
   },
   3: {
@@ -36,8 +54,9 @@ export const TIER_CONFIGS: Record<TierLevel, TierConfig> = {
     aiBidderCount: 4,
     difficultyMix: { easy: 1, medium: 4, hard: 5 },
     fanScoreRequired: 8,
-    aiBaseCreditPool: 1600,
-    aiAggressionRange: [0.6, 0.9],
+    aiBaseCreditPool: 2000,
+    aiAggressionRange: [0.65, 0.9],
+    seatReserves: { front: 1100, mid: 450, upper: 130 },
     comingSoon: true,
   },
   4: {
@@ -47,8 +66,9 @@ export const TIER_CONFIGS: Record<TierLevel, TierConfig> = {
     aiBidderCount: 4,
     difficultyMix: { easy: 0, medium: 4, hard: 6 },
     fanScoreRequired: 15,
-    aiBaseCreditPool: 2400,
-    aiAggressionRange: [0.7, 0.95],
+    aiBaseCreditPool: 2800,
+    aiAggressionRange: [0.75, 0.95],
+    seatReserves: { front: 1600, mid: 650, upper: 180 },
     comingSoon: true,
   },
 };
