@@ -41,14 +41,19 @@ Hype Multiplier (×1.5 → ×2 → ×3).
 against AI rivals. Each tier has a hidden reserve, ties go to you, and losing
 bids are refunded — allocation is a real strategic choice.
 
-**Collection** — Won seats become premium ticket stubs in a persistent Vault,
-with per-league collection completion to chase.
+**Collection** — Won seats become premium ticket stubs in a persistent Vault.
+Every ticket has a deterministic **rarity** (Standard → Prime → Collector →
+Legendary → Live → Golden Ticket) and a **venue theme** (Club, Arena, Stadium,
+Festival, Theater) that styles the stub. Completion is tracked per venue, per
+league, and overall, with a staged ticket-reveal animation on Results.
 
 **Progression** — Fan Score (total tickets) unlocks higher tiers. Bigger tiers
 mean harder trivia, tougher rivals, and richer rewards.
 
-**Retention** — Campaign medals, personal records, daily live events, and daily
-streaks give you a reason to come back tomorrow — all stored locally.
+**Retention** — Campaign medals, personal records, persistent achievements,
+three deterministic daily challenges, daily live events, and daily streaks give
+you a reason to come back tomorrow — all stored locally. Rival bidders have
+recognizable personalities (front-runner, value hunter, balanced, opportunist).
 
 ## Gameplay Loop
 
@@ -116,6 +121,49 @@ npx expo start
 Then press `i` (iOS Simulator), `a` (Android Emulator), or scan the QR code
 with the Expo Go app on a device.
 
+## Deploying to Vercel
+
+Face Value exports to a static single-page web build (Expo web / Metro),
+so it deploys to Vercel with no server. `vercel.json` is committed with the
+correct settings, so importing the repo is one click — Vercel reads it
+automatically.
+
+Produce the build locally to verify:
+
+```bash
+npm install
+npm run build:web   # → expo export --platform web, outputs to dist/
+```
+
+Deploy steps:
+
+1. Push the repo to GitHub/GitLab.
+2. In Vercel, **Add New → Project** and import the repo.
+3. If prompted, set **Root Directory** to the project folder (`face-value`
+   if the repo root is a monorepo; otherwise leave as `./`). The rest is
+   read from `vercel.json`.
+4. Click **Deploy**.
+
+Vercel settings (already encoded in `vercel.json`):
+
+| Setting | Value |
+|---|---|
+| Framework preset | **Other** (no framework) |
+| Build command | `npm run build:web` |
+| Output directory | `dist` |
+| Install command | `npm install` |
+| Root directory | `./` (the `face-value` project folder) |
+| Environment variables | none required |
+
+The SPA rewrite in `vercel.json` sends every path to `/` so a hard refresh
+or shared deep link always boots the app. Everything is local-only
+(AsyncStorage → browser localStorage on web); there is no backend, so no
+env vars or secrets are needed.
+
+> **Do not** set `EXPO_PUBLIC_ENABLE_DEV_FIXTURES` on the Vercel project —
+> leaving it unset keeps Playtest Mode and dev shortcuts hidden in the
+> deployed build.
+
 ## Playtesting
 
 This build is a release candidate for external playtesting:
@@ -139,7 +187,31 @@ npx expo export --platform android        # Android bundle
 npx tsx scripts/simulateAuction.ts        # 1000-sample auction balance
 npx tsx scripts/simulateRetention.ts      # medals / streaks / records assertions
 npx tsx scripts/testRoundIdempotency.ts   # round double-apply guards
+npx tsx scripts/testCollectibles.ts       # rarity / venue / challenges / achievements
 ```
+</details>
+
+<details>
+<summary><strong>Collectibles & daily systems</strong></summary>
+
+- **Ticket rarity** (`src/game/rarity.ts`) — deterministic from a ticket's
+  stored fields (seat, correctness, live). Ladder: Standard → Prime →
+  Collector → Legendary → Live → Golden Ticket.
+- **Venue themes** — every venue maps to Club / Arena / Stadium / Festival /
+  Theater, which tints the ticket stub.
+- **Daily challenges** (`src/game/challenges.ts`) — three deterministic
+  goals seeded by the local date; progress lives in the profile and resets
+  on date rollover.
+- **Achievements** (`src/game/achievements.ts`) — persistent milestone
+  unlocks evaluated against the post-round profile (unlock once).
+- **Collection** (`src/game/collection.ts`) — completion per venue, per
+  league, and overall, derived from the vault.
+
+New AsyncStorage lives inside the existing `facevalue/playerProfile/v1`
+key (added fields: `unlockedAchievementIds`, `dailyChallengeProgress`,
+`dailyChallengeDate`, `dailyChallengeCompletedIds`). Tickets gained optional
+`correctCount` / `totalQuestions` / `bestCombo` for stable rarity. All fields
+migrate in with safe defaults — no existing data is lost.
 </details>
 
 <details>

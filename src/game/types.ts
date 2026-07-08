@@ -58,6 +58,26 @@ export interface TierConfig {
   comingSoon: boolean;
 }
 
+/**
+ * Recognizable rival bidding archetypes. These shape HOW a bidder splits
+ * its committed credits across tiers (personality), NOT how much it
+ * commits or how big its pool is — so overall auction balance is
+ * unchanged while each rival reads distinctly.
+ *
+ * - frontRunner: throws almost everything at Front Row.
+ * - valueHunter: leans Mid/Upper looking for a bargain seat.
+ * - balanced: spreads evenly across all three tiers.
+ * - opportunist: unpredictable — a wider per-tier jitter.
+ */
+export type BidderArchetype = 'frontRunner' | 'valueHunter' | 'balanced' | 'opportunist';
+
+export const BIDDER_ARCHETYPE_LABELS: Record<BidderArchetype, string> = {
+  frontRunner: 'Front-runner',
+  valueHunter: 'Value hunter',
+  balanced: 'Balanced',
+  opportunist: 'Opportunist',
+};
+
 export interface AiBidder {
   id: string;
   name: string;
@@ -75,6 +95,8 @@ export interface AiBidder {
    * a serious contender regardless of how the player did on trivia.
    */
   frontRowSpecialist: boolean;
+  /** Recognizable bidding personality; drives per-tier weighting only. */
+  archetype: BidderArchetype;
 }
 
 /** Credits a single participant (player or AI) places on each seat tier. */
@@ -120,6 +142,14 @@ export interface Ticket {
   dateWonIso: string;
   creditsPaid: number;
   wasLiveEvent: boolean;
+  /**
+   * Round context captured at claim time so rarity is stable forever.
+   * Optional for backward compatibility — tickets minted before this
+   * field existed derive a graceful fallback rarity from seat + live.
+   */
+  correctCount?: number;
+  totalQuestions?: number;
+  bestCombo?: number;
 }
 
 /** Outcome of one answered gauntlet question, used for the Results recap. */
@@ -213,6 +243,17 @@ export interface PlayerProfile {
    * PROCESSED_ROUND_ID_CAP entries so storage never grows unbounded.
    */
   processedRoundIds: string[];
+  /** Ids of achievements the player has unlocked (persistent). */
+  unlockedAchievementIds: string[];
+  /**
+   * Progress toward each of today's daily challenges. Reset whenever the
+   * local date rolls over (see dailyChallengeDate). Keyed by challenge id.
+   */
+  dailyChallengeProgress: Record<string, number>;
+  /** The local date (YYYY-MM-DD) dailyChallengeProgress applies to. */
+  dailyChallengeDate: string | null;
+  /** Ids of daily challenges already completed today (avoids re-celebrating). */
+  dailyChallengeCompletedIds: string[];
 }
 
 /** How many processed round ids we retain before dropping the oldest. */
@@ -262,6 +303,12 @@ export interface RetentionDelta {
   personalBests: PersonalBestDelta[];
   /** Streak event, if any. */
   streakEvent: StreakEvent;
+  /** Achievements unlocked by this round (empty when none / already processed). */
+  unlockedAchievements: UnlockedAchievement[];
+  /** Daily challenges completed by this round (titles for the toast). */
+  completedChallengeTitles: string[];
+  /** Rarity of the ticket won this round, if any. */
+  ticketRarity: Rarity | null;
 }
 
 export interface PersonalBestDelta {
@@ -293,3 +340,66 @@ export interface ChaseGoal {
   /** Optional deep-link target — home currently doesn't route via id, but useful for future. */
   cta?: 'live' | 'league' | 'vault';
 }
+
+// ---------------------------------------------------------------------------
+// Daily challenges
+// ---------------------------------------------------------------------------
+
+/** The metric a daily challenge measures against a single round. */
+export type ChallengeMetric =
+  | 'correctAnswers' // total correct answers across rounds today
+  | 'creditsEarned' // total credits earned today
+  | 'ticketsWon' // seats claimed today
+  | 'frontRowWins' // front-row seats today
+  | 'bestCombo' // reach a combo length in a single round
+  | 'roundsPlayed'; // rounds completed today
+
+/** A generated daily challenge. Deterministic per local date. */
+export interface DailyChallenge {
+  id: string;
+  title: string;
+  metric: ChallengeMetric;
+  /** Target value to reach (progress is clamped to this). */
+  target: number;
+  /** Optional league restriction; undefined = any league. */
+  league?: League;
+}
+
+/** A challenge plus the player's live progress for the current day. */
+export interface DailyChallengeStatus {
+  challenge: DailyChallenge;
+  progress: number;
+  complete: boolean;
+}
+
+// ---------------------------------------------------------------------------
+// Achievements
+// ---------------------------------------------------------------------------
+
+/** A persistent achievement definition. */
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  /** Predicate over the post-round profile — true once earned. */
+  isUnlocked: (profile: PlayerProfile) => boolean;
+}
+
+/** An achievement unlocked by a round, surfaced for a tasteful toast. */
+export interface UnlockedAchievement {
+  id: string;
+  title: string;
+  description: string;
+}
+
+// ---------------------------------------------------------------------------
+// Rarity (defined here to avoid an import cycle between rarity.ts and this file)
+// ---------------------------------------------------------------------------
+
+export type Rarity =
+  | 'standard'
+  | 'prime'
+  | 'collector'
+  | 'legendary'
+  | 'live'
+  | 'golden';

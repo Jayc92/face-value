@@ -23,6 +23,7 @@ import {
   loadPlayerProfile,
   savePlayerProfile,
 } from '../utils/playerProfileStorage';
+import { fabricateUnlockTickets } from '../utils/devFixtures';
 import { loadPreferences } from '../utils/preferences';
 
 interface GameContextValue {
@@ -57,6 +58,10 @@ interface GameContextValue {
    * the call site behind __DEV__ + EXPO_PUBLIC_ENABLE_DEV_FIXTURES.
    */
   resetLocalData: () => Promise<void>;
+  /** Dev-only: clears just the Ticket Vault (leaves profile/streaks). */
+  devClearVault: () => Promise<void>;
+  /** Dev-only: seeds enough tickets to clear the Fan-Score tier gate. */
+  devUnlockAllTiers: () => Promise<void>;
 }
 
 const GameContext = createContext<GameContextValue | null>(null);
@@ -170,6 +175,23 @@ export function GameProvider({ children }: { children: React.ReactNode }): React
     ]);
   }, [setProfile]);
 
+  const devClearVault = useCallback(async (): Promise<void> => {
+    setTickets([]);
+    await clearTickets().catch((error) => console.error('Failed to clear vault', error));
+  }, []);
+
+  const devUnlockAllTiers = useCallback(async (): Promise<void> => {
+    // Seed distinct Front Row tickets so Fan Score clears the Tier-2 gate.
+    // Merges with existing tickets (dedup by id) and persists.
+    const seeded = fabricateUnlockTickets();
+    setTickets((previous) => {
+      const existingIds = new Set(previous.map((t) => t.id));
+      const next = [...seeded.filter((t) => !existingIds.has(t.id)), ...previous];
+      saveTickets(next).catch((error) => console.error('Failed to persist unlock tickets', error));
+      return next;
+    });
+  }, []);
+
   const collectionCompletion = useMemo<Record<League, number>>(() => {
     const completion = {} as Record<League, number>;
     for (const league of LEAGUES) {
@@ -194,6 +216,8 @@ export function GameProvider({ children }: { children: React.ReactNode }): React
       applyRound,
       hasProcessedRound,
       resetLocalData,
+      devClearVault,
+      devUnlockAllTiers,
     }),
     [
       tickets,
@@ -206,6 +230,8 @@ export function GameProvider({ children }: { children: React.ReactNode }): React
       applyRound,
       hasProcessedRound,
       resetLocalData,
+      devClearVault,
+      devUnlockAllTiers,
     ],
   );
 

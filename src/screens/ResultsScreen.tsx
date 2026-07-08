@@ -5,7 +5,7 @@ import { Panel } from '../components/Panel';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { ScreenShell } from '../components/ScreenShell';
 import { SpotlightHalo } from '../components/SpotlightHalo';
-import { TicketCard } from '../components/TicketCard';
+import { TicketReveal } from '../components/TicketReveal';
 import { explainAuction } from '../game/auctionExplain';
 import { LEAGUE_LABELS } from '../game/events';
 import { useGame } from '../game/GameContext';
@@ -23,6 +23,12 @@ import {
   Ticket,
 } from '../game/types';
 import { getPreferences } from '../utils/preferences';
+import {
+  formatDuration,
+  recordRound,
+  SessionRoundSummary,
+} from '../utils/sessionLog';
+import { playSound } from '../utils/sounds';
 import { palette, radii, seatAccents, spacing } from '../utils/theme';
 
 const SEAT_RANK: Record<SeatTier, number> = { front: 0, mid: 1, upper: 2 };
@@ -62,6 +68,7 @@ export function ResultsScreen({ navigation, route }: ScreenProps<'Results'>): Re
     creditsEarned,
     answeredQuestions,
     liveEventId,
+    roundStartedAtMs,
   } = route.params;
   const { addTicket, markLiveEventCompleted, applyRound, hasProcessedRound, tickets } = useGame();
 
@@ -70,13 +77,16 @@ export function ResultsScreen({ navigation, route }: ScreenProps<'Results'>): Re
   const creditsKept: number = creditsEarned - auction.creditsSpent;
   const correctCount: number = answeredQuestions.filter((answer) => answer.wasCorrect).length;
 
-  const [vaultStatus, setVaultStatus] = useState<'pending' | 'saved'>('pending');
   const [showRecap, setShowRecap] = useState<boolean>(false);
+  const [showSessionSummary, setShowSessionSummary] = useState<boolean>(false);
+  const [sessionSummary, setSessionSummary] = useState<SessionRoundSummary | null>(null);
   const [retentionDelta, setRetentionDelta] = useState<RetentionDelta | null>(null);
   const savedRef = useRef<boolean>(false);
 
   // Ticket id is derived from the stable roundId so a remount that
   // re-adds the same ticket dedupes in the vault (see addTicket).
+  // correctCount / totalQuestions / bestCombo are stored so the ticket's
+  // rarity stays deterministic forever.
   const claimedTicket: Ticket | null = wonAnySeat
     ? {
         id: `ticket-${roundId}`,
@@ -88,6 +98,9 @@ export function ResultsScreen({ navigation, route }: ScreenProps<'Results'>): Re
         dateWonIso: new Date().toISOString(),
         creditsPaid: auction.creditsSpent,
         wasLiveEvent: event.isLiveEvent,
+        correctCount,
+        totalQuestions: answeredQuestions.length,
+        bestCombo: computeBestCombo(answeredQuestions),
       }
     : null;
 
@@ -107,10 +120,24 @@ export function ResultsScreen({ navigation, route }: ScreenProps<'Results'>): Re
     }
     if (claimedTicket) {
       // addTicket is itself idempotent on ticket id.
-      addTicket(claimedTicket).then(() => setVaultStatus('saved'));
-    } else {
-      setVaultStatus('saved');
+      addTicket(claimedTicket);
     }
+
+    // Local session summary (in-memory, non-persistent) — observational
+    // tooling only. recordRound is idempotent on roundId.
+    setSessionSummary(
+      recordRound({
+        roundId,
+        league,
+        tierLevel,
+        correctCount,
+        totalQuestions: answeredQuestions.length,
+        creditsEarned,
+        seatWon: auction.playerBestSeat,
+        roundStartedAtMs: roundStartedAtMs ?? null,
+        completedAtMs: Date.now(),
+      }),
+    );
 
     const outcome: RoundOutcome = {
       roundId,
@@ -131,6 +158,16 @@ export function ResultsScreen({ navigation, route }: ScreenProps<'Results'>): Re
     // in that case the callouts panel renders nothing new.
     applyRound(outcome).then((delta) => {
       setRetentionDelta(seenBefore ? { ...delta, alreadyProcessed: true } : delta);
+      if (!seenBefore && !delta.alreadyProcessed) {
+        // Reward cues, staggered after the ticket reveal's shimmer so they
+        // don't stack on top of each other. playSound respects the toggle.
+        if (delta.completedChallengeTitles.length > 0) {
+          setTimeout(() => playSound('challenge'), 1200);
+        }
+        if (delta.unlockedAchievements.length > 0) {
+          setTimeout(() => playSound('achievement'), 1500);
+        }
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -207,7 +244,7 @@ export function ResultsScreen({ navigation, route }: ScreenProps<'Results'>): Re
 
       {claimedTicket ? (
         <View style={styles.ticketWrap}>
-          <TicketCard ticket={claimedTicket} variant="featured" />
+          <TicketReveal ticket={claimedTicket} />
         </View>
       ) : (
         <View style={styles.noTicketWrap}>
@@ -270,13 +307,26 @@ export function ResultsScreen({ navigation, route }: ScreenProps<'Results'>): Re
         </View>
       </View>
 
-      {wonAnySeat ? (
-        <Text style={styles.vaultNote}>
-          {vaultStatus === 'saved'
-            ? '✓ Ticket secured in your Vault'
-            : 'Adding ticket to your Vault…'}
-        </Text>
-      ) : null}
+      {/* Achievement unlocks + daily-challenge completions from this round */}
+      {retentionDelta && !retentionDelta.alreadyProcessed
+        ? retentionDelta.unlockedAchievements.map((achievement) => (
+            <View key={achievement.id} style={[styles.rewardRow, styles.achievementRow]}>
+              <Text style={styles.rewardKicker}>ACHIEVEMENT UNLOCKED</Text>
+              <Text style={styles.rewardTitle}>{achievement.title}</Text>
+              <Text style={styles.rewardDetail}>{achievement.description}</Text>
+            </View>
+          ))
+        : null}
+      {retentionDelta && !retentionDelta.alreadyProcessed
+        ? retentionDelta.completedChallengeTitles.map((title) => (
+            <View key={title} style={[styles.rewardRow, styles.challengeRow]}>
+              <Text style={[styles.rewardKicker, { color: palette.success }]}>
+                DAILY CHALLENGE COMPLETE
+              </Text>
+              <Text style={styles.rewardTitle}>{title}</Text>
+            </View>
+          ))
+        : null}
 
       {/* Auction breakdown — secondary detail */}
       <Panel variant="raised" style={styles.auctionCard}>
@@ -369,6 +419,40 @@ export function ResultsScreen({ navigation, route }: ScreenProps<'Results'>): Re
               <Text style={styles.factText}>{answer.question.funFact}</Text>
             </View>
           ))}
+        </Panel>
+      ) : null}
+
+      {/* Optional local session summary — a compact recap for the player
+          (and for a playtest observer). In-memory only, no persistence. */}
+      {sessionSummary ? (
+        <Pressable
+          onPress={() => setShowSessionSummary((value) => !value)}
+          style={styles.recapToggle}
+          accessibilityRole="button"
+          accessibilityLabel="Toggle session summary"
+        >
+          <Text style={styles.recapToggleText}>
+            {showSessionSummary ? '▾' : '▸'}  Session summary
+          </Text>
+          <Text style={styles.recapToggleHint}>{showSessionSummary ? 'Hide' : 'View'}</Text>
+        </Pressable>
+      ) : null}
+      {showSessionSummary && sessionSummary ? (
+        <Panel variant="raised" style={styles.summaryCard}>
+          <SummaryRow
+            label="Correct answers"
+            value={`${sessionSummary.correctCount}/${sessionSummary.totalQuestions}`}
+          />
+          <SummaryRow label="Credits earned" value={sessionSummary.creditsEarned.toLocaleString()} />
+          <SummaryRow
+            label="Seat won"
+            value={sessionSummary.seatWon ? SEAT_TIER_LABELS[sessionSummary.seatWon] : 'None'}
+          />
+          <SummaryRow label="Time spent" value={formatDuration(sessionSummary.timeSpentMs)} />
+          <SummaryRow
+            label="Attempt this session"
+            value={`#${sessionSummary.retryCount} · ${LEAGUE_LABELS[sessionSummary.league]} T${sessionSummary.tierLevel}`}
+          />
         </Panel>
       ) : null}
 
@@ -481,6 +565,15 @@ function RetentionCallouts({ delta }: RetentionCalloutsProps): React.JSX.Element
   );
 }
 
+function SummaryRow({ label, value }: { label: string; value: string }): React.JSX.Element {
+  return (
+    <View style={styles.summaryRow}>
+      <Text style={styles.summaryLabel}>{label}</Text>
+      <Text style={styles.summaryValue}>{value}</Text>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   headerBlock: {
     alignItems: 'center',
@@ -575,13 +668,38 @@ const styles = StyleSheet.create({
   secondaryFlex: {
     flex: 1,
   },
-  vaultNote: {
-    color: palette.success,
-    fontSize: 12,
-    fontWeight: '800',
+  rewardRow: {
+    borderRadius: radii.md,
+    borderWidth: 1,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm + 2,
+    marginBottom: spacing.sm,
+    gap: 2,
+  },
+  achievementRow: {
+    borderColor: palette.yellow,
+    backgroundColor: 'rgba(255, 233, 77, 0.06)',
+  },
+  challengeRow: {
+    borderColor: palette.success,
+    backgroundColor: 'rgba(61, 220, 132, 0.06)',
+  },
+  rewardKicker: {
+    color: palette.yellow,
+    fontSize: 10,
+    fontWeight: '900',
+    letterSpacing: 1.6,
+  },
+  rewardTitle: {
+    color: palette.textHi,
+    fontSize: 15,
+    fontWeight: '900',
     letterSpacing: 0.2,
-    textAlign: 'center',
-    marginBottom: spacing.md,
+  },
+  rewardDetail: {
+    color: palette.textMed,
+    fontSize: 12,
+    fontWeight: '600',
   },
   auctionCard: {
     padding: spacing.md,
@@ -707,6 +825,28 @@ const styles = StyleSheet.create({
     padding: spacing.md,
     gap: spacing.sm,
     marginBottom: spacing.md,
+  },
+  summaryCard: {
+    padding: spacing.md,
+    gap: spacing.xs,
+    marginBottom: spacing.md,
+  },
+  summaryRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+    paddingVertical: 3,
+  },
+  summaryLabel: {
+    color: palette.textLow,
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  summaryValue: {
+    color: palette.textHi,
+    fontSize: 13,
+    fontWeight: '800',
+    fontVariant: ['tabular-nums'],
   },
   factRow: {
     flexDirection: 'row',

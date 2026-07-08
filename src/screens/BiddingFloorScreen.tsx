@@ -40,6 +40,7 @@ export function BiddingFloorScreen({
     liveEventId,
     liveEventName,
     liveBonusActive,
+    roundStartedAtMs,
   } = route.params;
   const leagueVisual = LEAGUE_VISUALS[league];
 
@@ -111,6 +112,7 @@ export function BiddingFloorScreen({
       creditsEarned,
       answeredQuestions,
       liveEventId,
+      roundStartedAtMs,
     });
   };
 

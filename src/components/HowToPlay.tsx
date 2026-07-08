@@ -37,25 +37,25 @@ const STEPS: Step[] = [
     index: '01',
     accent: palette.pink,
     title: 'Answer fast. Build credits.',
-    body: '10 questions, 15 seconds each. Correct answers earn credits — the faster you lock one in, the more you bank. Streaks of 3+ trigger a Hype multiplier.',
+    body: '10 questions. Faster correct answers earn more credits.',
   },
   {
     index: '02',
     accent: palette.yellow,
-    title: 'Bid smart. Front Row has a reserve.',
-    body: 'Spend credits across three seat tiers against AI rivals. Each tier has a minimum bid — miss the reserve and nobody wins it. Highest qualifying bid takes the seat, and every losing bid is refunded.',
+    title: 'Bid for a seat.',
+    body: 'Spend credits to outbid rivals. Losing bids are refunded.',
   },
   {
     index: '03',
     accent: palette.pinkSoft,
-    title: 'Collect tickets. Chase medals.',
-    body: 'Won seats become tickets in your Vault. Each league and tier tracks a best medal, and personal records climb every time you beat your own numbers.',
+    title: 'Win tickets. Chase medals.',
+    body: 'Every seat you win joins your Vault and levels you up.',
   },
   {
     index: '04',
     accent: palette.success,
-    title: "Tonight's live event pays double.",
-    body: 'One event rotates daily and pays 2× credits inside its window. Complete it to keep your daily streak alive — miss a day and the streak resets.',
+    title: 'Come back daily.',
+    body: "Tonight's live event pays 2× and keeps your streak alive.",
   },
 ];
 

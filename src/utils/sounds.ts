@@ -8,8 +8,20 @@ import { getPreferences } from './preferences';
  *  - correct: rising 880->1320 Hz chirp
  *  - wrong:   falling 330->165 Hz buzz
  *  - cheer:   layered noise burst + major chord (crowd-ish swell)
+ *  - reveal:  shimmering upward sweep for the ticket rarity reveal
+ *  - achievement: bright two-note "unlocked" arpeggio
+ *  - challenge:   quick major triad ping for a completed daily challenge
+ *  - transition:  soft short whoosh between screens
  */
-type SoundName = 'tick' | 'correct' | 'wrong' | 'cheer';
+type SoundName =
+  | 'tick'
+  | 'correct'
+  | 'wrong'
+  | 'cheer'
+  | 'reveal'
+  | 'achievement'
+  | 'challenge'
+  | 'transition';
 
 const SAMPLE_RATE = 22050;
 
@@ -85,6 +97,37 @@ function synthesize(name: SoundName): string {
           const crowdNoise: number = (Math.random() * 2 - 1) * (1 - progress) * 0.8;
           return chord * 0.2 + crowdNoise;
         }),
+      );
+    case 'reveal':
+      // Shimmering sweep: a rising tone plus a faint octave sparkle, for
+      // the moment a ticket's rarity is unveiled.
+      return encodeWav(
+        make(0.55, (t, progress) => {
+          const sweep: number = Math.sin(2 * Math.PI * (500 + 900 * progress) * t);
+          const sparkle: number = Math.sin(2 * Math.PI * (1000 + 1800 * progress) * t) * 0.3;
+          return (sweep + sparkle) * 0.7;
+        }),
+      );
+    case 'achievement':
+      // Bright two-note "unlocked" arpeggio (C6 → G6).
+      return encodeWav(
+        make(0.5, (t, progress) => {
+          const freq: number = progress < 0.5 ? 1047 : 1568;
+          return Math.sin(2 * Math.PI * freq * t) * 0.85;
+        }),
+      );
+    case 'challenge':
+      // Quick ascending major triad ping (E5 → G#5 → B5).
+      return encodeWav(
+        make(0.42, (t, progress) => {
+          const freq: number = progress < 0.33 ? 659 : progress < 0.66 ? 831 : 988;
+          return Math.sin(2 * Math.PI * freq * t) * 0.8;
+        }),
+      );
+    case 'transition':
+      // Soft short whoosh: filtered noise fading fast.
+      return encodeWav(
+        make(0.18, (_t, progress) => (Math.random() * 2 - 1) * (1 - progress) * 0.5),
       );
     default:
       return encodeWav(make(0.05, () => 0));

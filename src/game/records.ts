@@ -9,7 +9,10 @@
  * Streaks live in ./streaks; medals in ./medals. This module composes
  * both plus the raw counters.
  */
+import { evaluateAchievements } from './achievements';
+import { advanceChallenges, dailyChallengesForDate } from './challenges';
 import { LEAGUE_LABELS } from './events';
+import { rarityFromRound } from './rarity';
 import {
   bestOf,
   compareMedals,
@@ -18,6 +21,7 @@ import {
 } from './medals';
 import { advanceStreak } from './streaks';
 import {
+  DailyChallenge,
   LeagueTierKey,
   LeagueTierRecord,
   Medal,
@@ -25,10 +29,12 @@ import {
   PersonalBestDelta,
   PlayerProfile,
   PROCESSED_ROUND_ID_CAP,
+  Rarity,
   RetentionDelta,
   RoundOutcome,
   SEAT_TIER_LABELS,
   SeatTier,
+  UnlockedAchievement,
 } from './types';
 
 /** Higher-index seat = worse; front is 0, mid 1, upper 2. */
@@ -94,6 +100,9 @@ export function applyRoundToProfile(
         medalUpgraded: false,
         personalBests: [],
         streakEvent: { kind: 'already-claimed', current: profile.currentDailyStreak },
+        unlockedAchievements: [],
+        completedChallengeTitles: [],
+        ticketRarity: null,
       },
     };
   }
@@ -217,6 +226,11 @@ export function applyRoundToProfile(
       ? profile.processedRoundIds
       : [...profile.processedRoundIds, outcome.roundId].slice(-PROCESSED_ROUND_ID_CAP);
 
+  // Advance today's daily challenges (resets progress on date rollover).
+  const challengeResult = advanceChallenges(profile, outcome, outcome.completedOnLocalDate);
+
+  // Build the profile with all counters applied first, then evaluate
+  // achievements against it so predicates see post-round totals.
   const nextProfile: PlayerProfile = {
     ...profile,
     currentDailyStreak: streak.currentDailyStreak,
@@ -234,7 +248,35 @@ export function applyRoundToProfile(
     perLeagueTier: { ...profile.perLeagueTier, [key]: updatedLtRecord },
     globalRecords: nextGlobal,
     processedRoundIds: nextProcessedRoundIds,
+    dailyChallengeDate: outcome.completedOnLocalDate,
+    dailyChallengeProgress: challengeResult.progress,
+    dailyChallengeCompletedIds: challengeResult.completedIds,
   };
+
+  // Newly-earned achievements (evaluated against the updated profile).
+  const unlockedAchievements: UnlockedAchievement[] = evaluateAchievements(
+    nextProfile,
+    profile.unlockedAchievementIds,
+  );
+  if (unlockedAchievements.length > 0) {
+    nextProfile.unlockedAchievementIds = [
+      ...profile.unlockedAchievementIds,
+      ...unlockedAchievements.map((a) => a.id),
+    ];
+  }
+
+  // Titles for challenges that crossed their target this round.
+  const todaysChallenges: DailyChallenge[] = dailyChallengesForDate(outcome.completedOnLocalDate);
+  const completedChallengeTitles: string[] = challengeResult.newlyCompleted
+    .map((id) => todaysChallenges.find((c) => c.id === id)?.title)
+    .filter((t): t is string => Boolean(t));
+
+  const roundRarity: Rarity | null = rarityFromRound({
+    seatWon: outcome.seatWon,
+    correctCount: outcome.correctCount,
+    totalQuestions: outcome.totalQuestions,
+    wasLiveEvent: outcome.wasLiveEvent,
+  });
 
   const delta: RetentionDelta = {
     alreadyProcessed: false,
@@ -243,6 +285,9 @@ export function applyRoundToProfile(
     medalUpgraded,
     personalBests,
     streakEvent: streak.event,
+    unlockedAchievements,
+    completedChallengeTitles,
+    ticketRarity: roundRarity,
   };
 
   // Attach medal headline as a synthetic PB entry if there was one — the

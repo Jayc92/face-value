@@ -2,6 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Svg, { Circle, Defs, LinearGradient, Path, Stop } from 'react-native-svg';
 import { LEAGUE_LABELS } from '../game/events';
+import {
+  RARITY_COLORS,
+  RARITY_LABELS,
+  ticketRarity,
+  VENUE_THEME_LABELS,
+  VENUE_THEME_STYLES,
+  venueTheme,
+} from '../game/rarity';
 import { SEAT_TIER_LABELS, SeatTier, Ticket } from '../game/types';
 import { hashString } from '../utils/rng';
 import { LEAGUE_VISUALS } from '../utils/leagueVisuals';
@@ -26,15 +34,7 @@ interface SeatDetails {
   row: string;
   seat: string;
   serial: string;
-  rarity: 'STANDARD' | 'PRIME' | 'COLLECTOR' | 'GRAIL';
 }
-
-const RARITY_COLORS: Record<SeatDetails['rarity'], string> = {
-  STANDARD: palette.textMed,
-  PRIME: palette.pinkSoft,
-  COLLECTOR: palette.yellow,
-  GRAIL: palette.yellow,
-};
 
 /**
  * Derives concrete seat coordinates and a serial number from the ticket id.
@@ -61,20 +61,11 @@ function deriveSeatDetails(ticket: Ticket): SeatDetails {
   const seatNumber: number = (seed >>> 8) % 38 + 1;
   const serialInt: number = (seed >>> 12) % 90000 + 10000;
 
-  const rarity: SeatDetails['rarity'] = ticket.wasLiveEvent
-    ? ticket.seatTier === 'front'
-      ? 'GRAIL'
-      : 'COLLECTOR'
-    : ticket.seatTier === 'front'
-      ? 'PRIME'
-      : 'STANDARD';
-
   return {
     section,
     row,
     seat: String(seatNumber).padStart(2, '0'),
     serial: `#${serialInt}`,
-    rarity,
   };
 }
 
@@ -89,26 +80,46 @@ export function TicketCard({ ticket, variant = 'grid' }: TicketCardProps): React
   const leagueVisual = LEAGUE_VISUALS[ticket.league];
   const isFeatured: boolean = variant === 'featured';
   const seat = deriveSeatDetails(ticket);
-  const rarityColor: string = RARITY_COLORS[seat.rarity];
+
+  // Deterministic rarity + venue theme drive the card's framing.
+  const rarity = ticketRarity(ticket);
+  const rarityColor: string = RARITY_COLORS[rarity].line;
+  const theme = venueTheme(ticket.venue);
+  const themeStyle = VENUE_THEME_STYLES[theme];
+  // Rarity owns the frame; the venue theme tints the stub background.
+  const frameColor: string = rarityColor;
 
   return (
     <View
       style={[
         styles.outer,
         isFeatured && styles.outerFeatured,
-        { borderColor: accent.line },
+        { borderColor: frameColor },
       ]}
     >
-      <View style={[styles.corner, { backgroundColor: accent.line }]} />
+      {/* Venue-theme tint sits over the panel base as a translucent wash. */}
+      <View
+        style={[StyleSheet.absoluteFill, { backgroundColor: themeStyle.bg }]}
+        pointerEvents="none"
+      />
+      <View style={[styles.corner, { backgroundColor: frameColor }]} />
+
+      {isFeatured ? (
+        <Text style={styles.motif} numberOfLines={1}>
+          {themeStyle.motif}
+        </Text>
+      ) : null}
 
       <View style={styles.topRow}>
         <LeagueBadge league={ticket.league} size={isFeatured ? 40 : 28} />
         <View style={styles.identity}>
           <View style={styles.rarityRow}>
-            <Text style={[styles.rarity, { color: rarityColor }]}>{seat.rarity}</Text>
+            <Text style={[styles.rarity, { color: rarityColor }]}>
+              {RARITY_LABELS[rarity].toUpperCase()}
+            </Text>
             <Text style={styles.kickerDot}>·</Text>
             <Text style={styles.kicker}>
-              {LEAGUE_LABELS[ticket.league]} · T{ticket.tierLevel}
+              {VENUE_THEME_LABELS[theme]} · {LEAGUE_LABELS[ticket.league]}
             </Text>
           </View>
           <Text
@@ -227,6 +238,16 @@ const styles = StyleSheet.create({
     height: 28,
     transform: [{ rotate: '45deg' }, { translateX: 14 }, { translateY: -14 }],
     opacity: 0.85,
+  },
+  motif: {
+    position: 'absolute',
+    right: spacing.md,
+    bottom: spacing.sm,
+    color: palette.hairlineStrong,
+    fontSize: 32,
+    fontWeight: '900',
+    letterSpacing: 2,
+    opacity: 0.5,
   },
   topRow: {
     flexDirection: 'row',

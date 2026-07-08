@@ -31,6 +31,8 @@ export type RootStackParamList = {
     liveEventId?: string;
     liveEventName?: string;
     liveBonusActive: boolean;
+    /** Epoch ms the gauntlet started; carried through for the session summary. */
+    roundStartedAtMs?: number;
   };
   Results: {
     /** Stable id for this round; makes profile/vault/streak writes idempotent. */
@@ -42,6 +44,8 @@ export type RootStackParamList = {
     creditsEarned: number;
     answeredQuestions: AnsweredQuestion[];
     liveEventId?: string;
+    /** Epoch ms the gauntlet started; used only for the local session summary. */
+    roundStartedAtMs?: number;
   };
   TicketVault: undefined;
   Settings: undefined;

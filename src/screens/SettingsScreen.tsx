@@ -6,6 +6,7 @@ import { Panel } from '../components/Panel';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { ScreenShell } from '../components/ScreenShell';
 import { Toggle } from '../components/Toggle';
+import { dailyLiveEventForDate } from '../game/events';
 import { useGame } from '../game/GameContext';
 import { ScreenProps } from '../game/navigation';
 import { BUILD_NOTE, VERSION_LABEL } from '../utils/buildInfo';
@@ -25,11 +26,11 @@ const ENABLE_DEV_FIXTURES: boolean =
   __DEV__ && process.env.EXPO_PUBLIC_ENABLE_DEV_FIXTURES === 'true';
 
 export function SettingsScreen({ navigation }: ScreenProps<'Settings'>): React.JSX.Element {
-  const { resetLocalData } = useGame();
+  const { resetLocalData, devClearVault, devUnlockAllTiers } = useGame();
   // Seed from the synchronous mirror (already warmed at hydration).
   const [prefs, setPrefs] = useState<Preferences>(() => getPreferences());
   const [howToPlayVisible, setHowToPlayVisible] = useState<boolean>(false);
-  const [resetDone, setResetDone] = useState<boolean>(false);
+  const [flash, setFlash] = useState<string | null>(null);
 
   useEffect(() => {
     // Ensure we reflect the persisted value even if the mirror was cold.
@@ -42,10 +43,35 @@ export function SettingsScreen({ navigation }: ScreenProps<'Settings'>): React.J
     savePreferences(next).catch((error) => console.error('Failed to save preferences', error));
   };
 
-  const handleReset = async (): Promise<void> => {
+  const flashMessage = (message: string): void => {
+    setFlash(message);
+    setTimeout(() => setFlash((current) => (current === message ? null : current)), 2200);
+  };
+
+  const handleResetProfile = async (): Promise<void> => {
     await resetLocalData();
     await clearOnboarding().catch((error) => console.error('Failed to clear onboarding', error));
-    setResetDone(true);
+    flashMessage('Profile, vault & onboarding reset');
+  };
+
+  const handleClearVault = async (): Promise<void> => {
+    await devClearVault();
+    flashMessage('Ticket Vault cleared');
+  };
+
+  const handleUnlockAll = async (): Promise<void> => {
+    await devUnlockAllTiers();
+    flashMessage('Tiers unlocked (Fan Score seeded)');
+  };
+
+  const handleForceDailyEvent = (): void => {
+    const event = dailyLiveEventForDate(new Date());
+    navigation.navigate('LeagueSelect', {
+      forcedLeague: event.league,
+      liveEventId: event.id,
+      liveEventName: event.name,
+      liveBonusActive: true,
+    });
   };
 
   return (
@@ -93,18 +119,44 @@ export function SettingsScreen({ navigation }: ScreenProps<'Settings'>): React.J
 
       {ENABLE_DEV_FIXTURES ? (
         <Panel variant="flat" borderColor={palette.danger} style={styles.devCard}>
-          <Text style={styles.devKicker}>DEV TOOLS</Text>
+          <Text style={styles.devKicker}>PLAYTEST MODE</Text>
           <Text style={styles.devBody}>
-            Wipes the Ticket Vault, player profile, streaks, and onboarding flag on
-            this device. Not shown in normal builds.
+            Local shortcuts for facilitating a playtest. Sound and reduced motion
+            are the toggles above. Hidden in normal builds.
           </Text>
-          <PrimaryButton
-            label={resetDone ? 'Local data cleared' : 'Reset local data'}
-            variant="danger"
-            size="md"
-            disabled={resetDone}
-            onPress={handleReset}
-          />
+
+          {flash ? <Text style={styles.devFlash}>{flash}</Text> : null}
+
+          <View style={styles.devActions}>
+            <PrimaryButton
+              label="Force daily event"
+              variant="secondary"
+              size="md"
+              onPress={handleForceDailyEvent}
+              style={styles.devButton}
+            />
+            <PrimaryButton
+              label="Unlock all tiers"
+              variant="secondary"
+              size="md"
+              onPress={handleUnlockAll}
+              style={styles.devButton}
+            />
+            <PrimaryButton
+              label="Clear vault"
+              variant="secondary"
+              size="md"
+              onPress={handleClearVault}
+              style={styles.devButton}
+            />
+            <PrimaryButton
+              label="Reset profile"
+              variant="danger"
+              size="md"
+              onPress={handleResetProfile}
+              style={styles.devButton}
+            />
+          </View>
         </Panel>
       ) : null}
 
@@ -194,6 +246,18 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '500',
     lineHeight: 19,
+  },
+  devFlash: {
+    color: palette.success,
+    fontSize: 12,
+    fontWeight: '800',
+    letterSpacing: 0.2,
+  },
+  devActions: {
+    gap: spacing.sm,
+  },
+  devButton: {
+    width: '100%',
   },
   footnote: {
     color: palette.textLow,

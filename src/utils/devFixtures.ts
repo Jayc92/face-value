@@ -7,7 +7,7 @@
  * from the __DEV__-gated dev chip on the Home screen.
  */
 import { generateAiBidders, resolveAuction } from '../game/aiBidders';
-import { buildGameEvent } from '../game/events';
+import { buildGameEvent, LEAGUES } from '../game/events';
 import { drawGauntletQuestions } from '../game/questionBank';
 import { RootStackParamList } from '../game/navigation';
 import { creditsForAnswer, QUESTION_TIME_SECONDS } from '../game/scoring';
@@ -17,6 +17,7 @@ import {
   BidAllocation,
   GameEvent,
   League,
+  Ticket,
   TierLevel,
   TriviaQuestion,
 } from '../game/types';
@@ -84,5 +85,34 @@ export function perfectResultsRouteParams(): RootStackParamList['Results'] {
     auction: round.auction,
     creditsEarned: round.creditsEarned,
     answeredQuestions: round.answeredQuestions,
+    roundStartedAtMs: Date.now(),
   };
+}
+
+/**
+ * Dev-only: synthesizes enough distinct Front Row tickets to unlock every
+ * PLAYABLE tier (Tier 2 gates at Fan Score 3). One ticket per league so
+ * the vault looks plausible. Tiers 3 & 4 stay `comingSoon` regardless —
+ * this only clears the Fan-Score gate, it does not change balance or
+ * unlock coming-soon content.
+ */
+export function fabricateUnlockTickets(): Ticket[] {
+  const nowIso = new Date().toISOString();
+  return LEAGUES.map((league: League, index: number): Ticket => {
+    const event = buildGameEvent(league, 1, false);
+    return {
+      id: `dev-unlock-${league}-${index}`,
+      eventName: event.name,
+      venue: event.venue,
+      league,
+      seatTier: 'front',
+      tierLevel: 1,
+      dateWonIso: nowIso,
+      creditsPaid: 300,
+      wasLiveEvent: false,
+      correctCount: 9,
+      totalQuestions: 10,
+      bestCombo: 6,
+    };
+  });
 }

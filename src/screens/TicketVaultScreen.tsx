@@ -7,13 +7,24 @@ import { Panel } from '../components/Panel';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { ScreenShell } from '../components/ScreenShell';
 import { TicketCard } from '../components/TicketCard';
+import { ACHIEVEMENTS, ACHIEVEMENT_COUNT } from '../game/achievements';
+import { rarityCounts, venueCollection } from '../game/collection';
 import { LEAGUE_LABELS, LEAGUES } from '../game/events';
 import { useGame } from '../game/GameContext';
 import { medalRank } from '../game/medals';
 import { ScreenProps } from '../game/navigation';
 import {
+  RARITY_COLORS,
+  RARITY_LABELS,
+  RARITY_ORDER,
+  VENUE_THEME_LABELS,
+  VENUE_THEME_STYLES,
+  VENUE_THEMES,
+} from '../game/rarity';
+import {
   League,
   Medal,
+  Rarity,
   SEAT_TIER_LABELS,
   SeatTier,
   Ticket,
@@ -93,6 +104,10 @@ export function TicketVaultScreen({
     playerProfile.longestDailyStreak > 0 ||
     tickets.length > 0;
 
+  const rarityTally = useMemo(() => rarityCounts(tickets), [tickets]);
+  const venueSlices = useMemo(() => venueCollection(tickets), [tickets]);
+  const unlockedCount: number = playerProfile.unlockedAchievementIds.length;
+
   return (
     <ScreenShell scroll>
       <HeaderBar
@@ -159,6 +174,94 @@ export function TicketVaultScreen({
                 </View>
               </View>
             ))}
+          </View>
+        </Panel>
+      ) : null}
+
+      {/* Rarity breakdown — how many of each ticket rarity you hold */}
+      {tickets.length > 0 ? (
+        <Panel variant="raised" style={styles.rarityCard}>
+          <Text style={styles.completionKicker}>Rarity</Text>
+          <View style={styles.rarityGrid}>
+            {RARITY_ORDER.map((rarity: Rarity) => (
+              <View key={rarity} style={styles.rarityCell}>
+                <Text style={[styles.rarityCount, { color: RARITY_COLORS[rarity].line }]}>
+                  {rarityTally[rarity]}
+                </Text>
+                <Text style={styles.rarityName}>{RARITY_LABELS[rarity]}</Text>
+              </View>
+            ))}
+          </View>
+        </Panel>
+      ) : null}
+
+      {/* Venue collection — completion per venue theme */}
+      {tickets.length > 0 ? (
+        <Panel variant="raised" style={styles.completionCard}>
+          <Text style={styles.completionKicker}>Venues</Text>
+          <View style={styles.completionGrid}>
+            {VENUE_THEMES.map((theme) => {
+              const slice = venueSlices[theme];
+              const style = VENUE_THEME_STYLES[theme];
+              return (
+                <View key={theme} style={styles.venueRow}>
+                  <Text style={styles.venueName}>{VENUE_THEME_LABELS[theme]}</Text>
+                  <View style={styles.completionTrack}>
+                    <View
+                      style={[
+                        styles.completionFill,
+                        { width: `${Math.round(slice.pct * 100)}%`, backgroundColor: style.line },
+                      ]}
+                    />
+                  </View>
+                  <Text style={styles.venueCount}>
+                    {slice.owned}/{slice.total}
+                  </Text>
+                </View>
+              );
+            })}
+          </View>
+        </Panel>
+      ) : null}
+
+      {/* Achievements — persistent milestones */}
+      {hasAnyProfileData ? (
+        <Panel variant="raised" style={styles.achievementsCard}>
+          <View style={styles.completionHeader}>
+            <Text style={styles.completionKicker}>Achievements</Text>
+            <Text style={styles.completionTotal}>
+              {unlockedCount}/{ACHIEVEMENT_COUNT}
+            </Text>
+          </View>
+          <View style={styles.achievementList}>
+            {ACHIEVEMENTS.map((achievement) => {
+              const earned: boolean = playerProfile.unlockedAchievementIds.includes(
+                achievement.id,
+              );
+              return (
+                <View key={achievement.id} style={styles.achievementItem}>
+                  <View
+                    style={[
+                      styles.achievementDot,
+                      { backgroundColor: earned ? palette.yellow : palette.panelRaised },
+                    ]}
+                  />
+                  <View style={styles.achievementText}>
+                    <Text
+                      style={[
+                        styles.achievementName,
+                        !earned && styles.achievementLocked,
+                      ]}
+                    >
+                      {achievement.title}
+                    </Text>
+                    <Text style={styles.achievementDesc} numberOfLines={1}>
+                      {achievement.description}
+                    </Text>
+                  </View>
+                </View>
+              );
+            })}
           </View>
         </Panel>
       ) : null}
@@ -388,6 +491,87 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
     gap: spacing.md,
     marginBottom: spacing.lg,
+  },
+  rarityCard: {
+    padding: spacing.lg,
+    gap: spacing.md,
+    marginBottom: spacing.lg,
+  },
+  rarityGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  rarityCell: {
+    width: '33.33%',
+    alignItems: 'center',
+    paddingVertical: spacing.sm,
+    gap: 2,
+  },
+  rarityCount: {
+    fontSize: 20,
+    fontWeight: '900',
+    fontVariant: ['tabular-nums'],
+  },
+  rarityName: {
+    color: palette.textLow,
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 0.2,
+  },
+  venueRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+  },
+  venueName: {
+    color: palette.textHi,
+    fontSize: 13,
+    fontWeight: '800',
+    width: 76,
+  },
+  venueCount: {
+    color: palette.textLow,
+    fontSize: 11,
+    fontWeight: '800',
+    fontVariant: ['tabular-nums'],
+    width: 34,
+    textAlign: 'right',
+  },
+  achievementsCard: {
+    padding: spacing.lg,
+    gap: spacing.md,
+    marginBottom: spacing.lg,
+  },
+  achievementList: {
+    gap: spacing.sm,
+  },
+  achievementItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+  },
+  achievementDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  achievementText: {
+    flex: 1,
+    gap: 1,
+  },
+  achievementName: {
+    color: palette.textHi,
+    fontSize: 13,
+    fontWeight: '800',
+    letterSpacing: 0.1,
+  },
+  achievementLocked: {
+    color: palette.textLow,
+  },
+  achievementDesc: {
+    color: palette.textLow,
+    fontSize: 11,
+    fontWeight: '600',
   },
   completionHeader: {
     flexDirection: 'row',

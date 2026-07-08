@@ -16,11 +16,18 @@ import {
   LEAGUES,
   recentLiveEvents,
 } from '../game/events';
+import { challengeStatuses } from '../game/challenges';
 import { useGame } from '../game/GameContext';
 import { deriveChaseGoals } from '../game/goals';
 import { ScreenProps } from '../game/navigation';
 import { toLocalDateString } from '../game/streaks';
-import { ChaseGoal, DailyLiveEvent, League, TierLevel } from '../game/types';
+import {
+  ChaseGoal,
+  DailyChallengeStatus,
+  DailyLiveEvent,
+  League,
+  TierLevel,
+} from '../game/types';
 import { perfectResultsRouteParams } from '../utils/devFixtures';
 import { LEAGUE_VISUALS } from '../utils/leagueVisuals';
 import {
@@ -119,6 +126,11 @@ export function HomeScreen({ navigation }: ScreenProps<'Home'>): React.JSX.Eleme
         playableTiers: PLAYABLE_TIERS,
       }),
     [playerProfile, today, liveEvent.league, liveEventCompleted],
+  );
+
+  const dailyChallenges: DailyChallengeStatus[] = useMemo(
+    () => challengeStatuses(playerProfile, today),
+    [playerProfile, today],
   );
 
   const startLiveEvent = (event: DailyLiveEvent, bonusActive: boolean): void => {
@@ -292,6 +304,52 @@ export function HomeScreen({ navigation }: ScreenProps<'Home'>): React.JSX.Eleme
                   </View>
                   <Text style={styles.chaseChevron}>›</Text>
                 </Pressable>
+              );
+            })}
+          </View>
+        </View>
+      ) : null}
+
+      {/* Daily challenges — three deterministic goals for today */}
+      {dailyChallenges.length > 0 ? (
+        <View style={styles.challengeBlock}>
+          <View style={styles.challengeHeader}>
+            <Text style={styles.chaseKicker}>Daily challenges</Text>
+            <Text style={styles.challengeCount}>
+              {dailyChallenges.filter((c) => c.complete).length}/{dailyChallenges.length}
+            </Text>
+          </View>
+          <View style={styles.challengeList}>
+            {dailyChallenges.map((status) => {
+              const pct: number = status.challenge.target > 0
+                ? Math.min(1, status.progress / status.challenge.target)
+                : 0;
+              return (
+                <View key={status.challenge.id} style={styles.challengeRow}>
+                  <View style={styles.challengeTextRow}>
+                    <Text
+                      style={[styles.challengeTitle, status.complete && styles.challengeTitleDone]}
+                      numberOfLines={1}
+                    >
+                      {status.complete ? '✓ ' : ''}
+                      {status.challenge.title}
+                    </Text>
+                    <Text style={styles.challengeProgress}>
+                      {Math.min(status.progress, status.challenge.target)}/{status.challenge.target}
+                    </Text>
+                  </View>
+                  <View style={styles.challengeTrack}>
+                    <View
+                      style={[
+                        styles.challengeFill,
+                        {
+                          width: `${Math.round(pct * 100)}%`,
+                          backgroundColor: status.complete ? palette.success : palette.pink,
+                        },
+                      ]}
+                    />
+                  </View>
+                </View>
               );
             })}
           </View>
@@ -557,6 +615,64 @@ const styles = StyleSheet.create({
     color: palette.textLow,
     fontSize: 22,
     fontWeight: '900',
+  },
+  challengeBlock: {
+    marginTop: spacing.md,
+    gap: spacing.sm,
+  },
+  challengeHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+  },
+  challengeCount: {
+    color: palette.textMed,
+    fontSize: 12,
+    fontWeight: '900',
+    fontVariant: ['tabular-nums'],
+  },
+  challengeList: {
+    gap: spacing.sm,
+    backgroundColor: palette.panelGlass,
+    borderRadius: radii.md,
+    borderWidth: 1,
+    borderColor: palette.hairline,
+    padding: spacing.md,
+  },
+  challengeRow: {
+    gap: 6,
+  },
+  challengeTextRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
+  challengeTitle: {
+    flex: 1,
+    color: palette.textHi,
+    fontSize: 13,
+    fontWeight: '700',
+    letterSpacing: 0.1,
+  },
+  challengeTitleDone: {
+    color: palette.success,
+  },
+  challengeProgress: {
+    color: palette.textLow,
+    fontSize: 11,
+    fontWeight: '800',
+    fontVariant: ['tabular-nums'],
+  },
+  challengeTrack: {
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: palette.panelRaised,
+    overflow: 'hidden',
+  },
+  challengeFill: {
+    height: '100%',
+    borderRadius: 2,
   },
   liveCard: {
     padding: spacing.lg,

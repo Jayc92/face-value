@@ -42,6 +42,10 @@ export function createDefaultProfile(): PlayerProfile {
     perLeagueTier: {},
     globalRecords: { ...EMPTY_GLOBAL_RECORDS },
     processedRoundIds: [],
+    unlockedAchievementIds: [],
+    dailyChallengeProgress: {},
+    dailyChallengeDate: null,
+    dailyChallengeCompletedIds: [],
   };
 }
 
@@ -78,6 +82,19 @@ function migrateProfile(raw: unknown): PlayerProfile {
     // simply start with an empty processed-id list.
     processedRoundIds: Array.isArray(candidate.processedRoundIds)
       ? candidate.processedRoundIds
+      : [],
+    // Collectible/challenge fields added after the original schema —
+    // older profiles migrate in with empty defaults (no data loss).
+    unlockedAchievementIds: Array.isArray(candidate.unlockedAchievementIds)
+      ? candidate.unlockedAchievementIds
+      : [],
+    dailyChallengeProgress:
+      candidate.dailyChallengeProgress && typeof candidate.dailyChallengeProgress === 'object'
+        ? candidate.dailyChallengeProgress
+        : {},
+    dailyChallengeDate: candidate.dailyChallengeDate ?? null,
+    dailyChallengeCompletedIds: Array.isArray(candidate.dailyChallengeCompletedIds)
+      ? candidate.dailyChallengeCompletedIds
       : [],
   };
 }

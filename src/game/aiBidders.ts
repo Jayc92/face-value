@@ -4,6 +4,7 @@ import {
   AiBidder,
   AuctionResult,
   BidAllocation,
+  BidderArchetype,
   SeatTier,
   SeatTierResult,
   SEAT_TIERS,
@@ -13,20 +14,20 @@ import {
 
 /**
  * Rival bidder persona pool. Names are competitive, brand-safe, and
- * evoke premium seating culture — no goofy caricatures. The BidderCard
- * component renders these with a monogram avatar (first + last
- * initial) and a "heat" status. The `emoji` field is retained on the
- * AiBidder type but no longer surfaced anywhere in the UI.
+ * evoke premium seating culture — no goofy caricatures. Each persona has
+ * a fixed archetype so the same rival always bids with the same
+ * recognizable personality (front-runner, value hunter, etc.). The
+ * BidderCard renders a monogram avatar + heat status.
  */
-const BIDDER_PERSONAS: Array<{ name: string; emoji: string }> = [
-  { name: 'Row A Rae', emoji: '' },
-  { name: 'Platinum Jules', emoji: '' },
-  { name: 'Floorline Dex', emoji: '' },
-  { name: 'Velvet Quinn', emoji: '' },
-  { name: 'Rush Club Kai', emoji: '' },
-  { name: 'Nova Vale', emoji: '' },
-  { name: 'Section Zero', emoji: '' },
-  { name: 'Encore Vale', emoji: '' },
+const BIDDER_PERSONAS: Array<{ name: string; emoji: string; archetype: BidderArchetype }> = [
+  { name: 'Row A Rae', emoji: '', archetype: 'frontRunner' },
+  { name: 'Platinum Jules', emoji: '', archetype: 'frontRunner' },
+  { name: 'Floorline Dex', emoji: '', archetype: 'valueHunter' },
+  { name: 'Velvet Quinn', emoji: '', archetype: 'balanced' },
+  { name: 'Rush Club Kai', emoji: '', archetype: 'opportunist' },
+  { name: 'Nova Vale', emoji: '', archetype: 'balanced' },
+  { name: 'Section Zero', emoji: '', archetype: 'valueHunter' },
+  { name: 'Encore Vale', emoji: '', archetype: 'opportunist' },
 ];
 
 /**
@@ -70,6 +71,9 @@ export function generateAiBidders(tierLevel: TierLevel, playerCredits: number): 
       creditPool,
       aggression,
       frontRowSpecialist: isSpecialist,
+      // The round's specialist always plays as a front-runner; everyone
+      // else keeps their persona's archetype.
+      archetype: isSpecialist ? 'frontRunner' : persona.archetype,
     };
   });
 }
@@ -92,20 +96,51 @@ export function computeAiAllocation(bidder: AiBidder): BidAllocation {
 
   let frontWeight: number;
   let midWeight: number;
+  // Per-tier jitter widens for the unpredictable "opportunist" archetype.
+  let tierJitter = 0.1;
   if (bidder.frontRowSpecialist) {
-    // Front-leaning, scales with aggression: 0.6 - 0.78.
+    // Front-leaning, scales with aggression: 0.6 - 0.78. Unchanged — this
+    // is the balance-critical Front Row contender.
     frontWeight = 0.6 + 0.18 * bidder.aggression;
     midWeight = 0.22;
   } else {
-    frontWeight = 0.35 + 0.4 * bidder.aggression;
-    midWeight = 0.42 - 0.12 * bidder.aggression;
+    // Baseline non-specialist split (aggression-driven), then nudged by
+    // archetype. The nudges are deliberately small and roughly zero-sum
+    // around the baseline so aggregate Front Row pressure — and thus the
+    // tuned auction balance — stays intact; only the *personality* reads
+    // differently round to round.
+    const baseFront: number = 0.35 + 0.4 * bidder.aggression;
+    const baseMid: number = 0.42 - 0.12 * bidder.aggression;
+    switch (bidder.archetype) {
+      case 'frontRunner':
+        frontWeight = baseFront + 0.1;
+        midWeight = baseMid - 0.06;
+        break;
+      case 'valueHunter':
+        frontWeight = baseFront - 0.1;
+        midWeight = baseMid + 0.06;
+        break;
+      case 'opportunist':
+        // Same central tendency as balanced, but noisier per tier.
+        frontWeight = baseFront;
+        midWeight = baseMid;
+        tierJitter = 0.22;
+        break;
+      case 'balanced':
+      default:
+        frontWeight = baseFront;
+        midWeight = baseMid;
+        break;
+    }
+    frontWeight = Math.max(0.1, Math.min(0.8, frontWeight));
+    midWeight = Math.max(0.1, Math.min(0.6, midWeight));
   }
   const upperWeight: number = Math.max(0.05, 1 - frontWeight - midWeight);
 
   const rawBids: Record<SeatTier, number> = {
-    front: applyJitter(committedTotal * frontWeight, 0.1),
-    mid: applyJitter(committedTotal * midWeight, 0.1),
-    upper: applyJitter(committedTotal * upperWeight, 0.1),
+    front: applyJitter(committedTotal * frontWeight, tierJitter),
+    mid: applyJitter(committedTotal * midWeight, tierJitter),
+    upper: applyJitter(committedTotal * upperWeight, tierJitter),
   };
 
   const allocation: BidAllocation = { front: 0, mid: 0, upper: 0 };

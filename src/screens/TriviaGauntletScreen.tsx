@@ -49,6 +49,10 @@ export function TriviaGauntletScreen({
   const phaseRef = useRef<Phase>('answering');
   phaseRef.current = phase;
 
+  // Wall-clock start of the round, captured once on mount, carried to the
+  // session summary. Observational only — no gameplay effect.
+  const roundStartedAtRef = useRef<number>(Date.now());
+
   const creditBump = useSharedValue(0);
   const creditScale = useAnimatedStyle(() => ({
     transform: [{ scale: 1 + creditBump.value * 0.18 }],
@@ -125,6 +129,7 @@ export function TriviaGauntletScreen({
         liveEventId,
         liveEventName,
         liveBonusActive,
+        roundStartedAtMs: roundStartedAtRef.current,
       });
       return;
     }
